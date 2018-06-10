@@ -1,0 +1,47 @@
+import { Response } from '@angular/http';
+import { JobService } from '../job.service';
+import JobModel from '../models/job';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './findjob.component.html',
+  styleUrls: ['./findjob.component.css']
+})
+export class FindJobComponent implements OnInit {
+
+  constructor(
+    private jobService: JobService
+  ) { }
+
+  jobList: JobModel[];
+  pageCount: number;
+  pageNumber = 1;
+
+  ngOnInit(): void {
+    this.jobService.getJobs(this.pageNumber)
+      .subscribe(jobs => {
+        this.jobList = jobs.jobList
+        this.pageCount = jobs.pageCount
+      });
+  }
+
+  changePage(newPage) {
+	this.jobService.getJobs(newPage)
+	.subscribe(jobs => {
+        this.jobList = jobs.jobList
+        this.pageCount = jobs.pageCount
+        console.log(jobs)
+      });
+	this.pageNumber = newPage;
+  }
+
+countPages() {
+	var pages = [];
+    for (var i = 0; i < this.pageCount; i++) {
+    	pages.push(i+1);
+    }
+    return pages;
+  }
+
+}

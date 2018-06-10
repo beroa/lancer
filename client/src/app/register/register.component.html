@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+      <h1>Register</h1>
+      <p class="lead">Already a member? <a routerLink="/login">Log in</a> instead.</p>
+
+      <form name="register" (submit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="name">Username</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name" #name="ngModel" ng-required="true">
+          <p class="form-invalid" *ngIf="name.errors.required && (name.dirty || name.touched)">Username is required.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email" #email="ngModel" required>
+          <p class="form-invalid" *ngIf="email.errors.required && (email.dirty || email.touched)">Email is required.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password" #password="ngModel" required>
+          <p class="form-invalid" *ngIf="password.errors.required && (password.dirty || password.touched)">Password is required.</p>
+          <p class="form-invalid" *ngIf="password.errors.minlength && (password.dirty || password.touched)">Password must be at least 6 characters.</p>
+        </div>
+
+        <button type="submit" class="btn btn-default" [disabled]="register.pending || register.invalid">Register!</button>
+      </form>
+    </div>
+
+    <div class="col-md-2"></div>
+  </div>
+
+</div>
