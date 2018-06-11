@@ -7,9 +7,9 @@ var auth = jwt({
   userProperty: 'payload'
 });
 
-var ctrlProfile = require('../controllers/profile');
-var ctrlAuth = require('../controllers/authentication');
-var ctrlJob = require('../controllers/job');
+var ctrlProfile = require('../controllers/profile.ctrl');
+var ctrlAuth = require('../controllers/authentication.ctrl');
+var ctrlJob = require('../controllers/job.ctrl');
 
 router.get('/profile', auth, ctrlProfile.profileRead);
 
@@ -18,5 +18,7 @@ router.post('/login', ctrlAuth.login);
 
 router.get('/find', ctrlJob.getJobs);
 router.post('/post/submit', ctrlJob.createJob);
+
+router.get('/job/:id', ctrlJob.getJob);
 
 module.exports = router;

@@ -15,6 +15,7 @@ import { FindJobComponent } from './findjob/findjob.component'
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { JobService } from './job.service';
+import { JobComponent } from './job/job.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'post', component: PostJobComponent },
-  { path: 'find', component: FindJobComponent }
+  { path: 'find', component: FindJobComponent },
+  { path: 'job/:id', component: JobComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
     RegisterComponent,
     HomeComponent,
     PostJobComponent,
-    FindJobComponent
+    FindJobComponent,
+    JobComponent
   ],
   imports: [
     BrowserModule,

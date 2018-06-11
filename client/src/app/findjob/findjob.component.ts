@@ -2,6 +2,7 @@ import { Response } from '@angular/http';
 import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class FindJobComponent implements OnInit {
 
   constructor(
-    private jobService: JobService
+    private jobService: JobService,
+    private router: Router
   ) { }
 
   jobList: JobModel[];
@@ -24,6 +26,11 @@ export class FindJobComponent implements OnInit {
         this.jobList = jobs.jobList
         this.pageCount = jobs.pageCount
       });
+  }
+
+  goToJob(jobId) {
+    console.log("goToJob called, id:" + jobId);
+    this.router.navigate(['/job/' + jobId]);
   }
 
   changePage(newPage) {

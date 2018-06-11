@@ -1,0 +1,9 @@
+.listing {
+	border: 2px solid #CCCCCC;
+	background: #FCFCFC;
+	padding: 1em;
+}
+
+.job-title {
+	font-size: 2em;
+}

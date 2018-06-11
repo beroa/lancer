@@ -12,6 +12,7 @@ export class JobService {
   api_url = 'http://localhost:3000';
   postUrl = `${this.api_url}/api/post`;
   findUrl = `${this.api_url}/api/find`;
+  jobUrl = `${this.api_url}/api/job`;
 
   constructor(
     private http: HttpClient
@@ -21,8 +22,15 @@ export class JobService {
     return this.http.post(`${this.postUrl}/submit`, job);
   }
 
+  getJob(id: string): Observable<any>{
+    return this.http.get(`${this.jobUrl}/` + id)
+    .map(res  => {
+      return { job: res["data"] } ;
+    })
+  }
+
   getJobs(page: number): Observable<any>{
-    return this.http.get(`${this.findUrl}?page=`+page)
+    return this.http.get(`${this.findUrl}?page=` + page)
     .map(res  => {
       return { jobList: res["data"].docs, pageCount: res["data"].pages} ;
     })

@@ -24,10 +24,13 @@ export class PostJobComponent {
   public isLoggedIn = this.auth.isLoggedIn();
 
   create() {
+    this.newJob.setAuthor(this.auth.getUserDetails().name);
+    console.log(this.newJob.author);
+
     this.jobService.createJob(this.newJob)
       .subscribe((res) => {
         this.newJob = new JobModel()
-      })
+      });
   }
 
 } 
