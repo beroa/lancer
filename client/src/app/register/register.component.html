@@ -6,11 +6,11 @@
       <h1>Register</h1>
       <p class="lead">Already a member? <a routerLink="/login">Log in</a> instead.</p>
 
-      <form name="register" (submit)="onSubmit()">
+      <form name="register" (submit)="register()">
 
         <div class="form-group">
           <label for="name">Username</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name" #name="ngModel" ng-required="true">
+          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name" #name="ngModel" required>
           <p class="form-invalid" *ngIf="name.errors.required && (name.dirty || name.touched)">Username is required.</p>
         </div>
 

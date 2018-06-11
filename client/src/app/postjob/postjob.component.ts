@@ -16,12 +16,13 @@ export class PostJobComponent {
   constructor(
   	private auth: AuthenticationService, 
   	private jobService: JobService, 
-  	router: Router,
+  	private router: Router,
   	private http: HttpClient) {;
   }
 
   public newJob: JobModel = new JobModel()
   public isLoggedIn = this.auth.isLoggedIn();
+  jobId = String;
 
   create() {
     this.newJob.setAuthor(this.auth.getUserDetails().name);
@@ -29,8 +30,10 @@ export class PostJobComponent {
 
     this.jobService.createJob(this.newJob)
       .subscribe((res) => {
-        this.newJob = new JobModel()
+        this.jobId = res.jobId
+        this.router.navigate(['/job/' + this.jobId]);
       });
+
   }
 
 } 

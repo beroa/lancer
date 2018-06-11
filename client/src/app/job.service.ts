@@ -19,7 +19,10 @@ export class JobService {
   ) { }
 
   createJob(job: Job): Observable<any>{
-    return this.http.post(`${this.postUrl}/submit`, job);
+    return this.http.post(`${this.postUrl}/submit`, job)
+    .map(res => {
+      return { jobId: res["data"]._id, }
+    })
   }
 
   getJob(id: string): Observable<any>{
