@@ -29,7 +29,6 @@ export class FindJobComponent implements OnInit {
   }
 
   goToJob(jobId) {
-    console.log("goToJob called, id:" + jobId);
     this.router.navigate(['/job/' + jobId]);
   }
 
@@ -38,7 +37,6 @@ export class FindJobComponent implements OnInit {
 	.subscribe(jobs => {
         this.jobList = jobs.jobList
         this.pageCount = jobs.pageCount
-        console.log(jobs)
       });
 	this.pageNumber = newPage;
   }

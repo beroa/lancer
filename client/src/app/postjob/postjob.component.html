@@ -4,24 +4,24 @@
     <div class="col-md-8">
 
       <div class="message-login" *ngIf="!isLoggedIn">
-        <p>To post a job, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
+        <p>To make a submission, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
       </div>
 
       <div class="form-newjob" *ngIf="isLoggedIn">
-        <h1 class="form-newjob-heading">New Job</h1>
+        <h1 class="form-newjob-heading">New Submission</h1>
 
         <form (submit)="create()">
 
           <div class="form-group">
             <label for="Title">Title</label>
             <input type="Title" class="form-control" name="title" [(ngModel)]="newJob.title" placeholder="Title of the job" #title="ngModel" required>
-            <p class="form-invalid" *ngIf="title.invalid && (title.dirty || title.touched)">Job title is required.</p>
+            <p class="form-invalid" *ngIf="title.invalid && (title.dirty || title.touched)">Submission title is required.</p>
           </div>
 
           <div class="form-group">
             <label for="description">Description</label>
             <textarea type="description" class="form-control description" name="description" [(ngModel)]="newJob.description" placeholder="Description of the job" #description="ngModel" required></textarea>
-            <p class="form-invalid" *ngIf="description.invalid && (description.dirty || description.touched)">Job description is required.</p>
+            <p class="form-invalid" *ngIf="description.invalid && (description.dirty || description.touched)">Submission description is required.</p>
           </div>
 
           <button type="submit" class="btn btn-default">Create Job</button>

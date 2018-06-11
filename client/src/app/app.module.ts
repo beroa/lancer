@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, FormBuilder } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -43,12 +44,12 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService, 
     AuthGuardService,
-    JobService,
-    FormBuilder
+    JobService
   ],
   bootstrap: [AppComponent]
 })

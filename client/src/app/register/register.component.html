@@ -6,28 +6,26 @@
       <h1>Register</h1>
       <p class="lead">Already a member? <a routerLink="/login">Log in</a> instead.</p>
 
-      <form name="register" (submit)="register()">
-
-        <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name" #name="ngModel" required>
-          <p class="form-invalid" *ngIf="name.errors.required && (name.dirty || name.touched)">Username is required.</p>
-        </div>
+      <form [formGroup]="form" (submit)="register()">
 
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email" #email="ngModel" required>
-          <p class="form-invalid" *ngIf="email.errors.required && (email.dirty || email.touched)">Email is required.</p>
+          <input type="email" class="form-control" name="email" placeholder="Enter email" formControlName="email">
+        </div>
+
+        <div class="form-group">
+          <label for="name">Username</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter your name" formControlName="name">
+          <p class="form-invalid" *ngIf="form.controls.name.errors?.required && (form.controls.name.dirty || form.controls.name.touched)">Username is required.</p>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password" #password="ngModel" required>
-          <p class="form-invalid" *ngIf="password.errors.required && (password.dirty || password.touched)">Password is required.</p>
-          <p class="form-invalid" *ngIf="password.errors.minlength && (password.dirty || password.touched)">Password must be at least 6 characters.</p>
+          <input type="password" class="form-control" name="password" placeholder="Password"  formControlName="password">
+          <p class="form-invalid" *ngIf="form.controls.password.errors?.required && (form.controls.password.dirty || form.controls.password.touched)">Password is required</p>
         </div>
 
-        <button type="submit" class="btn btn-default" [disabled]="register.pending || register.invalid">Register!</button>
+        <button type="submit" class="btn btn-default" [disabled]="!form.valid">Register!</button>
       </form>
     </div>
 
