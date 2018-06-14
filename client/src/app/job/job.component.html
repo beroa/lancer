@@ -7,8 +7,7 @@
 		     	<div class="job-title">
 		     		<p> {{job?.title}} </p>
 				</div>
-				<div class="job-description">
-					<p> {{job?.description}} </p>
+				<div class="job-description" [innerHtml]="job?.description">
 				</div>
 
 				<hr>

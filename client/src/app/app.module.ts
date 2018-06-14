@@ -19,6 +19,7 @@ import { JobService } from './job.service';
 import { JobComponent } from './job/job.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentService } from './comment.service';
+import { CommentDirective } from './comment.directive';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
     PostJobComponent,
     FindJobComponent,
     JobComponent,
-    CommentsComponent
+    CommentsComponent,
+    CommentDirective
   ],
   imports: [
     BrowserModule,

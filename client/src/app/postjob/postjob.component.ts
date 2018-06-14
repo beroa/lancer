@@ -6,6 +6,7 @@ import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { markdown } from 'markdown';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class PostJobComponent {
   postJob() {
     this.newJob.author = this.auth.getUserDetails().name;
     this.newJob.title = this.form.get('title').value;
-    this.newJob.description = this.form.get('description').value;
+    this.newJob.description = markdown.toHTML(this.form.get('description').value);
 
     this.jobService.createJob(this.newJob)
       .subscribe((res) => {

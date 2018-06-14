@@ -3,7 +3,7 @@
 	  <div class="col-md-2"></div>
 	  <div class="col-md-8">
       
-	  	<form class="post" (submit)="postComment()">
+	  	<form class="post" (submit)="onSubmit()">
 	        <label for="">New Comment</label>
 	        <div *ngIf="!isLoggedIn" class="message-login" >
     			<p>To post a comment, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
@@ -14,12 +14,15 @@
 	    	</div>
       	</form>
 
+<!--       	<div class="comments">
+      	<comment ng-repeat="comment in commentList" comment-data="comment"></comment>
+    	</div> -->
+
 	    <div class="comments">
 		    <ul class="comment-list">
 				<li class="comment-item" *ngFor="let comment of commentList">
-					<span>
-						{{comment.content}}
-					</span>
+					<div [innerHtml]="comment.content">
+					</div>
 					<br>
 					<div class="comment-bar">
 						<table>

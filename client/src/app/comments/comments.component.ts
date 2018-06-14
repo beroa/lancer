@@ -4,6 +4,7 @@ import { AuthenticationService, TokenPayload } from '../authentication.service';
 import CommentModel from '../models/comment';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { markdown } from 'markdown';
 
 @Component({
   selector: 'app-comments',
@@ -18,38 +19,44 @@ export class CommentsComponent implements OnInit {
 		private route: ActivatedRoute
 	) { }
 
-  	public isLoggedIn = this.auth.isLoggedIn();
+	public isLoggedIn = this.auth.isLoggedIn();
 	jobId: string;
 	private sub: any;
 	commentList: CommentModel[];
-	public newComment: CommentModel = new CommentModel()
+	public newComment: CommentModel = new CommentModel();
+
 
 	ngOnInit(): void {
 		this.sub = this.route.params.subscribe(params => {
 			this.jobId = params['id'];
-	    	if (this.isLoggedIn) {
-	    		this.newComment.jobId = this.jobId;
-	    		this.newComment.author = this.auth.getUserDetails().name;
-	    	}
-	    });
+			if (this.isLoggedIn) {
+				this.newComment.jobId = this.jobId;
+				this.newComment.author = this.auth.getUserDetails().name;
+			}
+		});
 
-	    this.commentService.getComments(this.jobId)
-	      .subscribe(comments => {
-	        this.commentList = comments.commentList
-	    });
+		this.commentService.getComments(this.jobId)
+		  .subscribe(comments => {
+			this.commentList = comments.commentList
+		});
   }
 
-  postComment() {
-  	this.commentService.postComment(this.newComment)
-      .subscribe((res) => {
-        this.router.navigate(['/job/' + this.jobId]);
-    });
+	onSubmit() {
+		this.newComment.content = markdown.toHTML(this.newComment.content);
+		this.postComment();
+	}
 
-    this.commentService.getComments(this.jobId)
-	      .subscribe(comments => {
-	        this.commentList = comments.commentList
-	    });
+	postComment() {
+		this.commentService.postComment(this.newComment)
+		  .subscribe((res) => {
+			this.router.navigate(['/job/' + this.jobId]);
+		});
 
-  }
+		this.commentService.getComments(this.jobId)
+			  .subscribe(comments => {
+				this.commentList = comments.commentList
+			});
+
+	}
 
 }
