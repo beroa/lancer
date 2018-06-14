@@ -17,13 +17,22 @@
 	    <div class="comments">
 		    <ul class="comment-list">
 				<li class="comment-item" *ngFor="let comment of commentList">
-					<span class="comment-author">
-						{{comment.author}}:
-					</span>
-					<br>
-					<span class="comment-content">
+					<span>
 						{{comment.content}}
 					</span>
+					<br>
+					<div class="comment-bar">
+						<table>
+							<tr>
+								<td class="tleft">
+									- {{comment.author}}
+								</td>
+								<td class="tright">
+									<span class="reply"> Reply </span>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</li>
 		    </ul>
 	    </div>

@@ -27,7 +27,6 @@ export class CommentsComponent implements OnInit {
 	ngOnInit(): void {
 		this.sub = this.route.params.subscribe(params => {
 			this.jobId = params['id'];
-	    	console.log('loading comments: '+ this.jobId);
 	    	if (this.isLoggedIn) {
 	    		this.newComment.jobId = this.jobId;
 	    		this.newComment.author = this.auth.getUserDetails().name;
@@ -37,12 +36,10 @@ export class CommentsComponent implements OnInit {
 	    this.commentService.getComments(this.jobId)
 	      .subscribe(comments => {
 	        this.commentList = comments.commentList
-	        console.log('comments: ' + this.commentList);
 	    });
   }
 
   postComment() {
-  	console.log("posting comment" + this.newComment.content);
   	this.commentService.postComment(this.newComment)
       .subscribe((res) => {
         this.router.navigate(['/job/' + this.jobId]);
@@ -51,7 +48,6 @@ export class CommentsComponent implements OnInit {
     this.commentService.getComments(this.jobId)
 	      .subscribe(comments => {
 	        this.commentList = comments.commentList
-	        console.log('comments: ' + this.commentList);
 	    });
 
   }

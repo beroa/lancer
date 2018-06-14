@@ -2,7 +2,6 @@
 	margin: .5em 0;
 	padding: .5em 1em;
 }
-
 .btn-comment {
 	margin-top: 7px;
 }
@@ -11,9 +10,6 @@
 .comment-list {
 	list-style: none;
 	margin-left: -40px;
-}
-.comment-author {
-
 }
 .comment-item {
 	border: 2px solid #CCCCCC;
@@ -24,4 +20,16 @@
 .comment-content {
 	font-size:18px;
 	padding-left: 1em;
+}
+.comment-bar {
+	border-top: 1px solid #EEEEEE;
+}
+table {
+	width: 100%;
+}
+.tleft {
+	text-align: left
+}
+.tright {
+	text-align: right;
 }
