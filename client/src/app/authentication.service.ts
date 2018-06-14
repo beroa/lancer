@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 export interface UserDetails {
   _id: string;
-  email: string;
   name: string;
   exp: number;
   iat: number;
@@ -17,9 +16,8 @@ interface TokenResponse {
 }
 
 export interface TokenPayload {
-  email: string;
+  name: string;
   password: string;
-  name?: string;
 }
 
 var apiUrl = 'http://localhost:3000/api/';
@@ -65,13 +63,12 @@ export class AuthenticationService {
 
   private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
     let base;
-
     if (method === 'post') {
       base = this.http.post(`${apiUrl}/${type}`, user);
     } else {
       base = this.http.get(`${apiUrl}/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
-
+    
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
@@ -80,7 +77,6 @@ export class AuthenticationService {
         return data;
       })
     );
-
     return request;
   }
 

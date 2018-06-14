@@ -14,7 +14,6 @@ export class RegisterComponent {
   
   // credentials will recieve values from formbuilder after submit
   credentials: TokenPayload = {
-    email: '',
     name: '',
     password: ''
   };
@@ -28,7 +27,6 @@ export class RegisterComponent {
 
   createForm() {
     this.form = this.fb.group({
-      email: ['', Validators.required],
       name: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -43,7 +41,6 @@ export class RegisterComponent {
   //   }
 
   register() {
-    this.credentials.email = this.form.get('email').value;
     this.credentials.name = this.form.get('name').value;
     this.credentials.password = this.form.get('password').value;
 

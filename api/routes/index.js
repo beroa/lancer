@@ -18,7 +18,7 @@ router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 router.get('/find', ctrlJob.getJobs);
-router.post('/post/submit', ctrlJob.createJob);
+router.post('/post/submit', auth, ctrlJob.createJob);
 
 router.get('/job/:id', ctrlJob.getJob);
 router.get('/job/:id/comments', ctrlComment.getComments);

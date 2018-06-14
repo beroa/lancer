@@ -9,20 +9,14 @@
       <form [formGroup]="form" (submit)="register()">
 
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email" formControlName="email">
-          <p class="form-invalid" *ngIf="form.controls.email.errors?.required && (form.controls.email.dirty || form.controls.email.touched)">Email is required.</p>
-        </div>
-
-        <div class="form-group">
           <label for="name">Username</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name" formControlName="name">
+          <input type="text" class="form-control" name="name" placeholder="Enter your username" formControlName="name">
           <p class="form-invalid" *ngIf="form.controls.name.errors?.required && (form.controls.name.dirty || form.controls.name.touched)">Username is required.</p>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="Password"  formControlName="password">
+          <input type="password" class="form-control" name="password" placeholder="Enter your password"  formControlName="password">
           <p class="form-invalid" *ngIf="form.controls.password.errors?.required && (form.controls.password.dirty || form.controls.password.touched)">Password is required</p>
         </div>
 

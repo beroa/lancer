@@ -8,13 +8,13 @@
   
       <form (submit)="login()">
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+          <label for="name">Username</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter your username" [(ngModel)]="credentials.name">
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+          <input type="password" class="form-control" name="password" placeholder="Enter your password" [(ngModel)]="credentials.password">
         </div>
 
         <button type="submit" class="btn btn-default">Sign in!</button>

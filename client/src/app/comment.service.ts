@@ -31,22 +31,6 @@ export class CommentService {
     })
   }
 
-  // //Update comment, takes a Comment Object as parameter
-  // editComment(comment:Comment){
-  //   let editUrl = `${this.postUrl}`
-  //   //returns the observable of http put request 
-  //   return this.http.put(editUrl, comment);
-  // }
-
-  // deleteComment(id:string):any{
-  //   //Delete the object by the id
-  //   let deleteUrl = `${this.postUrl}/${id}`
-  //   return this.http.delete(deleteUrl)
-  //   .map(res  => {
-  //     return res;
-  //   })
-  // }
-
   //Default Error handling method.
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
