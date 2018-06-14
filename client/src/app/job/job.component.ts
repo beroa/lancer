@@ -3,9 +3,10 @@ import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-job',
   templateUrl: './job.component.html',
   styleUrls: ['./job.component.css']
 })

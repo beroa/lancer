@@ -17,6 +17,8 @@ import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { JobService } from './job.service';
 import { JobComponent } from './job/job.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentService } from './comment.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,7 +39,8 @@ const routes: Routes = [
     HomeComponent,
     PostJobComponent,
     FindJobComponent,
-    JobComponent
+    JobComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ const routes: Routes = [
   providers: [
     AuthenticationService, 
     AuthGuardService,
-    JobService
+    JobService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

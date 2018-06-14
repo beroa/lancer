@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-md-2"></div>
+	  <div class="col-md-8">
+      
+	  	<form class="post" (submit)="postComment()">
+	        <label for="">New Comment</label>
+	        <div *ngIf="!isLoggedIn" class="message-login" >
+    			<p>To post a comment, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
+  			</div>
+  			<div *ngIf="isLoggedIn">
+		        <textarea type="text" class="form-control" name="content" [(ngModel)]="newComment.content" placeholder="Enter Your Comment"></textarea>
+		        <button type="submit" class="btn btn-default btn-comment">Post Comment</button>
+	    	</div>
+      	</form>
+
+	    <div class="comments">
+		    <ul class="comment-list">
+				<li class="comment-item" *ngFor="let comment of commentList">
+					<span class="comment-author">
+						{{comment.author}}:
+					</span>
+					<br>
+					<span class="comment-content">
+						{{comment.content}}
+					</span>
+				</li>
+		    </ul>
+	    </div>
+
+	  </div>
+	</div>
+  <div class="col-md-2"></div>
+</div>

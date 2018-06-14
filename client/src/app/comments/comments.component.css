@@ -1,0 +1,27 @@
+.post {
+	margin: .5em 0;
+	padding: .5em 1em;
+}
+
+.btn-comment {
+	margin-top: 7px;
+}
+
+
+.comment-list {
+	list-style: none;
+	margin-left: -40px;
+}
+.comment-author {
+
+}
+.comment-item {
+	border: 2px solid #CCCCCC;
+	background: #FCFCFC;
+	margin: .5em 0;
+	padding: .5em 1em;
+}
+.comment-content {
+	font-size:18px;
+	padding-left: 1em;
+}

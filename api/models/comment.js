@@ -2,12 +2,15 @@ var mongoose = require( 'mongoose' );
 var mongoosePaginate = require('mongoose-paginate');
 
 var commentSchema = new mongoose.Schema({
-  content:  {
-  	type: String,
-  	required: true
-  },
-  author: String,
-  date_created: Date
+	jobId: {
+		type: String
+	},
+	parentId: String,
+  	content:  {
+  		type: String
+  	},
+  	author: String,
+  	date_created: Date
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
