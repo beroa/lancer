@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-findjob',
   templateUrl: './findjob.component.html',
   styleUrls: ['./findjob.component.css']
 })
