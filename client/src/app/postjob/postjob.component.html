@@ -10,21 +10,21 @@
       <div class="form-newjob" *ngIf="isLoggedIn">
         <h1 class="form-newjob-heading">New Submission</h1>
 
-        <form (submit)="create()">
+        <form [formGroup]="form" (submit)="onSubmit()">
 
           <div class="form-group">
             <label for="Title">Title</label>
-            <input type="Title" class="form-control" name="title" [(ngModel)]="newJob.title" placeholder="Title of the job" #title="ngModel" required>
-            <p class="form-invalid" *ngIf="title.invalid && (title.dirty || title.touched)">Submission title is required.</p>
+            <input class="form-control" name="title" placeholder="Title of the job" formControlName="title">
+            <p class="form-invalid" *ngIf="form.controls.title.errors?.required && (form.controls.title.dirty || form.controls.title.touched)">Submission title is required.</p>
           </div>
 
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea type="description" class="form-control description" name="description" [(ngModel)]="newJob.description" placeholder="Description of the job" #description="ngModel" required></textarea>
-            <p class="form-invalid" *ngIf="description.invalid && (description.dirty || description.touched)">Submission description is required.</p>
+            <textarea class="form-control" name="description" placeholder="Description of the job" formControlName="description"></textarea>
+            <p class="form-invalid" *ngIf="form.controls.description.errors?.required && (form.controls.description.dirty || form.controls.description.touched)">Submission description is required.</p>
           </div>
 
-          <button type="submit" class="btn btn-default">Create Job</button>
+          <button type="submit" class="btn btn-default" [disabled]="!form.valid">Create Job</button>
         </form>
 
       </div>

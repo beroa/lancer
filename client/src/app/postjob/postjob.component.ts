@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import { Router } from '@angular/router';
+import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -13,20 +14,41 @@ import { Router } from '@angular/router';
 })
 
 export class PostJobComponent {
+  form: FormGroup;
+  submitted = false;
+
   constructor(
   	private auth: AuthenticationService, 
   	private jobService: JobService, 
   	private router: Router,
-  	private http: HttpClient) {;
+  	private http: HttpClient,
+    private fb: FormBuilder) {
+    this.createForm();
   }
 
   public newJob: JobModel = new JobModel()
   public isLoggedIn = this.auth.isLoggedIn();
   jobId = String;
 
-  create() {
-    this.newJob.setAuthor(this.auth.getUserDetails().name);
-    console.log(this.newJob.author);
+  createForm() {
+    this.form = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.form.invalid) {
+        return;
+    }
+    this.postJob();
+  }
+
+  postJob() {
+    this.newJob.author = this.auth.getUserDetails().name;
+    this.newJob.title = this.form.get('title').value;
+    this.newJob.description = this.form.get('description').value;
 
     this.jobService.createJob(this.newJob)
       .subscribe((res) => {

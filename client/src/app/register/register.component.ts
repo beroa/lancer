@@ -8,9 +8,8 @@ import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } 
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  // registerForm: FormGroup;
-  // submitted = false;
   form: FormGroup;
+  submitted = false;
   
   // credentials will recieve values from formbuilder after submit
   credentials: TokenPayload = {
@@ -32,19 +31,18 @@ export class RegisterComponent {
     });
   }
 
-  // onSubmit() {
-  //       this.submitted = true;
-  //       if (this.registerForm.invalid) {
-  //           return;
-  //       }
-  //       this.register();
-  //   }
+  onSubmit() {
+        this.submitted = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.register();
+    }
 
   register() {
     this.credentials.name = this.form.get('name').value;
     this.credentials.password = this.form.get('password').value;
 
-    console.log(this.form);
     this.auth.register(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/profile');
     }, (err) => {

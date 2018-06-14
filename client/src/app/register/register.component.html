@@ -6,7 +6,7 @@
       <h1>Register</h1>
       <p class="lead">Already a member? <a routerLink="/login">Log in</a> instead.</p>
 
-      <form [formGroup]="form" (submit)="register()">
+      <form [formGroup]="form" (submit)="onSubmit()">
 
         <div class="form-group">
           <label for="name">Username</label>
