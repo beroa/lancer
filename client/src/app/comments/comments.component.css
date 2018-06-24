@@ -17,18 +17,20 @@
 	margin: .5em 0;
 	padding: .5em 1em;
 }
-.comment-content {
+.comment-content p {
 	font-size:18px;
 	padding-left: 1em;
 }
+
 .comment-bar {
 	border-top: 1px solid #EEEEEE;
+	margin-top: -20px;
 }
 table {
 	width: 100%;
 }
 .tleft {
-	text-align: left
+	text-align: left;
 }
 .tright {
 	text-align: right;
