@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
   hash: String,
   salt: String,
   address: String,
-  WIF: String // ENCRYPT ME PLS
+  WIF: String // HIDE ME PLS
 });
 
 userSchema.methods.setPassword = function(password) {

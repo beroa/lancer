@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,7 +21,7 @@ import { JobComponent } from './job/job.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentService } from './comment.service';
 import { CommentDirective } from './comment.directive';
-import { BtcApiService } from './btcapiservice.service';
+import { BlockExplorerService } from './blockexplorer.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule
   ],
@@ -57,7 +59,7 @@ const routes: Routes = [
     AuthGuardService,
     JobService,
     CommentService,
-    BtcApiService
+    BlockExplorerService
   ],
   bootstrap: [AppComponent]
 })

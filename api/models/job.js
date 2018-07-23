@@ -13,7 +13,7 @@ var jobSchema = new mongoose.Schema({
   description: String,
   date_created: Date,
   address: String,
-  WIF: String // ENCRYPT ME PLS
+  WIF: String // HIDE ME PLS
 });
 
 jobSchema.plugin(mongoosePaginate);
