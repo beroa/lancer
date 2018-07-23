@@ -1,6 +1,9 @@
 var mongoose = require( 'mongoose' );
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var bitcoin = require("bitcoinjs-lib")
+
+const testnet = bitcoin.networks.testnet;
 
 var userSchema = new mongoose.Schema({
   name: {
@@ -9,10 +12,12 @@ var userSchema = new mongoose.Schema({
   },
   email: String,
   hash: String,
-  salt: String
+  salt: String,
+  address: String,
+  WIF: String // ENCRYPT ME PLS
 });
 
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
@@ -32,5 +37,12 @@ userSchema.methods.generateJwt = function() {
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
+
+userSchema.methods.generateWallet = function() {
+  var keyPair = bitcoin.ECPair.makeRandom({network: testnet});
+  this.address = keyPair.getAddress();
+  this.WIF = keyPair.toWIF();
+}
+
 
 mongoose.model('User', userSchema);

@@ -20,6 +20,7 @@ import { JobComponent } from './job/job.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentService } from './comment.service';
 import { CommentDirective } from './comment.directive';
+import { BtcApiService } from './btcapiservice.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -55,7 +56,8 @@ const routes: Routes = [
     AuthenticationService, 
     AuthGuardService,
     JobService,
-    CommentService
+    CommentService,
+    BtcApiService
   ],
   bootstrap: [AppComponent]
 })

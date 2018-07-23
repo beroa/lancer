@@ -1,4 +1,6 @@
- var JobModel = require('../models/job')
+var JobModel = require('../models/job')
+var mongoose = require('mongoose');
+var Job = mongoose.model('Job');
 
 _this = this
 
@@ -25,13 +27,21 @@ exports.getJobs = async function(query, page, limit) {
     }
 }
 
-exports.createJob = async function(Job) {
-    var newJob = new JobModel({
-        title: Job.title,
-        description: Job.description,
-        author: Job.author,
-        date_created: new Date()
-    })
+exports.createJob = async function(JobData) {
+    // var newJob = new JobModel({
+    //     title: Job.title,
+    //     description: Job.description,
+    //     author: Job.author,
+    //     date_created: new Date()
+    // });
+    
+    var newJob = new Job();
+    newJob.title = JobData.title;
+    newJob.description = JobData.description;
+    newJob.author = JobData.author;
+    newJob.date_created = new Date();
+    newJob.generateWallet();
+
     try{
         var savedJob = await newJob.save()
         return savedJob;

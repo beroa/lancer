@@ -1,8 +1,5 @@
 var CommentService = require('../services/comment.serv')
 
-_this = this
-
-
 exports.getComment = async function(req, res, next) {
     var id = req.params.id
 try{

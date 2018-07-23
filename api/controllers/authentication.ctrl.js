@@ -7,7 +7,7 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
-module.exports.register = function(req, res) {
+exports.register = function(req, res) {
 
   if(!req.body.name || !req.body.password) {
     sendJSONresponse(res, 400, {
@@ -20,6 +20,7 @@ module.exports.register = function(req, res) {
 
   user.name = req.body.name;
   user.setPassword(req.body.password);
+  user.generateWallet();
 
   user.save(function(err) {
     if (err)
@@ -34,7 +35,7 @@ module.exports.register = function(req, res) {
 
 };
 
-module.exports.login = function(req, res) {
+exports.login = function(req, res) {
 
   if(!req.body.name|| !req.body.password) {
     sendJSONresponse(res, 400, {

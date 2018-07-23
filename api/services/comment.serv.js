@@ -1,4 +1,5 @@
- var CommentModel = require('../models/comment')
+var CommentModel = require('../models/comment')
+
 
 _this = this
 
@@ -28,6 +29,7 @@ exports.createComment = async function(Comment){
         author: Comment.author,
         date_created: new Date()
     })
+
     try{
         var savedComment = await newComment.save()
         return savedComment;

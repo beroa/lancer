@@ -25,4 +25,5 @@ router.get('/job/:id/comments', ctrlComment.getComments);
 
 router.post('/job/:id/comments/submit', ctrlComment.createComment);
 
+
 module.exports = router;

@@ -1,11 +1,8 @@
-var JobService = require('../services/job.serv')
-
-_this = this
-
+var JobService = require('../services/job.serv');
 
 exports.getJob = async function(req, res, next) {
     var id = req.params.id
-try{
+    try{
         var Job = await JobService.getJob(id)
         return res.status(200).json({status: 200, data: Job, message: "Succesfully Recieved Job"});
     }catch(e){
@@ -39,38 +36,3 @@ exports.createJob = async function(req, res, next){
         return res.status(400).json({status: 400, message: "Job Creation was Unsuccesfull: " + e})
     }
 }
-
-// exports.updateJob = async function(req, res, next){
-//     if(!req.body._id){
-//         return res.status(400).json({status: 400., message: "Id must be present"})
-//     }
-
-//     var id = req.body._id;
-
-//     console.log(req.body)
-
-//     var job = {
-//         id,
-//         title: req.body.title ? req.body.title : null,
-//         description: req.body.description ? req.body.description : null,
-//     }
-
-//     try{
-//         var updatedJob = await JobService.updateJob(job)
-//         return res.status(200).json({status: 200, data: updatedJob, message: "Succesfully Updated Tod"})
-//     }catch(e){
-//         return res.status(400).json({status: 400., message: e.message})
-//     }
-// }
-
-// exports.removeJob = async function(req, res, next){
-//     var id = req.params.id;
-
-//     try{
-//         var deleted = await JobService.deleteJob(id)
-//         return res.status(204).json({status:204, message: "Succesfully Job Deleted"})
-//     }catch(e){
-//         return res.status(400).json({status: 400, message: e.message})
-//     }
-
-// }

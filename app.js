@@ -38,7 +38,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Configure CORS
 app.use(cors());
+// app.listen(80, function () {
+//   console.log('CORS-enabled web server listening on port 80')
+// })
 
 // [SH] Initialise Passport before using the route middleware
 app.use(passport.initialize());

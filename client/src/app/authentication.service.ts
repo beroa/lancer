@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 
 export interface UserDetails {
   _id: string;
-  name: string;
   exp: number;
   iat: number;
+  name: string;
+  address: string;
 }
 
 interface TokenResponse {
