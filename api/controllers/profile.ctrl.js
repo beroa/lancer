@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-exports.profileRead = function(req, res) {
+exports.profileRead = async function(req, res, next) {
   if (!req.payload._id) {
     res.status(401).json({
       "message" : "UnauthorizedError: private profile"

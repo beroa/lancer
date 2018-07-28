@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
+import { RequestOptions, Request, RequestMethod } from '@angular/http';
 
 export interface UserDetails {
   _id: string;
   exp: number;
   iat: number;
   name: string;
-  address: string;
 }
 
 interface TokenResponse {
@@ -21,7 +21,7 @@ export interface TokenPayload {
   password: string;
 }
 
-var apiUrl = 'http://localhost:3000/api/';
+var apiUrl = 'http://localhost:3000/api';
 
 @Injectable()
 export class AuthenticationService {
@@ -62,12 +62,12 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'maketx', user?: TokenPayload): Observable<any> {
     let base;
     if (method === 'post') {
       base = this.http.post(`${apiUrl}/${type}`, user);
     } else {
-      base = this.http.get(`${apiUrl}/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`${apiUrl}/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});      
     }
     
     const request = base.pipe(
@@ -93,9 +93,32 @@ export class AuthenticationService {
     return this.request('get', 'profile');
   }
 
+  public transaction(user, destination, quantity): Observable<any> {
+    let base = this.http.get(`${apiUrl}/maketx`, { 
+      headers: { 
+        Authorization: `Bearer ${this.getToken()}`
+      },
+      params: { 
+        user: `${user}`,
+        destination: `${destination}`, 
+        quantity: `${quantity}`}
+      });
+
+    const request = base.pipe(
+      map((data: TokenResponse) => {
+        if (data.token) {
+          this.saveToken(data.token);
+        }
+        return data;
+      })
+    );
+    return request;
+  }
+
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
   }
+
 }

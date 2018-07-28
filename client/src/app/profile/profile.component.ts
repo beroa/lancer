@@ -6,7 +6,7 @@ import { BlockExplorerService } from '../blockexplorer.service';
   templateUrl: './profile.component.html'
 })
 export class ProfileComponent {
-  details: UserDetails;
+  details: any;
   balance: 0;
 
   api_data: any = {};

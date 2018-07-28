@@ -2,7 +2,7 @@ var CommentService = require('../services/comment.serv')
 
 exports.getComment = async function(req, res, next) {
     var id = req.params.id
-try{
+    try{
         var Comment = await CommentService.getComment(id)
         return res.status(200).json({status: 200, data: Comment, message: "Succesfully Recieved Comment"});
     }catch(e){

@@ -7,22 +7,39 @@
 		     	<div class="job-title">
 		     		<p> {{job?.title}} </p>
 				</div>
-				<div class="job-description" [innerHtml]="job?.description">
-				</div>
+				<div class="job-description" [innerHtml]="job?.description"></div>
 
 				<hr>
 
-				<div class="job-date_created">
-					<p> Date created: {{job?.date_created}} </p>
-				</div>
-				<div class="job-author">
-					<p> Created by: {{job?.author}} </p>
-				</div>
-				<div class="job-address">
-					<p> Address: {{job?.address}} </p>
-				</div>
-				<div class="job-balance">
-					<p> Balance: {{api_data?.balance}} tBTC</p>
+				<p> Date created: {{job?.date_created}} </p>
+				<p> Created by: {{job?.author}} </p>
+				<p> Address: {{job?.address}} </p>
+				<p> Balance: {{api_data_job_addr?.balance}} tBTC</p>
+
+				<div class="job-fund">
+					<button type="submit" class="btn btn-default" (click)="fundMe()">Fund Me</button>
+
+					<div *ngIf="!isLoggedIn && isFundingOpen" class="message-login">
+				        <p>To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
+				     </div>
+
+					<div *ngIf="isLoggedIn && isFundingOpen" id="fundingBox">
+						<form [formGroup]="form" (submit)="onSubmit()">
+						<p> Your account balance: {{api_data_user_addr?.balance}} tBTC </p>
+
+				        <div class="form-group">
+				          <label for="tx_value">Amount to send (in tBTC):</label>
+				          <input type="text" class="form-control" name="tx_value" placeholder="1"  formControlName="tx_value">
+				          <p class="form-invalid" *ngIf="form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)">Amount is required</p>
+
+				          <p class="form-invalid" *ngIf="api_data_user_addr.balance < form.controls.tx_value.value">Amount cannot be greater than your account balance.</p>
+
+				        </div>
+
+				        <button type="submit" class="btn btn-default" [disabled]="!form.valid">Send Transaction</button>
+				      </form>
+
+					</div>
 				</div>
 
 
