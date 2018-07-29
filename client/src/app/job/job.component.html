@@ -17,7 +17,7 @@
 				<p> Balance: {{api_data_job_addr?.balance}} tBTC</p>
 
 				<div class="job-fund">
-					<button type="submit" class="btn btn-default" (click)="fundMe()">Fund Me</button>
+					<button type="submit" class="btn btn-default" (click)="fundMe()" [disabled]="confirmed">Fund Me</button>
 
 					<div *ngIf="!isLoggedIn && isFundingOpen" class="message-login">
 				        <p>To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>

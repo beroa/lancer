@@ -20,13 +20,13 @@ exports.parseTransaction = async function(req, res, next) {
         try {
           BitcoinJSService.parseTransaction(user, req.query.destination, req.query.quantity)
           .then(function(response) {
-            console.log("resp: "+response);
+            // console.log("resp: "+response);
             BlockExplorerService.postTx(response)
             .then(function(response) {
-              console.log("resp2: "+response);
+              // console.log("resp2: "+response);
               return res.status(200).json(response);
             }).catch(function(err) {
-              console.log("err: "+err);
+              // console.log("err: "+err);
               res.status(400).json({status: 400, message: err.message});
             })
           }).catch(function(err) {
