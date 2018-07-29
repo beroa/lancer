@@ -1,6 +1,6 @@
 .listing {
 	border: 2px solid #CCCCCC;
-	background: #FCFCFC;
+	background: #edf8f0;
 	padding: 1em;
 }
 
@@ -8,20 +8,6 @@
 	font-size: 2em;
 }
 
-#fundingBox {
-	border: 2px solid #CCCCCC;
-	padding: 2em;
-	margin-top: .5em;
-}
-
-.form-invalid {
-	color: red;
-}
-
-.form-success {
-	color: green;
-}
-
-.confirmation {
-	margin-top: .5em;
+#fundMe {
+	margin-top:1em;
 }

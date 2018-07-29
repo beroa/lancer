@@ -1,0 +1,43 @@
+<div *ngIf="isLoggedIn" id="fundingBox">
+	<div *ngIf="!isLoggedIn && isFundingOpen" class="message-login">
+		<p>To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
+	</div>
+
+<form [formGroup]="form" (submit)="onSubmit()">
+
+	<p> <b>Your account balance:</b> {{api_data_user_addr?.balance}} tBTC </p>
+
+	<div *ngIf="isDestinationLocked">
+		<p> <b>Destination Address:</b> {{destination}} </p>
+	</div>
+
+	<div *ngIf="!isDestinationLocked">
+		<div class="form-group">
+			<label for="tx_destination">Destination Address:</label>
+			<input type="text" class="form-control" name="tx_destination" placeholder="1"  formControlName="tx_destination">
+			<p class="form-invalid" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="tx_value">Amount to send (in tBTC):</label>
+		<input type="text" class="form-control" name="tx_value" placeholder="1"  formControlName="tx_value">
+		<p class="form-invalid" *ngIf="form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)">Amount is required</p>
+		<p class="form-invalid" *ngIf="api_data_user_addr.balance < form.controls.tx_value.value">Amount cannot be greater than your account balance.</p>
+	</div>
+
+	<div class="form-group">
+		<label for="tx_fees">Transaction fees:</label>
+		<input type="text" class="form-control" name="tx_fees" placeholder=".0001"  formControlName="tx_fees">
+		<p class="form-invalid" *ngIf=".01 < form.controls.tx_fees.value">Fees must be < .01</p>
+		<p class="form-invalid" *ngIf=".00002 >= form.controls.tx_fees.value">Fees must be > .00002</p>
+	</div>
+
+	<button type="submit" class="btn btn-default" [disabled]="!form.valid">Send Transaction</button>
+
+	<div class="confirmation">
+		<p class="form-invalid" *ngIf="confirmed && txid == 0">Your transaction could not be sent.</p>
+		<p class="form-success" *ngIf="confirmed && txid != 0">Success! txid: {{txid}}</p>
+	</div>
+
+</form>

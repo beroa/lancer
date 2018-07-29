@@ -10,6 +10,7 @@ import JobModel from '../models/job';
 import UserModel from '../models/user';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { TransactionComponent } from '../transaction/transaction.component';
 
 
 @Component({
@@ -30,13 +31,7 @@ export class JobComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   confirmed = false;
-  txid = 0;
-
-  public popoverTitle: string = 'Transaction Confirmation';
-  public popoverMessage: string = 'Are you sure you want to send _ to _ ?';
-  public confirmClicked: boolean = false;
-  public cancelClicked: boolean = false;
-  
+  txid = 0;  
 
   constructor(
     private jobService: JobService,
@@ -44,7 +39,6 @@ export class JobComponent implements OnInit {
     private blockexplorer: BlockExplorerService,
     private fb: FormBuilder,
     private auth: AuthenticationService) {
-    this.createForm();
     this.isLoggedIn = this.auth.isLoggedIn();
   }
 
@@ -71,12 +65,12 @@ export class JobComponent implements OnInit {
     }
   }
 
-  createForm() {
-    this.form = this.fb.group({
-      tx_value: ['', Validators.required],
-      tx_fees: ['.0002', Validators.required]
-    });
-  }
+  // createForm() {
+  //   this.form = this.fb.group({
+  //     tx_value: ['', Validators.required],
+  //     tx_fees: ['.0002', Validators.required]
+  //   });
+  // }
 
   fundMe() {
     if (!this.submitted) {
@@ -84,27 +78,23 @@ export class JobComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.form.invalid) {
-        return;
-    }
-    if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
-      return;
-    }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   if (this.form.invalid) {
+  //       return;
+  //   }
+  //   if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
+  //     return;
+  //   }
 
-    this.auth.transaction(this.user._id, this.job.address, this.form.controls.tx_value.value)
-    .subscribe( res => {
-      console.log(res);
-        this.txid = JSON.parse(res).txid;
-        this.confirmed = true;
-      }, (err) => {
-        console.error(err);
-      });
-  }
-
-  generateTransaction() {
-
-  }
+  //   this.auth.transaction(this.user._id, this.job.address, this.form.controls.tx_value.value)
+  //   .subscribe( res => {
+  //     console.log(res);
+  //       this.txid = JSON.parse(res).txid;
+  //       this.confirmed = true;
+  //     }, (err) => {
+  //       console.error(err);
+  //     });
+  // }
   
 }

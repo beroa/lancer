@@ -1,0 +1,18 @@
+#fundingBox {
+	border: 2px solid #CCCCCC;
+	padding: 2em;
+	margin-top: .5em;
+	background: #d0ecd9;
+}
+
+.form-invalid {
+	color: red;
+}
+
+.form-success {
+	color: green;
+}
+
+.confirmation {
+	margin-top: .5em;
+}

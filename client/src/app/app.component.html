@@ -1,22 +1,24 @@
-<div class="navbar navbar-default">
-  <div class="container">
-    <div id="navbar-main">
+<div id="root">
+	<div class="navbar navbar-inverse">
+		<div class="container">
+			<div id="navbar-main">
 
-      <ul class="nav navbar-nav">
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/find">Find</a></li>
-        <li><a routerLink="/post">Post</a></li>
-      </ul>
+				<ul class="nav navbar-nav">
+					<li><a routerLink="/">Home</a></li>
+					<li><a routerLink="/find">Find</a></li>
+					<li><a routerLink="/post">Post</a></li>
+				</ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!auth.isLoggedIn()"><a routerLink="/register">Register</a></li>
-        <li *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Log In</a></li>
-        <li *ngIf="auth.isLoggedIn()"><a routerLink="/profile">My Profile</a></li>
-        <li *ngIf="auth.isLoggedIn()"><a (click)="auth.logout()">Logout</a></li>
-      </ul>
-      
-    </div>
-  </div>
+				<ul class="nav navbar-nav navbar-right">
+					<li *ngIf="!auth.isLoggedIn()"><a routerLink="/register">Register</a></li>
+					<li *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Log In</a></li>
+					<li *ngIf="auth.isLoggedIn()"><a routerLink="/profile">My Profile</a></li>
+					<li *ngIf="auth.isLoggedIn()"><a routerLink="/" (click)="auth.logout()">Logout</a></li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
 </div>
 
 <router-outlet></router-outlet>

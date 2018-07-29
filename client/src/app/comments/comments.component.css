@@ -6,14 +6,13 @@
 	margin-top: 7px;
 }
 
-
 .comment-list {
 	list-style: none;
 	margin-left: -40px;
 }
 .comment-item {
-	border: 2px solid #CCCCCC;
-	background: #FCFCFC;
+	border: 1px solid #CCCCCC;
+	background: #d0ecd9;
 	margin: .5em 0;
 	padding: .5em 1em;
 }
@@ -34,4 +33,8 @@ table {
 }
 .tright {
 	text-align: right;
+}
+
+#comments-frame {
+	background: #edf8f0;
 }

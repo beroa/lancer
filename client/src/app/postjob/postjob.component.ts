@@ -10,54 +10,54 @@ import { markdown } from 'markdown';
 
 
 @Component({
-  templateUrl: './postjob.component.html',
-  styleUrls: ['./postjob.component.css']
+	templateUrl: './postjob.component.html',
+	styleUrls: ['./postjob.component.css']
 })
 
 export class PostJobComponent {
-  form: FormGroup;
-  submitted = false;
+	form: FormGroup;
+	submitted = false;
 
-  constructor(
-  	private auth: AuthenticationService, 
-  	private jobService: JobService, 
-  	private router: Router,
-  	private http: HttpClient,
-    private fb: FormBuilder) {
-    this.createForm();
-  }
+	constructor(
+		private auth: AuthenticationService, 
+		private jobService: JobService, 
+		private router: Router,
+		private http: HttpClient,
+		private fb: FormBuilder) {
+		this.createForm();
+	}
 
-  public newJob: JobModel = new JobModel()
-  public isLoggedIn = this.auth.isLoggedIn();
-  jobId = String;
+	public newJob: JobModel = new JobModel()
+	public isLoggedIn = this.auth.isLoggedIn();
+	jobId = String;
 
-  createForm() {
-    this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
+	createForm() {
+		this.form = this.fb.group({
+			title: ['', Validators.required],
+			description: ['', Validators.required]
+		});
+	}
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.form.invalid) {
-        return;
-    }
-    this.postJob();
-  }
+	onSubmit() {
+		this.submitted = true;
+		if (this.form.invalid) {
+				return;
+		}
+		this.postJob();
+	}
 
-  postJob() {
-    this.newJob.author = this.auth.getUserDetails().name;
-    this.newJob.title = this.form.get('title').value;
-    this.newJob.description = markdown.toHTML(this.form.get('description').value);
+	postJob() {
+		this.newJob.author = this.auth.getUserDetails().name;
+		this.newJob.title = this.form.get('title').value;
+		this.newJob.description = markdown.toHTML(this.form.get('description').value);
 
-    this.jobService.createJob(this.newJob)
-      .subscribe((res) => {
-        this.jobId = res.jobId
-        this.router.navigate(['/job/' + this.jobId]);
-      });
+		this.jobService.createJob(this.newJob)
+			.subscribe((res) => {
+				this.jobId = res.jobId
+				this.router.navigate(['/job/' + this.jobId]);
+			});
 
-  }
+	}
 
 } 
 

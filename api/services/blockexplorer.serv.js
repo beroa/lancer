@@ -4,13 +4,13 @@ var rp = require('request-promise');
 
 
 exports.getAddr = async function(addr) {
-    let response = await rp('https://testnet.blockexplorer.com/api/addr/' + addr);
+	let response = await rp('https://testnet.blockexplorer.com/api/addr/' + addr);
 	let data = await JSON.parse(response);
 	return data;
 }
 
 exports.getTx = async function(tx) {
-    let response = await rp('https://testnet.blockexplorer.com/api/tx/' + tx);
+	let response = await rp('https://testnet.blockexplorer.com/api/tx/' + tx);
 	let data = await JSON.parse(response);
 	return data;
 }
@@ -36,10 +36,10 @@ exports.postTx = async function(raw_tx) {
 }
 
 tx_input = function(id, index, quantity) {
-    this.id = id;
-    this.index = index;
-    this.quantity = quantity;
-    return this;
+	this.id = id;
+	this.index = index;
+	this.quantity = quantity;
+	return this;
 }
 
 exports.findInputs = async function(addr, quantity) {
@@ -50,7 +50,6 @@ exports.findInputs = async function(addr, quantity) {
 	for (let i = 0; i < response.length && inputs_quantity < quantity; i++) {
 		input = new tx_input(response[i].txid, response[i].vout, response[i].satoshis);
 		inputs.push(input);
-		console.log("INP" + input);
 		inputs_quantity += input.quantity;
 	}
 	return inputs;

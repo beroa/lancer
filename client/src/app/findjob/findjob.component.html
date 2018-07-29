@@ -2,16 +2,16 @@
 	<div class="row">
 	  <div class="col-md-1"></div>
 	  <div class="col-md-10">
-	  	
-	  	<div class="pages">
-	  		Page: {{pageNumber}}
-	  		<span class="page-number" *ngFor="let page of countPages()" (click)="changePage(page)">
-	  			{{page}}
-	  		</span>
-	  	</div>
+		
+		<div class="pages">
+			Page: {{pageNumber}}
+			<span class="page-number" *ngFor="let page of countPages()" (click)="changePage(page)">
+				{{page}}
+			</span>
+		</div>
 
-	    <div class="jobs">
-		    <ul class="job-list">
+		<div class="jobs">
+			<ul class="job-list">
 				<li class="job-item" *ngFor="let job of jobList">
 					<a (click)="goToJob(job._id)">
 						{{job.title}}
@@ -20,8 +20,8 @@
 					<span class="job-description" [innerHtml]="job.description">
 					</span>
 				</li>
-		    </ul>
-	    </div>
+			</ul>
+		</div>
 
 	  </div>
 	</div>

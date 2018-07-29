@@ -9,56 +9,56 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class JobService {
 
-  api_url = 'http://localhost:3000';
-  postUrl = `${this.api_url}/api/post`;
-  findUrl = `${this.api_url}/api/find`;
-  jobUrl = `${this.api_url}/api/job`;
+	api_url = 'http://localhost:3000';
+	postUrl = `${this.api_url}/api/post`;
+	findUrl = `${this.api_url}/api/find`;
+	jobUrl = `${this.api_url}/api/job`;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+	constructor(
+		private http: HttpClient
+	) { }
 
-  createJob(job: Job): Observable<any>{
-    return this.http.post(`${this.postUrl}/submit`, job)
-    .map(res => {
-      return { jobId: res["data"]._id, }
-    })
-  }
+	createJob(job: Job): Observable<any>{
+		return this.http.post(`${this.postUrl}/submit`, job)
+		.map(res => {
+			return { jobId: res["data"]._id, }
+		})
+	}
 
-  getJob(id: string): Observable<any>{
-    return this.http.get(`${this.jobUrl}/` + id)
-    .map(res  => {
-      return { job: res["data"] } ;
-    })
-  }
+	getJob(id: string): Observable<any>{
+		return this.http.get(`${this.jobUrl}/` + id)
+		.map(res  => {
+			return { job: res["data"] } ;
+		})
+	}
 
-  getJobs(page: number): Observable<any>{
-    return this.http.get(`${this.findUrl}?page=` + page)
-    .map(res  => {
-      return { jobList: res["data"].docs, pageCount: res["data"].pages} ;
-    })
-  }
+	getJobs(page: number): Observable<any>{
+		return this.http.get(`${this.findUrl}?page=` + page)
+		.map(res  => {
+			return { jobList: res["data"].docs, pageCount: res["data"].pages} ;
+		})
+	}
 
-  // //Update job, takes a Job Object as parameter
-  // editJob(job:Job){
-  //   let editUrl = `${this.postUrl}`
-  //   //returns the observable of http put request 
-  //   return this.http.put(editUrl, job);
-  // }
+	// //Update job, takes a Job Object as parameter
+	// editJob(job:Job){
+	//   let editUrl = `${this.postUrl}`
+	//   //returns the observable of http put request 
+	//   return this.http.put(editUrl, job);
+	// }
 
-  // deleteJob(id:string):any{
-  //   //Delete the object by the id
-  //   let deleteUrl = `${this.postUrl}/${id}`
-  //   return this.http.delete(deleteUrl)
-  //   .map(res  => {
-  //     return res;
-  //   })
-  // }
+	// deleteJob(id:string):any{
+	//   //Delete the object by the id
+	//   let deleteUrl = `${this.postUrl}/${id}`
+	//   return this.http.delete(deleteUrl)
+	//   .map(res  => {
+	//     return res;
+	//   })
+	// }
 
-  //Default Error handling method.
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+	//Default Error handling method.
+	private handleError(error: any): Promise<any> {
+		console.error('An error occurred', error); // for demo purposes only
+		return Promise.reject(error.message || error);
+	}
 
 }
