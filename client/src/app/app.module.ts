@@ -22,6 +22,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { CommentService } from './comment.service';
 import { CommentDirective } from './comment.directive';
 import { BlockExplorerService } from './blockexplorer.service';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,7 +53,8 @@ const routes: Routes = [
     HttpClientModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmationPopoverModule.forRoot({confirmButtonType:'danger'}) 
   ],
   providers: [
     AuthenticationService, 

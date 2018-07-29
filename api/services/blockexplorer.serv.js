@@ -21,6 +21,20 @@ exports.getUnspent = async function(addr) {
 	return data;
 }
 
+exports.postTx = async function(raw_tx) {
+		var options = {
+		method: 'POST',
+		uri: 'https://testnet.blockexplorer.com/api/tx/send',
+		body: {
+			rawtx: raw_tx
+		},
+		json: true
+	};
+
+	let response = await rp(options);
+	return JSON.stringify(response);
+}
+
 tx_input = function(id, index, quantity) {
     this.id = id;
     this.index = index;

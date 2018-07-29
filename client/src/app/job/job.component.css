@@ -17,3 +17,7 @@
 .form-invalid {
 	color: red;
 }
+
+.form-success {
+	color: green;
+}

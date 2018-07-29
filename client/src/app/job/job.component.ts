@@ -9,6 +9,8 @@ import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import UserModel from '../models/user';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 
 @Component({
   selector: 'app-job',
@@ -27,6 +29,13 @@ export class JobComponent implements OnInit {
   private isFundingOpen = false;
   form: FormGroup;
   submitted = false;
+  confirmed = false;
+  txid = 0;
+
+  public popoverTitle: string = 'Transaction Confirmation';
+  public popoverMessage: string = 'Are you sure you want to send _ to _ ?';
+  public confirmClicked: boolean = false;
+  public cancelClicked: boolean = false;
   
 
   constructor(
@@ -39,14 +48,8 @@ export class JobComponent implements OnInit {
     this.isLoggedIn = this.auth.isLoggedIn();
   }
 
-  createForm() {
-    this.form = this.fb.group({
-      tx_value: ['', Validators.required]
-    });
-  }
-
   ngOnInit(): void {
-  	this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
        this.jobId = params['id'];
     });
 
@@ -68,8 +71,17 @@ export class JobComponent implements OnInit {
     }
   }
 
+  createForm() {
+    this.form = this.fb.group({
+      tx_value: ['', Validators.required],
+      tx_fees: ['.0002', Validators.required]
+    });
+  }
+
   fundMe() {
-    this.isFundingOpen = !this.isFundingOpen;
+    if (!this.submitted) {
+      this.isFundingOpen = !this.isFundingOpen;
+    }
   }
 
   onSubmit() {
@@ -81,12 +93,14 @@ export class JobComponent implements OnInit {
       return;
     }
 
-   this.auth.transaction(this.user._id, this.job.address, this.form.controls.tx_value.value).subscribe( res => {
-     console.log("UID" + this.user._id);
-      console.log("tx:" + res);
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.transaction(this.user._id, this.job.address, this.form.controls.tx_value.value)
+    .subscribe( res => {
+      console.log(res);
+        this.txid = JSON.parse(res).txid;
+        this.confirmed = true;
+      }, (err) => {
+        console.error(err);
+      });
   }
 
   generateTransaction() {

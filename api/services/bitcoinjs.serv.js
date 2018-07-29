@@ -10,9 +10,9 @@ exports.parseTransaction = async function(user, jobAddress, quantity) {
     quantity = parseFloat(quantity)*100000000;
     let user_data = await BlockExplorerService.getAddr(user.address);
     let inputs = await BlockExplorerService.findInputs(user.address, quantity);
-    console.log(user.address);
-    console.log("INPUTS" + inputs)
-    console.log(quantity);
+    // console.log(user.address);
+    // console.log("INPUTS" + inputs)
+    // console.log(quantity);
     return this.makeTransaction(user.WIF, jobAddress, quantity, inputs);
 }
 
@@ -20,11 +20,11 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs) {
     let key = bitcoin.ECPair.fromWIF(WIF, testnet);
     let tx = new bitcoin.TransactionBuilder(testnet);
     let total = 0;
-    console.log("INPLEN"+inputs.length);
+    // console.log("INPLEN"+inputs.length);
     for (let i = 0; i < inputs.length; i++) {
         tx.addInput(inputs[i].id, inputs[i].index);
         total += inputs[i].quantity;
-        console.log("TOTAL"+total);
+        // console.log("TOTAL"+total);
     }
     tx.addOutput(destination, quantity);
     total -= quantity;
