@@ -3,11 +3,13 @@ import { AuthenticationService, UserDetails } from '../authentication.service';
 import { BlockExplorerService } from '../blockexplorer.service';
 
 @Component({
-	templateUrl: './profile.component.html'
+	templateUrl: './profile.component.html',
+	styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
 	details: any;
 	balance: 0;
+	isWithdrawing = false;
 
 	api_data: any = {};
 
@@ -28,6 +30,10 @@ export class ProfileComponent {
 			console.error(err);
 		});
 	}
+
+	withdrawal() {
+      this.isWithdrawing = !this.isWithdrawing;
+  }
 
 	// getApiData() {
 	//   console.log(this.address_url + this.details.address);
