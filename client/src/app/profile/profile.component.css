@@ -1,3 +1,7 @@
 h1 {
 	margin-bottom: .75em;
 }
+
+.form-control-static-red {
+	color:red;
+}

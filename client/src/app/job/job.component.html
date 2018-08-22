@@ -14,15 +14,11 @@
 				<p> Date created: {{job?.date_created}} </p>
 				<p> Created by: {{job?.author}} </p>
 				<p> Address: {{job?.address}} </p>
-				<p> Balance: {{api_data_job_addr?.balance}} tBTC</p>
+				<p *ngIf="api_data_job_addr.balance">Balance: {{ api_data_job_addr.balance }} tBTC</p>
+				<p class="red-text" *ngIf="!api_data_job_addr.balance">Balance: Error: Could not connect to Blockexplorer.</p>
 
 				<div id="fundMe">
 					<button type="submit" class="btn btn-default" (click)="fundMe()" [disabled]="confirmed">Fund Me</button>
-
-					<div *ngIf="!isLoggedIn && isFundingOpen" class="message-login">
-						<p>To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
-					 </div>
-
 					<app-transaction *ngIf ="isLoggedIn && isFundingOpen" [destination]="job.address"></app-transaction>
 				</div>
 

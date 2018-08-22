@@ -6,7 +6,6 @@
 			<h1 class="form-signin-heading">My Profile</h1>
 
 			<div>
-
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Username:</label>
 					<p class="form-control-static">{{ details?.name }}</p>
@@ -24,14 +23,14 @@
 
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Balance: </label>
-					<p class="form-control-static">{{ api_data.balance }} tBTC</p>
+					<p class="form-control-static" *ngIf="api_data.balance">{{ api_data.balance }} tBTC</p>
+					<p class="form-control-static-red" *ngIf="!api_data.balance">Error: Could not connect to Blockexplorer.</p>
 				</div>
 
 				<div id="withdrawal">
 					<button type="submit" class="btn btn-default" (click)="withdrawal()" [disabled]="confirmed">Withdraw</button>
 					<app-transaction *ngIf ="isWithdrawing"></app-transaction>
 				</div>
-
 			</div>
 
 		</div>

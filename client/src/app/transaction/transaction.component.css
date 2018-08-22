@@ -1,4 +1,4 @@
-#fundingBox {
+#transaction {
 	border: 2px solid #CCCCCC;
 	padding: 2em;
 	margin-top: 1em;
@@ -15,4 +15,8 @@
 
 .confirmation {
 	margin-top: .5em;
+}
+
+.red-text {
+	color: red;
 }
