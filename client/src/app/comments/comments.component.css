@@ -36,5 +36,7 @@ table {
 }
 
 #comments-frame {
-	background: #edf8f0;
+	/*background: #edf8f0;*/
+	margin-top:2em;
+	border: 2px solid #CCCCCC;
 }

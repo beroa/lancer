@@ -16,7 +16,10 @@
 				<p> Address: {{job?.address}} </p>
 				<p *ngIf="api_data_job_addr.balance">Balance: {{ api_data_job_addr.balance }} tBTC</p>
 				<p class="red-text" *ngIf="!api_data_job_addr.balance">Balance: Error: Could not connect to Blockexplorer.</p>
-
+				<div id="jobAdmin" *ngIf="isJobAuthor">
+					<p>this is your job</p>
+				</div>
+				
 				<div id="fundMe">
 					<button type="submit" class="btn btn-default" (click)="fundMe()" [disabled]="confirmed">Fund Me</button>
 					<app-transaction *ngIf ="isLoggedIn && isFundingOpen" [destination]="job.address"></app-transaction>

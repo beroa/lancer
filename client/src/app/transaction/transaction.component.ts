@@ -16,11 +16,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
+	isDestinationLocked = false;
+	private isLoggedIn: boolean;
 	api_data_user_addr: any = {};
 	@Input() destination? = ""
-	isDestinationLocked = false;
-
-	private isLoggedIn: boolean;
 	form: FormGroup;
 	submitted = false;
 	confirmed = false;

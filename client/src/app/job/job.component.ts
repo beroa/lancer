@@ -27,6 +27,7 @@ export class JobComponent implements OnInit {
   private sub: any;
 
   private isLoggedIn: boolean;
+  private isJobAuthor = false;
   private isFundingOpen = false;
   form: FormGroup;
   submitted = false;
@@ -60,8 +61,11 @@ export class JobComponent implements OnInit {
         this.user = user;
         this.blockexplorer.get_addr(this.user.address).subscribe(res => {
           this.api_data_user_addr = res;
-        })
-      })
+        });
+        if (this.user.name == this.job.author) {
+          this.isJobAuthor = true;
+        }
+      });
     }
   }
 
