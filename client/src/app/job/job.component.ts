@@ -23,7 +23,6 @@ export class JobComponent implements OnInit {
   job: JobModel;
   user: UserModel;
   api_data_job_addr: any = {};
-  api_data_user_addr: any = {};
   private sub: any;
 
   private isLoggedIn: boolean;
@@ -59,9 +58,6 @@ export class JobComponent implements OnInit {
     if (this.isLoggedIn) {
       this.auth.profile().subscribe(user => {
         this.user = user;
-        this.blockexplorer.get_addr(this.user.address).subscribe(res => {
-          this.api_data_user_addr = res;
-        });
         if (this.user.name == this.job.author) {
           this.isJobAuthor = true;
         }
@@ -69,36 +65,10 @@ export class JobComponent implements OnInit {
     }
   }
 
-  // createForm() {
-  //   this.form = this.fb.group({
-  //     tx_value: ['', Validators.required],
-  //     tx_fees: ['.0002', Validators.required]
-  //   });
-  // }
-
   fundMe() {
     if (!this.submitted) {
       this.isFundingOpen = !this.isFundingOpen;
     }
   }
 
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (this.form.invalid) {
-  //       return;
-  //   }
-  //   if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
-  //     return;
-  //   }
-
-  //   this.auth.transaction(this.user._id, this.job.address, this.form.controls.tx_value.value)
-  //   .subscribe( res => {
-  //     console.log(res);
-  //       this.txid = JSON.parse(res).txid;
-  //       this.confirmed = true;
-  //     }, (err) => {
-  //       console.error(err);
-  //     });
-  // }
-  
 }

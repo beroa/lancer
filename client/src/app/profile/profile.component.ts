@@ -35,16 +35,4 @@ export class ProfileComponent {
       this.isWithdrawing = !this.isWithdrawing;
   }
 
-	// getApiData() {
-	//   console.log(this.address_url + this.details.address);
-	//   return this.http.get(this.address_url + this.details.address).map((res: Response) => res.json())
-	// }
-
-	// readApiData() {
-	//   this.getApiData().subscribe(data => {
-	//     console.log(data);
-	//     this.api_data = data;
-	//   })
-	// }
-
 }

@@ -67,7 +67,6 @@ export class TransactionComponent implements OnInit {
 		if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
 			return;
 		}
-
 		this.auth.transaction(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value)
 		.subscribe( res => {
 			console.log(res);
@@ -76,10 +75,5 @@ export class TransactionComponent implements OnInit {
 		}, (err) => {
 			console.error(err);
 		});
-	}
-
-  generateTransaction() {
-
-  }
-  
+	}  
 }

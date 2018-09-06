@@ -29,7 +29,9 @@ exports.createComment = async function(req, res, next){
         jobId: req.params.id,
         parentId: req.body.parentId,
         content: req.body.content,
-        author: req.body.author
+        author: req.body.author,
+        image: req.body.image,
+        image_type: req.body.image_type
     }
 
     try{

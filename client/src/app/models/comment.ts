@@ -4,6 +4,8 @@ class Comment {
 	content: string;
 	author: string;
 	date_created: Date;
+	image: string;
+	image_type: string;
 
 	constructor() {
 		this.jobId = ""
@@ -11,6 +13,8 @@ class Comment {
 		this.content = ""
 		this.author = ""
 		this.date_created = new Date()
+		this.image = ""
+		this.image_type = ""
 	}
 }
 

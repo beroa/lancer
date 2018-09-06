@@ -14,8 +14,11 @@
 				<p> Date created: {{job?.date_created}} </p>
 				<p> Created by: {{job?.author}} </p>
 				<p> Address: {{job?.address}} </p>
-				<p *ngIf="api_data_job_addr.balance">Balance: {{ api_data_job_addr.balance }} tBTC</p>
-				<p class="red-text" *ngIf="!api_data_job_addr.balance">Balance: Error: Could not connect to Blockexplorer.</p>
+				<p>
+					Balance: 
+						<span *ngIf="api_data_job_addr">{{ api_data_job_addr.balance }} tBTC</span>
+						<span *ngIf="!api_data_job_addr"></span>
+				</p>
 				<div id="jobAdmin" *ngIf="isJobAuthor">
 					<p>this is your job</p>
 				</div>
@@ -35,5 +38,5 @@
 </div>
 
 <div class="comments">
-	<app-comments></app-comments>
+	<app-comments [api_data_job_addr]="api_data_job_addr"></app-comments>
 </div>

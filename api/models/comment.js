@@ -6,11 +6,13 @@ var commentSchema = new mongoose.Schema({
 		type: String
 	},
 	parentId: String,
-  	content:  {
-  		type: String
-  	},
-  	author: String,
-  	date_created: Date
+	content: {
+		type: String
+	},
+	author: String,
+	date_created: Date,
+  image: String,
+  image_type: String
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

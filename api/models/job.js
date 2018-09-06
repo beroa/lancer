@@ -13,7 +13,9 @@ var jobSchema = new mongoose.Schema({
   description: String,
   date_created: Date,
   address: String,
-  WIF: String // HIDE ME PLS
+  WIF: String, // HIDE ME PLS,
+  selection: String,
+  txid: String
 });
 
 jobSchema.plugin(mongoosePaginate);
