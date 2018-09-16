@@ -30,7 +30,7 @@ export class CommentsComponent implements OnInit {
 
 
 	public popoverTitle: string = 'Select For Payment';
-	public popoverMessage = "Are you sure you want this user to recieve your job's funds ("+this.api_data_job_addr.balance+" tBTC)?\n Your job will be marked complete.";
+	public popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.balance + " tBTC)?\n Your job will be marked complete.";
 	public confirmClicked: boolean = false;
 	public cancelClicked: boolean = false;
 
@@ -48,7 +48,6 @@ export class CommentsComponent implements OnInit {
 			
 			    	if (this.newComment.author == this.job.author) {
 						this.isJobAuthor = true;
-
 					}
 				}
 			});
@@ -110,22 +109,19 @@ export class CommentsComponent implements OnInit {
 	}
 
 	showImage(comment: CommentModel): any {
-    	return 'data:'+comment.image_type+';base64,' + comment.image;
+    	return 'data:'+  comment.image_type + ';base64,' + comment.image;
 	}
 
 	select() {
 		this.isSelecting = !this.isSelecting;
 		console.log(this.api_data_job_addr);
-		this.popoverMessage = "Are you sure you want this user to recieve your job's funds ("+this.api_data_job_addr.balance+" tBTC)?\n Your job will be marked complete.";
+		this.popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.balance + " tBTC)?\n Your job will be marked complete.";
 	}
 
 	paySubmission(selectedComment: CommentModel) {
-		
-		this.auth.transaction(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value)
+		this.auth.jobComplete(this.job._id, selectedComment.author)
 		.subscribe( res => {
 			console.log(res);
-			this.txid = JSON.parse(res).txid;
-			this.confirmed = true;
 		}, (err) => {
 			console.error(err);
 		});

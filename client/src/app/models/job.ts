@@ -1,4 +1,5 @@
 class Job {
+	_id: string;
 	title: string;
 	author: string;
 	description: string;
@@ -6,6 +7,7 @@ class Job {
 	address: string;
 
 	constructor() {
+		this._id = ""
 		this.title = ""
 		this.description = ""
 		this.author = ""

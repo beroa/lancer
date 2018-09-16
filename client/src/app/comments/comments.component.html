@@ -27,10 +27,10 @@
 	    <div class="comments">
 		    <ul class="comment-list">
 				<li class="comment-item" *ngFor="let comment of commentList">
-					<div *ngIf="job.selected == comment._id">
+<!-- 					<div *ngIf="job.selected == comment._id">
 						this comment was selected
 						txid: 
-					</div>
+					</div> -->
 					<img
 					*ngIf="comment.image && comment.image.length > 0"
 					[src]="showImage(comment)"
@@ -46,6 +46,7 @@
 								</td>
 								<td class="tright">
 									<button class="select" type="submit" class="btn btn-default" (click)="select()" [disabled]="confirmed"
+									*ngIf="isJobAuthor"
 									mwlConfirmationPopover
 									[popoverTitle]="popoverTitle"
 									[popoverMessage]="popoverMessage"

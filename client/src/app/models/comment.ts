@@ -1,6 +1,8 @@
 class Comment {
+	_id: string;
 	jobId: string;
 	parentId: string;
+	authorId: string;
 	content: string;
 	author: string;
 	date_created: Date;

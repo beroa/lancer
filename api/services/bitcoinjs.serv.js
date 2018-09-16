@@ -6,14 +6,35 @@ var BlockExplorerService = require('./blockexplorer.serv');
 
 _this = this
 
-exports.parseTransaction = async function(user, jobAddress, quantity) {
+exports.parseTransaction = async function(user, destination, quantity) {
 	quantity = parseFloat(quantity)*100000000;
 	let user_data = await BlockExplorerService.getAddr(user.address);
 	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
-	return this.makeTransaction(user.WIF, jobAddress, quantity, inputs);
+	return this.makeTransaction(user.WIF, destination, quantity, inputs);
+}
+
+exports.userSend = async function(user, destination, quantity) {
+	quantity = parseFloat(quantity)*100000000;
+	let user_data = await BlockExplorerService.getAddr(user.address);
+	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
+	// console.log(user.address);
+	// console.log("INPUTS" + inputs)
+	// console.log(quantity);
+	return this.makeTransaction(user.WIF, destination, quantity, inputs);
+}
+
+exports.jobSend = async function(job, destination) {
+	// quantity = parseFloat(quantity)*100000000;
+	let job_data = await BlockExplorerService.getAddr(job.address);
+	var quantity = job_data.valueSats;
+	let inputs = await BlockExplorerService.findInputs(job.address, quantity);
+	// console.log(user.address);
+	// console.log("INPUTS" + inputs)
+	// console.log(quantity);
+	return this.makeTransaction(job.WIF, destination, quantity, inputs);
 }
 
 exports.makeTransaction = async function(WIF, destination, quantity, inputs) {

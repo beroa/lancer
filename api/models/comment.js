@@ -10,9 +10,10 @@ var commentSchema = new mongoose.Schema({
 		type: String
 	},
 	author: String,
+	authorId: String,
 	date_created: Date,
-  image: String,
-  image_type: String
+  	image: String,
+  	image_type: String
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

@@ -28,12 +28,6 @@ exports.getJobs = async function(query, page, limit) {
 }
 
 exports.createJob = async function(JobData) {
-    // var newJob = new JobModel({
-    //     title: Job.title,
-    //     description: Job.description,
-    //     author: Job.author,
-    //     date_created: new Date()
-    // });
     
     var newJob = new Job();
     newJob.title = JobData.title;
@@ -44,6 +38,23 @@ exports.createJob = async function(JobData) {
 
     try{
         var savedJob = await newJob.save()
+        return savedJob;
+    }catch(e){
+        throw Error("Error while Creating Job")
+    }
+}
+
+exports.completeJob = async function(user, job, recipient) {
+    
+    var newJob = new Job();
+    newJob.title = JobData.title;
+    newJob.description = JobData.description;
+    newJob.author = JobData.author;
+    newJob.date_created = new Date();
+    newJob.generateWallet();
+
+    try{
+        var savedJob = await newJob.save();
         return savedJob;
     }catch(e){
         throw Error("Error while Creating Job")

@@ -115,6 +115,28 @@ export class AuthenticationService {
 		return request;
 	}
 
+	public jobComplete(job, destination): Observable<any> {
+		let base = this.http.post(`${apiUrl}/job/${job}/complete`, { 
+			headers: { 
+				Authorization: `Bearer ${this.getToken()}`
+			},
+			params: { 
+				job: `${job}`,
+				destination: `${destination}`
+			}
+		});
+
+		const request = base.pipe(
+			map((data: TokenResponse) => {
+				if (data.token) {
+					this.saveToken(data.token);
+				}
+				return data;
+			})
+		);
+		return request;
+	}
+
 	public logout(): void {
 		this.token = '';
 		window.localStorage.removeItem('mean-token');
