@@ -29,7 +29,7 @@ router.post('/job/:id/complete', auth, ctrlBitcoinJS.completeJob);
 router.get('/job/:id/comments', ctrlComment.getComments);
 router.post('/job/:id/comments/submit', ctrlComment.createComment);
 
-router.get('/maketx', auth, ctrlBitcoinJS.parseTransaction);
+router.get('/maketx', auth, ctrlBitcoinJS.userSend);
 // };
 
 
