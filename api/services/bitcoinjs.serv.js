@@ -6,6 +6,8 @@ var BlockExplorerService = require('./blockexplorer.serv');
 
 _this = this
 
+const FEE = 200000;
+
 exports.parseTransaction = async function(user, destination, quantity) {
 	quantity = parseFloat(quantity)*100000000;
 	let user_data = await BlockExplorerService.getAddr(user.address);
@@ -13,6 +15,7 @@ exports.parseTransaction = async function(user, destination, quantity) {
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
+	quantity -= FEE;
 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
 }
 
@@ -23,6 +26,7 @@ exports.userSend = async function(user, destination, quantity) {
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
+	quantity -= FEE;
 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
 }
 
@@ -34,6 +38,7 @@ exports.jobSend = async function(job, destination) {
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
+	quantity -= FEE;
 	return this.makeTransaction(job.WIF, destination, quantity, inputs);
 }
 
@@ -49,8 +54,8 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs) {
 	}
 	tx.addOutput(destination, quantity);
 	total -= quantity;
-	if (total > 1500) {
-		tx.addOutput(key.getAddress(), total-1000);
+	if (total > FEE) {
+		tx.addOutput(key.getAddress(), total - FEE);
 	}
 	for (let i = 0; i < inputs.length; i++) {
 		tx.sign(i, key);
