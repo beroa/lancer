@@ -1,7 +1,5 @@
 var JobService = require('../services/job.serv');
-var BitcoinJSService = require('../services/bitcoinjs.serv.js');
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
 
 exports.getJob = async function(req, res, next) {
     var id = req.params.id
@@ -40,42 +38,3 @@ exports.createJob = async function(req, res, next){
     }
 }
 
-exports.completeJob = async function(req, res, next) {
-    var request = {
-        jobId: req.params.id,
-        destination: req.body.destination
-    }
-
-    if (!req.payload._id) {
-        res.status(401).json({
-          "message" : "UnauthorizedError: private profile"
-        });
-    } else {
-        var user = await User.findById(req.payload._id);
-        var recipient = await User.findByName(req.body.destination);
-        // res.status(200).json(user);
-        var Job = await JobService.getJob(req.params.id);
-        if (Job.author != user) {
-            res.status(401).json({
-              "message" : "UnauthorizedError: not your job"
-            });
-        } else {
-            try {
-              BitcoinJSService.jobSend(user, req.query.destination, req.query.quantity)
-              .then(function(response) {
-                console.log(response);
-                BlockExplorerService.postTx(response)
-                .then(function(response) {
-                  return res.status(200).json(response);
-                }).catch(function(err) {
-                  res.status(400).json({status: 400, message: err.message});
-                })
-              }).catch(function(err) {
-                res.status(400).json({status: 400, message: err.message});
-              })
-            } catch (e) {
-              res.status(400).json({status: 400, message: e.message});
-            }
-        }
-    }
-}

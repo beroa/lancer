@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
 import { RequestOptions, Request, RequestMethod } from '@angular/http';
 
+// decoded token
 export interface UserDetails {
 	_id: string;
+	name: string;
 	exp: number;
 	iat: number;
-	name: string;
 }
 
 interface TokenResponse {
@@ -43,6 +44,7 @@ export class AuthenticationService {
 
 	public getUserDetails(): UserDetails {
 		const token = this.getToken();
+		// console.log("getuserdetails: " + token);
 		let payload;
 		if (token) {
 			payload = token.split('.')[1];
@@ -55,6 +57,7 @@ export class AuthenticationService {
 
 	public isLoggedIn(): boolean {
 		const user = this.getUserDetails();
+		// console.log("isloggedin: " + user);
 		if (user) {
 			return user.exp > Date.now() / 1000;
 		} else {
@@ -116,25 +119,22 @@ export class AuthenticationService {
 	}
 
 	public jobComplete(job, destination): Observable<any> {
-		let base = this.http.post(`${apiUrl}/job/${job}/complete`, { 
-			headers: { 
-				Authorization: `Bearer ${this.getToken()}`
-			},
-			params: { 
-				job: `${job}`,
-				destination: `${destination}`
-			}
-		});
+		const httpOptions = {
+		  headers: new HttpHeaders({
+		    'Content-Type':  'application/json',
+		    'Authorization': `Bearer ${this.getToken()}`
+		  })
+		};
 
-		const request = base.pipe(
-			map((data: TokenResponse) => {
-				if (data.token) {
-					this.saveToken(data.token);
-				}
-				return data;
-			})
-		);
-		return request;
+		let data = { 
+			job: `${job}`,
+			destination: `${destination}`
+		};
+
+		return this.http.post(`${apiUrl}/job/${job}/complete`, data, httpOptions
+		).map(res => {
+			return { res }
+		})
 	}
 
 	public logout(): void {

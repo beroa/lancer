@@ -39,22 +39,6 @@ export class JobService {
 		})
 	}
 
-	// //Update job, takes a Job Object as parameter
-	// editJob(job:Job){
-	//   let editUrl = `${this.postUrl}`
-	//   //returns the observable of http put request 
-	//   return this.http.put(editUrl, job);
-	// }
-
-	// deleteJob(id:string):any{
-	//   //Delete the object by the id
-	//   let deleteUrl = `${this.postUrl}/${id}`
-	//   return this.http.delete(deleteUrl)
-	//   .map(res  => {
-	//     return res;
-	//   })
-	// }
-
 	//Default Error handling method.
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only

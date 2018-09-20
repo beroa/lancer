@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { AuthenticationService, UserDetails } from '../authentication.service';
 import { BlockExplorerService } from '../blockexplorer.service';
+import UserModel from '../models/user';
 
 @Component({
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-	details: any;
+	profile: UserModel;
 	balance: 0;
 	isWithdrawing = false;
 
@@ -19,13 +20,13 @@ export class ProfileComponent {
 	) { }
 	
 	ngOnInit() {    
-		this.auth.profile().subscribe(user => {
-			this.details = user;
-
-			this.blockexplorer.get_addr(this.details.address).subscribe(res => {
+		this.auth.profile().subscribe(res => {
+			this.profile = res.profile;
+			// console.log("profile: " + JSON.stringify(this.profile));
+			// console.log("profile_address: " + this.profile.address);
+			this.blockexplorer.get_addr(this.profile.address).subscribe(res => {
 				this.api_data = res;
 			})
-
 		}, (err) => {
 			console.error(err);
 		});
