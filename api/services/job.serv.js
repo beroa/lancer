@@ -1,4 +1,4 @@
-var JobModel = require('../models/job')
+var JobModel = require('../models/job');
 var mongoose = require('mongoose');
 var Job = mongoose.model('Job');
 
@@ -45,14 +45,12 @@ exports.createJob = async function(JobData) {
 }
 
 exports.completeJob = async function(user, job, recipient) {
-    
     var newJob = new Job();
     newJob.title = JobData.title;
     newJob.description = JobData.description;
     newJob.author = JobData.author;
     newJob.date_created = new Date();
     newJob.generateWallet();
-
     try{
         var savedJob = await newJob.save();
         return savedJob;

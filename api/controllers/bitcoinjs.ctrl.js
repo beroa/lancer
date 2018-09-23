@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Job = mongoose.model('Job');
+var UserModel = require('../models/user');
 
+var JobService = require('../services/job.serv.js');
 var BitcoinJSService = require('../services/bitcoinjs.serv');
 var BlockExplorerService = require('../services/blockexplorer.serv.js')
 

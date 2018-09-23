@@ -8,16 +8,16 @@ _this = this
 
 const FEE = 2000000;
 
-exports.parseTransaction = async function(user, destination, quantity) {
-	quantity = parseFloat(quantity)*100000000;
-	let user_data = await BlockExplorerService.getAddr(user.address);
-	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
-	// console.log(user.address);
-	// console.log("INPUTS" + inputs)
-	// console.log(quantity);
-	quantity -= FEE
-	return this.makeTransaction(user.WIF, destination, quantity, inputs);
-}
+// exports.parseTransaction = async function(user, destination, quantity) {
+// 	quantity = parseFloat(quantity)*100000000;
+// 	let user_data = await BlockExplorerService.getAddr(user.address);
+// 	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
+// 	// console.log(user.address);
+// 	// console.log("INPUTS" + inputs)
+// 	// console.log(quantity);
+// 	quantity -= FEE
+// 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
+// }
 
 exports.userSend = async function(user, destination, quantity) {
 	quantity = parseFloat(quantity)*100000000;
@@ -30,10 +30,10 @@ exports.userSend = async function(user, destination, quantity) {
 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
 }
 
-exports.jobSend = async function(job, destination) {
+exports.jobFullSend = async function(job, destination) {
 	// quantity = parseFloat(quantity)*100000000;
 	let job_data = await BlockExplorerService.getAddr(job.address);
-	var quantity = job_data.valueSats;
+	var quantity = job_data.balanceSat;
 	let inputs = await BlockExplorerService.findInputs(job.address, quantity);
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
