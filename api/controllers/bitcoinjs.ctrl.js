@@ -20,17 +20,17 @@ exports.userSend = async function(req, res, next) {
       User.findById(req.payload._id).exec(function(err, user) {
         try {
           // create transaction hex
-          BitcoinJSService.userSend(user, req.query.destination)
+          BitcoinJSService.userSend(user, req.query.destination, req.query.quantity)
           .then(function(response) {
             // post transaction
             BlockExplorerService.postTx(response)
             .then(function(response) {
               return res.status(200).json(response);
             }).catch(function(err) {
-              res.status(400).json({status: 400, message: err.message});
+              res.status(400).json({status: 400, message: "posttx "+err.message});
             })
           }).catch(function(err) {
-            res.status(400).json({status: 400, message: err.message});
+            res.status(400).json({status: 400, message: "usersend "+err.message});
           })
         } catch (e) {
           res.status(400).json({status: 400, message: e.message});

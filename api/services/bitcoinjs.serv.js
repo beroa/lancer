@@ -6,7 +6,7 @@ var BlockExplorerService = require('./blockexplorer.serv');
 
 _this = this
 
-const FEE = 200000;
+const FEE = 2000000;
 
 exports.parseTransaction = async function(user, destination, quantity) {
 	quantity = parseFloat(quantity)*100000000;
@@ -15,7 +15,7 @@ exports.parseTransaction = async function(user, destination, quantity) {
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
-	quantity -= FEE;
+	quantity -= FEE
 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
 }
 
