@@ -58,7 +58,7 @@ exports.completeJob = async function(req, res, next) {
         var User = await UserModel.findById(req.payload._id);
         var recipient = await UserModel.findOne({ name: req.body.destination });
         var Job = await JobService.getJob(req.params.id);
-        console.log("dest: "+req.body.destination);
+        
         if (Job.author != User.name) {
             res.status(401).json({
               "message" : "UnauthorizedError: not your job"
