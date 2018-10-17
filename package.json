@@ -1,9 +1,8 @@
 {
   "name": "lancer",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bitcoinjs-lib": "^3.3.2",
@@ -12,7 +11,7 @@
     "cookie-parser": "~1.3.3",
     "cors": "^2.8.4",
     "debug": "~2.1.1",
-    "express": "~4.11.1",
+    "express": "^4.11.2",
     "express-jwt": "^3.0.1",
     "form-data": "^2.3.2",
     "jade": "~1.9.1",
@@ -23,6 +22,7 @@
     "nodemon": "^1.17.5",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "serve-favicon": "~2.2.0"

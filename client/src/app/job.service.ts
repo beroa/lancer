@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class JobService {
 
-	api_url = 'http://localhost:3000';
+	api_url = 'https://lancerapp.herokuapp.com';
 	postUrl = `${this.api_url}/api/post`;
 	findUrl = `${this.api_url}/api/find`;
 	jobUrl = `${this.api_url}/api/job`;

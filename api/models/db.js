@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird')
 
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/lancer';
+var dbURI = 'mongodb://lancerapp:timlapw1@ds045464.mlab.com:45464/heroku_ddvgcv9l';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }

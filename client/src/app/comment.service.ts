@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CommentService {
 
-	api_url = 'http://localhost:3000';
+	api_url = 'https://lancerapp.herokuapp.com';
 	jobUrl = `${this.api_url}/api/job`;
 
 	constructor(

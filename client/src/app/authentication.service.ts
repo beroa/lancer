@@ -22,7 +22,7 @@ export interface TokenPayload {
 	password: string;
 }
 
-var apiUrl = 'http://localhost:3000/api';
+var apiUrl = 'https://lancerapp.herokuapp.com/api';
 
 @Injectable()
 export class AuthenticationService {

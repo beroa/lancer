@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BitcoinJSService {
 
-	apiUrl = 'http://localhost:3000/api/maketx';
+	apiUrl = 'https://lancerapp.herokuapp.com/api/maketx';
 
 	constructor(private http: Http, private router: Router, private auth: AuthenticationService) {}
 

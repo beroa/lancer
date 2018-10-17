@@ -52,6 +52,15 @@ app.use(passport.initialize());
 // [SH] Use the API routes when path starts with /api
 app.use('/api', routesApi);
 
+// // Index Route
+// Serve only the static files form the dist directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', function(req,res) {
+res.sendFile(path.join(__dirname+'public/index.html'));
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
