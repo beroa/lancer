@@ -25,7 +25,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: FindJobComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
