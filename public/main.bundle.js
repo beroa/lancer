@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"root\">\n\t<div class=\"navbar navbar-inverse\">\n\t\t<div class=\"container\">\n\t\t\t<div id=\"navbar-main\">\n\n\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t<li><a routerLink=\"/\">Home</a></li>\n\t\t\t\t\t<li><a routerLink=\"/find\">Find</a></li>\n\t\t\t\t\t<li><a routerLink=\"/post\">Post</a></li>\n\t\t\t\t</ul>\n\n\t\t\t\t<ul class=\"nav navbar-nav navbar-right\">\n\t\t\t\t\t<li *ngIf=\"!auth.isLoggedIn()\"><a routerLink=\"/register\">Register</a></li>\n\t\t\t\t\t<li *ngIf=\"!auth.isLoggedIn()\"><a routerLink=\"/login\">Log In</a></li>\n\t\t\t\t\t<li *ngIf=\"auth.isLoggedIn()\"><a routerLink=\"/profile\">My Profile</a></li>\n\t\t\t\t\t<li *ngIf=\"auth.isLoggedIn()\"><a routerLink=\"/\" (click)=\"auth.logout()\">Logout</a></li>\n\t\t\t\t</ul>\n\t\t\t\t\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n\n<router-outlet></router-outlet>\n"
+module.exports = "<div id=\"root\">\n\t<div class=\"navbar navbar-inverse\">\n\t\t<div class=\"container\">\n\t\t\t<div id=\"navbar-main\">\n\n\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t<li><a routerLink=\"/find\">Find</a></li>\n\t\t\t\t\t<li><a routerLink=\"/post\">Post</a></li>\n\t\t\t\t</ul>\n\n\t\t\t\t<ul class=\"nav navbar-nav navbar-right\">\n\t\t\t\t\t<li *ngIf=\"!auth.isLoggedIn()\"><a routerLink=\"/register\">Register</a></li>\n\t\t\t\t\t<li *ngIf=\"!auth.isLoggedIn()\"><a routerLink=\"/login\">Log In</a></li>\n\t\t\t\t\t<li *ngIf=\"auth.isLoggedIn()\"><a routerLink=\"/profile\">My Profile</a></li>\n\t\t\t\t\t<li *ngIf=\"auth.isLoggedIn()\"><a routerLink=\"/\" (click)=\"auth.logout()\">Logout</a></li>\n\t\t\t\t</ul>\n\t\t\t\t\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -136,7 +136,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_10__home_home_component__["a" /* HomeComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_12__findjob_findjob_component__["a" /* FindJobComponent */] },
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */] },
     { path: 'register', component: __WEBPACK_IMPORTED_MODULE_9__register_register_component__["a" /* RegisterComponent */] },
     { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_7__profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_14__auth_guard_service__["a" /* AuthGuardService */]] },
@@ -739,7 +739,7 @@ var FindJobComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t<div class=\"col-md-2\"></div>\n\t<div class=\"col-md-8\">\n  \t\t<h1>this is the home page</h1>\n  \t</div>\n  \t<div class=\"col-md-2\"></div>\n</div>"
+module.exports = "<!-- <div class=\"container\">\n\t<div class=\"row\">\n\t<div class=\"col-md-2\"></div>\n\t<div class=\"col-md-8\">\n  \t\t<h1>this is the home page</h1>\n  \t</div>\n  \t<div class=\"col-md-2\"></div>\n</div> -->"
 
 /***/ }),
 
