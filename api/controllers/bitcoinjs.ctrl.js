@@ -12,7 +12,7 @@ exports.userSend = async function(req, res, next) {
     res.status(401).json({
       "message" : "UnauthorizedError: must log in"
     });
-  } else if (!req.query.destination || !req.query.quantity) {
+  } else if (!req.query.destination || !req.query.quantity || !req.query.fee) {
     res.status(401).json({
       "message" : "transaction missing fields"
     });
@@ -22,7 +22,7 @@ exports.userSend = async function(req, res, next) {
       User.findById(req.payload._id).exec(function(err, user) {
         try {
           // create transaction hex
-          BitcoinJSService.userSend(user, req.query.destination, req.query.quantity)
+          BitcoinJSService.userSend(user, req.query.destination, req.query.quantity, req.query.fee)
           .then(function(response) {
             // post transaction
             BlockExplorerService.postTx(response)

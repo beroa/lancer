@@ -96,7 +96,7 @@ export class AuthenticationService {
 		return this.request('get', 'profile');
 	}
 
-	public transaction(user, destination, quantity): Observable<any> {
+	public transaction(user, destination, quantity, fee): Observable<any> {
 		let base = this.http.get(`${apiUrl}/maketx`, { 
 			headers: { 
 				Authorization: `Bearer ${this.getToken()}`
@@ -104,7 +104,8 @@ export class AuthenticationService {
 			params: { 
 				user: `${user}`,
 				destination: `${destination}`, 
-				quantity: `${quantity}`}
+				quantity: `${quantity}`,
+				fee: `${fee}`}
 			});
 
 		const request = base.pipe(

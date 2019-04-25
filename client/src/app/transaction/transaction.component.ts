@@ -55,7 +55,7 @@ export class TransactionComponent implements OnInit {
 		this.form = this.fb.group({
 			tx_destination: ['', Validators.required],
 			tx_value: ['', Validators.required],
-			tx_fees: ['.0002', Validators.required]
+			tx_fee: ['.0002', Validators.required]
 		});
 	}
 
@@ -67,7 +67,7 @@ export class TransactionComponent implements OnInit {
 		if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
 			return;
 		}
-		this.auth.transaction(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value)
+		this.auth.transaction(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 		.subscribe( res => {
 			console.log(res);
 			this.txid = JSON.parse(res).txid;

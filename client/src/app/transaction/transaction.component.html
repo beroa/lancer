@@ -35,10 +35,10 @@
 			</div>
 
 			<div class="form-group">
-				<label for="tx_fees">Transaction fees:</label>
-				<input type="text" class="form-control" name="tx_fees" placeholder=".0001"  formControlName="tx_fees">
-				<p class="red-text" *ngIf=".01 < form.controls.tx_fees.value">Fees must be < .01</p>
-				<p class="red-text" *ngIf=".00002 >= form.controls.tx_fees.value">Fees must be > .00002</p>
+				<label for="tx_fee">Transaction fees:</label>
+				<input type="text" class="form-control" name="tx_fee" placeholder=".0001"  formControlName="tx_fee">
+				<p class="red-text" *ngIf=".01 < form.controls.tx_fee.value">Fees must be < .01</p>
+				<p class="red-text" *ngIf=".00002 >= form.controls.tx_fee.value">Fees must be > .00002</p>
 			</div>
 
 			<button type="submit" class="btn btn-default" [disabled]="!form.valid">Send Transaction</button>

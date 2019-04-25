@@ -55,6 +55,8 @@ exports.findInputs = async function(addr, quantity) {
 	return inputs;
 }
 
+
+// calculates unspent from transactions
 // exports.findUnspent = async function(addr_data, quantity) {
 // 	let tx_count = (addr_data.transactions).length;
 // 	var inputs = [];

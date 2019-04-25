@@ -6,7 +6,7 @@ var BlockExplorerService = require('./blockexplorer.serv');
 
 _this = this
 
-const FEE = 2000000;
+const DEF_FEE = 90000;
 
 // exports.parseTransaction = async function(user, destination, quantity) {
 // 	quantity = parseFloat(quantity)*100000000;
@@ -19,15 +19,20 @@ const FEE = 2000000;
 // 	return this.makeTransaction(user.WIF, destination, quantity, inputs);
 // }
 
-exports.userSend = async function(user, destination, quantity) {
+exports.userSend = async function(user, destination, quantity, fee) {
 	quantity = parseFloat(quantity)*100000000;
+	fee = parseFloat(fee)*100000000;
 	let user_data = await BlockExplorerService.getAddr(user.address);
+	if (quantity > user_data.balanceSat) {
+		return "Quantity (${quantity}) is greater than balance (${user_data.balanceSat})";
+	}
 	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
 	// console.log(user.address);
-	// console.log("INPUTS" + inputs)
-	// console.log(quantity);
-	quantity -= FEE;
-	return this.makeTransaction(user.WIF, destination, quantity, inputs);
+	// console.log("INPUTS" + inputs);
+	// console.log("QUANTITY" + quantity);
+	// console.log("FEE" + fee);
+	quantity -= fee;
+	return this.makeTransaction(user.WIF, destination, quantity, inputs, fee);
 }
 
 exports.jobFullSend = async function(job, destination) {
@@ -38,11 +43,11 @@ exports.jobFullSend = async function(job, destination) {
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
-	quantity -= FEE;
+	quantity -= DEF_FEE;
 	return this.makeTransaction(job.WIF, destination, quantity, inputs);
 }
 
-exports.makeTransaction = async function(WIF, destination, quantity, inputs) {
+exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee) {
 	let key = bitcoin.ECPair.fromWIF(WIF, testnet);
 	let tx = new bitcoin.TransactionBuilder(testnet);
 	let total = 0;
@@ -54,9 +59,9 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs) {
 	}
 	tx.addOutput(destination, quantity);
 	total -= quantity;
-	if (total > FEE) {
-		tx.addOutput(key.getAddress(), total - FEE);
-	}
+	// if (total > fee) {
+	// 	tx.addOutput(key.getAddress(), total - fee);
+	// }
 	for (let i = 0; i < inputs.length; i++) {
 		tx.sign(i, key);
 	}
