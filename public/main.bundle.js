@@ -106,12 +106,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__blockexplorer_service__ = __webpack_require__("../../../../../src/app/blockexplorer.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angular_confirmation_popover__ = __webpack_require__("../../../../angular-confirmation-popover/fesm5/angular-confirmation-popover.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transaction_transaction_component__ = __webpack_require__("../../../../../src/app/transaction/transaction.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__tempcomp_tempcomp_component__ = __webpack_require__("../../../../../src/app/tempcomp/tempcomp.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -159,7 +161,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__findjob_findjob_component__["a" /* FindJobComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__job_job_component__["a" /* JobComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__comments_comments_component__["a" /* CommentsComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__transaction_transaction_component__["a" /* TransactionComponent */]
+                __WEBPACK_IMPORTED_MODULE_21__transaction_transaction_component__["a" /* TransactionComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__tempcomp_tempcomp_component__["a" /* TempcompComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -650,7 +653,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".job-list {\n\tlist-style: none;\n\tmargin-left: -40px;\n\tfont-size: 30px;\n}\n.job-item {\n\tborder: 2px solid #CCCCCC;\n\tbackground: #edf8f0;\n\tmargin: .5em 0;\n\tpadding: .5em 1em;\n}\n.job-description {\n\tfont-size:18px;\n\tpadding-left: 1em;\n}\n.page-number {\t\n\tdisplay:inline-block;\n\ttext-align:center;\n\tborder:1px solid #CCCCCC;\n\tbackground: #FAFAFA;\n\tmargin-right:5px;\n\tpadding:0 5px;\n}", ""]);
+exports.push([module.i, ".job-list {\n\tlist-style: none;\n\tmargin-left: -40px;\n}\n\n.job-item {\n\tborder: 2px solid #CCCCCC;\n\tbackground: #edf8f0;\n\tmargin: .5em 0;\n\tpadding: 1em 1em;\n\t/*padding-left: 40px;*/\n}\n\n.job-title {\n\tfont-size: 30px;\n}\n\n.job-description {\n\tfont-size: 18px;\n}\n\n.job-date {\n\tfloat:right;\n}\n\n.page-number {\t\n\tdisplay:inline-block;\n\ttext-align:center;\n\tborder:1px solid #CCCCCC;\n\tbackground: #FAFAFA;\n\tmargin-right:5px;\n\tpadding:0 5px;\n}", ""]);
 
 // exports
 
@@ -663,7 +666,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/findjob/findjob.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t  <div class=\"col-md-1\"></div>\n\t  <div class=\"col-md-10\">\n\t\t\n\t\t<div class=\"pages\">\n\t\t\tPage: {{pageNumber}}\n\t\t\t<span class=\"page-number\" *ngFor=\"let page of countPages()\" (click)=\"changePage(page)\">\n\t\t\t\t{{page}}\n\t\t\t</span>\n\t\t</div>\n\n\t\t<div class=\"jobs\">\n\t\t\t<ul class=\"job-list\">\n\t\t\t\t<li class=\"job-item\" *ngFor=\"let job of jobList\">\n\t\t\t\t\t<a (click)=\"goToJob(job._id)\">\n\t\t\t\t\t\t{{job.title}}\n\t\t\t\t\t</a>\n\t\t\t\t\t<br>\n\t\t\t\t\t<span class=\"job-description\" [innerHtml]=\"job.description\">\n\t\t\t\t\t</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t  </div>\n\t</div>\n  <div class=\"col-md-1\"></div>\n</div>"
+module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t  <div class=\"col-md-1\"></div>\n\t  <div class=\"col-md-10\">\n\t\t\n\t\t<div class=\"pages\">\n\t\t\tPage: {{pageNumber}}\n\t\t\t<span class=\"page-number\" *ngFor=\"let page of countPages()\" (click)=\"changePage(page)\">\n\t\t\t\t{{page}}\n\t\t\t</span>\n\t\t</div>\n\n\t\t<div class=\"jobs\">\n\t\t\t<ul class=\"job-list\">\n\t\t\t\t<li class=\"job-item\" *ngFor=\"let job of jobList\">\n\t\t\t\t\t<a class=\"job-title\" (click)=\"goToJob(job._id)\">\n\t\t\t\t\t\t{{job.title}}\n\t\t\t\t\t</a>\n\t\t\t\t\t<span class=\"job-date\">\n\t\t\t\t\t\t{{job.date_created}}\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t\t<p class=\"job-description\" [innerHtml]=\"job.description\">\n\t\t\t\t\t</p>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t  </div>\n\t</div>\n  <div class=\"col-md-1\"></div>\n</div>"
 
 /***/ }),
 
@@ -1164,7 +1167,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "h1 {\n\tmargin-bottom: .75em;\n}\n\n.form-control-static-red {\n\tcolor:red;\n}", ""]);
+exports.push([module.i, "h1 {\n\tmargin-bottom: .75em;\n}\n\n.form-control-static-red {\n\tcolor:red;\n}\n\n#withdrawal {\n\tpadding-left: 15px;\n}", ""]);
 
 // exports
 
@@ -1177,7 +1180,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div class=\"col-md-2\"></div>\n\t\t <div class=\"col-md-8\">\n\n\t\t\t<h1 class=\"form-signin-heading\">My Profile</h1>\n\n\t\t\t<div>\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Username:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.name }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Public Address:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.address }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">WIF lol:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.WIF }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Balance: </label>\n\t\t\t\t\t<p class=\"form-control-static\" *ngIf=\"api_data.balance\">{{ api_data.balance }} tBTC</p>\n\t\t\t\t\t<!-- <p class=\"form-control-static-red\" *ngIf=\"!api_data.balance\">Error: Could not connect to Blockexplorer.</p> -->\n\t\t\t\t</div>\n\n\t\t\t\t<div id=\"withdrawal\">\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-default\" (click)=\"withdrawal()\" [disabled]=\"confirmed\">Withdraw</button>\n\t\t\t\t\t<app-transaction *ngIf =\"isWithdrawing\"></app-transaction>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\t\t<div class=\"col-md-2\"></div>\n\t</div>\n</div>"
+module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div class=\"col-md-2\"></div>\n\t\t <div class=\"col-md-8\">\n\n\t\t\t<h1 class=\"form-signin-heading\">My Profile</h1>\n\n\t\t\t<div>\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Username:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.name }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Public Address:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.address }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">WIF:</label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ profile?.WIF }}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label class=\"col-sm-3 control-label\">Balance: </label>\n\t\t\t\t\t<p class=\"form-control-static\">{{ api_data.balance }} tBTC</p>\n\t\t\t\t\t<!-- <p class=\"form-control-static-red\" *ngIf=\"!api_data.balance\">Error: Could not connect to Blockexplorer.</p> -->\n\t\t\t\t</div>\n\n\t\t\t\t<div id=\"withdrawal\">\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-default\" (click)=\"withdrawal()\" [disabled]=\"confirmed\">Withdraw</button>\n\t\t\t\t\t<app-transaction *ngIf =\"isWithdrawing\"></app-transaction>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\t\t<div class=\"col-md-2\"></div>\n\t</div>\n</div>"
 
 /***/ }),
 
@@ -1338,6 +1341,67 @@ var RegisterComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/tempcomp/tempcomp.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/tempcomp/tempcomp.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  tempcomp works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/tempcomp/tempcomp.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TempcompComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TempcompComponent = /** @class */ (function () {
+    function TempcompComponent() {
+    }
+    TempcompComponent.prototype.ngOnInit = function () {
+    };
+    TempcompComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-tempcomp',
+            template: __webpack_require__("../../../../../src/app/tempcomp/tempcomp.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/tempcomp/tempcomp.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], TempcompComponent);
+    return TempcompComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/transaction/transaction.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1346,7 +1410,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#transaction {\n\tborder: 2px solid #CCCCCC;\n\tpadding: 2em;\n\tmargin-top: 1em;\n\tbackground: #d0ecd9;\n}\n\n.form-invalid {\n\tcolor: red;\n}\n\n.form-success {\n\tcolor: green;\n}\n\n.confirmation {\n\tmargin-top: .5em;\n}\n\n.red-text {\n\tcolor: red;\n}", ""]);
+exports.push([module.i, "#transaction {\n\tborder: 2px solid #CCCCCC;\n\tpadding: 2em;\n\tmargin-top: 1em;\n\tbackground: #d0ecd9;\n}\n\n.form-invalid {\n\tcolor: red;\n}\n\n.form-success {\n\tcolor: green;\n}\n\n.confirmation {\n\tmargin-top: .5em;\n}\n\n.red-text {\n\tcolor: red;\n\tmargin: 0;\n}\n\n.message-login {\n\tmargin: 0;\n}", ""]);
 
 // exports
 
@@ -1359,7 +1423,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/transaction/transaction.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"transaction\">\n\t<div *ngIf=\"!isLoggedIn\" class=\"message-login\">\n\t\t<p>To make a contribution, you must <a routerLink=\"/login\">log in</a> or <a routerLink=\"/register\">register</a>.</p>\n\t</div>\n\n\t<div *ngIf=\"!api_data_user_addr.balance\">\n\t\t<p class=\"red-text\">Error: User account data could not be loaded.</p>\n\t</div>\n\n\t<div *ngIf=\"isLoggedIn && api_data_user_addr.balance\">\n\n\t<form [formGroup]=\"form\" (submit)=\"onSubmit()\">\n\n\t\t<p class=\"form-control-static\" *ngIf=\"api_data_user_addr.balance\">Your account balance: {{api_data_user_addr.balance}} tBTC</p>\n\t\t<p class=\"form-control-static-red\" *ngIf=\"!api_data_user_addr.balance\"> Error: Check internet connection.</p>\n\n\t\t<div *ngIf=\"isDestinationLocked\">\n\t\t\t<p> <b>Destination Address:</b> {{destination}} </p>\n\t\t</div>\n\n\t\t<div *ngIf=\"!isDestinationLocked\">\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"tx_destination\">Destination Address:</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_destination\" formControlName=\"tx_destination\">\n\t\t\t\t<p class=\"red-text\" *ngIf=\"form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)\">Destination is required</p>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"tx_value\">Amount to send (in tBTC):</label>\n\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_value\" placeholder=\"1\"  formControlName=\"tx_value\">\n\t\t\t<p class=\"red-text\" *ngIf=\"form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)\">Amount is required</p>\n\t\t\t<p class=\"red-text\" *ngIf=\"api_data_user_addr.balance < form.controls.tx_value.value\">Amount cannot be greater than your account balance.</p>\n\t\t</div>\n\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"tx_fees\">Transaction fees:</label>\n\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_fees\" placeholder=\".0001\"  formControlName=\"tx_fees\">\n\t\t\t<p class=\"red-text\" *ngIf=\".01 < form.controls.tx_fees.value\">Fees must be < .01</p>\n\t\t\t<p class=\"red-text\" *ngIf=\".00002 >= form.controls.tx_fees.value\">Fees must be > .00002</p>\n\t\t</div>\n\n\t\t<button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!form.valid\">Send Transaction</button>\n\n\t\t<div class=\"confirmation\">\n\t\t\t<p class=\"red-text\" *ngIf=\"confirmed && txid == 0\">Your transaction could not be sent.</p>\n\t\t\t<p class=\"form-success\" *ngIf=\"confirmed && txid != 0\">Success! txid: {{txid}}</p>\n\t\t</div>\n\t</form>\n</div>"
+module.exports = "<div id=\"transaction\">\n\t<!-- make sure we got the data -->\n\t<div>\n\t\t<p *ngIf=\"!isLoggedIn\" class=\"message-login\">To make a contribution, you must <a routerLink=\"/login\">log in</a> or <a routerLink=\"/register\">register</a>.</p>\n\n\t\t<p *ngIf=\"isLoggedIn && api_data_user_addr && !api_data_user_addr.balance\" class=\"red-text\">Your account balance is zero. Visit your <a routerLink=\"/profile\">profile</a> to add funds.</p>\n\n\t\t<p *ngIf=\"!api_data_user_addr\" class=\"red-text\">Error: User account data could not be loaded. Try again later.</p>\n\t</div>\n\n\t<div *ngIf=\"isLoggedIn && api_data_user_addr.balance\">\n\n\t\t<form [formGroup]=\"form\" (submit)=\"onSubmit()\">\n\n\t\t\t<p class=\"form-control-static\" *ngIf=\"api_data_user_addr.balance\">Your account balance: {{api_data_user_addr.balance}} tBTC</p>\n\t\t\t<p class=\"form-control-static-red\" *ngIf=\"!api_data_user_addr.balance\"> Error: Check internet connection.</p>\n\n\t\t\t<div *ngIf=\"isDestinationLocked\">\n\t\t\t\t<p> <b>Destination Address:</b> {{destination}} </p>\n\t\t\t</div>\n\n\t\t\t<div *ngIf=\"!isDestinationLocked\">\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label for=\"tx_destination\">Destination Address:</label>\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_destination\" formControlName=\"tx_destination\">\n\t\t\t\t\t<p class=\"red-text\" *ngIf=\"form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)\">Destination is required</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"tx_value\">Amount to send (in tBTC):</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_value\" placeholder=\"1\"  formControlName=\"tx_value\">\n\t\t\t\t<p class=\"red-text\" *ngIf=\"form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)\">Amount is required</p>\n\t\t\t\t<p class=\"red-text\" *ngIf=\"api_data_user_addr.balance < form.controls.tx_value.value\">Amount cannot be greater than your account balance.</p>\n\t\t\t</div>\n\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"tx_fees\">Transaction fees:</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"tx_fees\" placeholder=\".0001\"  formControlName=\"tx_fees\">\n\t\t\t\t<p class=\"red-text\" *ngIf=\".01 < form.controls.tx_fees.value\">Fees must be < .01</p>\n\t\t\t\t<p class=\"red-text\" *ngIf=\".00002 >= form.controls.tx_fees.value\">Fees must be > .00002</p>\n\t\t\t</div>\n\n\t\t\t<button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!form.valid\">Send Transaction</button>\n\n\t\t\t<div class=\"confirmation\">\n\t\t\t\t<p class=\"red-text\" *ngIf=\"confirmed && txid == 0\">Your transaction could not be sent.</p>\n\t\t\t\t<p class=\"form-success\" *ngIf=\"confirmed && txid != 0\">Success! txid: {{txid}}</p>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n</div>"
 
 /***/ }),
 
