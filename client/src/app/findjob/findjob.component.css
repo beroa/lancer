@@ -1,17 +1,26 @@
 .job-list {
 	list-style: none;
 	margin-left: -40px;
-	font-size: 30px;
 }
+
 .job-item {
 	border: 2px solid #CCCCCC;
 	background: #edf8f0;
 	margin: .5em 0;
-	padding: .5em 1em;
+	padding: 1em 1em;
+	/*padding-left: 40px;*/
 }
+
+.job-title {
+	font-size: 30px;
+}
+
 .job-description {
-	font-size:18px;
-	padding-left: 1em;
+	font-size: 18px;
+}
+
+.job-date {
+	float:right;
 }
 
 .page-number {	

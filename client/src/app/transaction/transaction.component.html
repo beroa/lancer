@@ -1,50 +1,52 @@
 <div id="transaction">
-	<div *ngIf="!isLoggedIn" class="message-login">
-		<p>To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
-	</div>
+	<!-- make sure we got the data -->
+	<div>
+		<p *ngIf="!isLoggedIn" class="message-login">To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
 
-	<div *ngIf="!api_data_user_addr.balance">
-		<p class="red-text">Error: User account data could not be loaded.</p>
+		<p *ngIf="isLoggedIn && api_data_user_addr && !api_data_user_addr.balance" class="red-text">Your account balance is zero. Visit your <a routerLink="/profile">profile</a> to add funds.</p>
+
+		<p *ngIf="!api_data_user_addr" class="red-text">Error: User account data could not be loaded. Try again later.</p>
 	</div>
 
 	<div *ngIf="isLoggedIn && api_data_user_addr.balance">
 
-	<form [formGroup]="form" (submit)="onSubmit()">
+		<form [formGroup]="form" (submit)="onSubmit()">
 
-		<p class="form-control-static" *ngIf="api_data_user_addr.balance">Your account balance: {{api_data_user_addr.balance}} tBTC</p>
-		<p class="form-control-static-red" *ngIf="!api_data_user_addr.balance"> Error: Check internet connection.</p>
+			<p class="form-control-static" *ngIf="api_data_user_addr.balance">Your account balance: {{api_data_user_addr.balance}} tBTC</p>
+			<p class="form-control-static-red" *ngIf="!api_data_user_addr.balance"> Error: Check internet connection.</p>
 
-		<div *ngIf="isDestinationLocked">
-			<p> <b>Destination Address:</b> {{destination}} </p>
-		</div>
-
-		<div *ngIf="!isDestinationLocked">
-			<div class="form-group">
-				<label for="tx_destination">Destination Address:</label>
-				<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
-				<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
+			<div *ngIf="isDestinationLocked">
+				<p> <b>Destination Address:</b> {{destination}} </p>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<label for="tx_value">Amount to send (in tBTC):</label>
-			<input type="text" class="form-control" name="tx_value" placeholder="1"  formControlName="tx_value">
-			<p class="red-text" *ngIf="form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)">Amount is required</p>
-			<p class="red-text" *ngIf="api_data_user_addr.balance < form.controls.tx_value.value">Amount cannot be greater than your account balance.</p>
-		</div>
+			<div *ngIf="!isDestinationLocked">
+				<div class="form-group">
+					<label for="tx_destination">Destination Address:</label>
+					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
+					<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
+				</div>
+			</div>
 
-		<div class="form-group">
-			<label for="tx_fees">Transaction fees:</label>
-			<input type="text" class="form-control" name="tx_fees" placeholder=".0001"  formControlName="tx_fees">
-			<p class="red-text" *ngIf=".01 < form.controls.tx_fees.value">Fees must be < .01</p>
-			<p class="red-text" *ngIf=".00002 >= form.controls.tx_fees.value">Fees must be > .00002</p>
-		</div>
+			<div class="form-group">
+				<label for="tx_value">Amount to send (in tBTC):</label>
+				<input type="text" class="form-control" name="tx_value" placeholder="1"  formControlName="tx_value">
+				<p class="red-text" *ngIf="form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)">Amount is required</p>
+				<p class="red-text" *ngIf="api_data_user_addr.balance < form.controls.tx_value.value">Amount cannot be greater than your account balance.</p>
+			</div>
 
-		<button type="submit" class="btn btn-default" [disabled]="!form.valid">Send Transaction</button>
+			<div class="form-group">
+				<label for="tx_fees">Transaction fees:</label>
+				<input type="text" class="form-control" name="tx_fees" placeholder=".0001"  formControlName="tx_fees">
+				<p class="red-text" *ngIf=".01 < form.controls.tx_fees.value">Fees must be < .01</p>
+				<p class="red-text" *ngIf=".00002 >= form.controls.tx_fees.value">Fees must be > .00002</p>
+			</div>
 
-		<div class="confirmation">
-			<p class="red-text" *ngIf="confirmed && txid == 0">Your transaction could not be sent.</p>
-			<p class="form-success" *ngIf="confirmed && txid != 0">Success! txid: {{txid}}</p>
-		</div>
-	</form>
+			<button type="submit" class="btn btn-default" [disabled]="!form.valid">Send Transaction</button>
+
+			<div class="confirmation">
+				<p class="red-text" *ngIf="confirmed && txid == 0">Your transaction could not be sent.</p>
+				<p class="form-success" *ngIf="confirmed && txid != 0">Success! txid: {{txid}}</p>
+			</div>
+		</form>
+	</div>
 </div>

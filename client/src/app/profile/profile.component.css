@@ -5,3 +5,7 @@ h1 {
 .form-control-static-red {
 	color:red;
 }
+
+#withdrawal {
+	padding-left: 15px;
+}

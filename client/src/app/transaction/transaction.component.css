@@ -19,4 +19,9 @@
 
 .red-text {
 	color: red;
+	margin: 0;
+}
+
+.message-login {
+	margin: 0;
 }

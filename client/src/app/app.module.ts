@@ -23,6 +23,7 @@ import { CommentService } from './comment.service';
 import { BlockExplorerService } from './blockexplorer.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { TransactionComponent } from './transaction/transaction.component';
+import { TempcompComponent } from './tempcomp/tempcomp.component';
 
 const routes: Routes = [
   { path: '', component: FindJobComponent },
@@ -45,7 +46,8 @@ const routes: Routes = [
     FindJobComponent,
     JobComponent,
     CommentsComponent,
-    TransactionComponent
+    TransactionComponent,
+    TempcompComponent
   ],
   imports: [
     BrowserModule,

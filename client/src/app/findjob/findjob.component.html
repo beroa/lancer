@@ -13,12 +13,15 @@
 		<div class="jobs">
 			<ul class="job-list">
 				<li class="job-item" *ngFor="let job of jobList">
-					<a (click)="goToJob(job._id)">
+					<a class="job-title" (click)="goToJob(job._id)">
 						{{job.title}}
 					</a>
-					<br>
-					<span class="job-description" [innerHtml]="job.description">
+					<span class="job-date">
+						{{job.date_created}}
 					</span>
+				
+					<p class="job-description" [innerHtml]="job.description">
+					</p>
 				</li>
 			</ul>
 		</div>
