@@ -14,61 +14,67 @@ import { TransactionComponent } from '../transaction/transaction.component';
 
 
 @Component({
-  selector: 'app-job',
-  templateUrl: './job.component.html',
-  styleUrls: ['./job.component.css']
+	selector: 'app-job',
+	templateUrl: './job.component.html',
+	styleUrls: ['./job.component.css']
 })
 export class JobComponent implements OnInit {
-  jobId: string;
-  job: JobModel;
-  user: UserModel;
-  api_data_job_addr: any = {};
-  private sub: any;
+	jobId: string;
+	job: JobModel;
+	user: UserModel;
+	api_data_job_addr: any = {};
+	private sub: any;
 
-  private isLoggedIn: boolean;
-  private isJobAuthor = false;
-  private isFundingOpen = false;
-  form: FormGroup;
-  submitted = false;
-  confirmed = false;
-  txid = 0;  
+	private isLoggedIn: boolean;
+	private isJobAuthor = false;
+	private isFundingOpen = false;
+	form: FormGroup;
+	submitted = false;
+	confirmed = false;
+	txid = 0;  
 
-  constructor(
-    private jobService: JobService,
-    private route: ActivatedRoute,
-    private blockexplorer: BlockExplorerService,
-    private fb: FormBuilder,
-    private auth: AuthenticationService) {
-    this.isLoggedIn = this.auth.isLoggedIn();
-  }
+	constructor(
+		private jobService: JobService,
+		private route: ActivatedRoute,
+		private blockexplorer: BlockExplorerService,
+		private fb: FormBuilder,
+		private auth: AuthenticationService) {
+		this.isLoggedIn = this.auth.isLoggedIn();
+	}
 
-  ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-       this.jobId = params['id'];
-    });
+	ngOnInit(): void {
+		this.sub = this.route.params.subscribe(params => {
+			 this.jobId = params['id'];
+		});
 
-    this.jobService.getJob(this.jobId)
-      .subscribe(params => {
-        this.job = params.job;
-        this.blockexplorer.get_addr(this.job.address).subscribe(res => {
-          this.api_data_job_addr = res.data;
-        })
-      });
+		// get job
+		this.jobService.getJob(this.jobId)
+			.subscribe(params => {
+				this.job = params.job;
 
-    if (this.isLoggedIn) {
-      this.auth.profile().subscribe(user => {
-        this.user = user;
-        if (this.user.name == this.job.author) {
-          this.isJobAuthor = true;
-        }
-      });
-    }
-  }
+				// get job address balance
+				this.blockexplorer.get_addr(this.job.address).subscribe(res => {
+					this.api_data_job_addr = res.data;
+				})
 
-  fundMe() {
-    if (!this.submitted) {
-      this.isFundingOpen = !this.isFundingOpen;
-    }
-  }
+				// get user
+				if (this.isLoggedIn) {
+					this.auth.profile().subscribe(user => {
+						this.user = user;
+						if (this.user.name == this.job.author) {
+							this.isJobAuthor = true;
+						}
+					});
+				}
+			});
+
+		
+	}
+
+	fundMe() {
+		if (!this.submitted) {
+			this.isFundingOpen = !this.isFundingOpen;
+		}
+	}
 
 }

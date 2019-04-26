@@ -912,21 +912,24 @@ var JobComponent = /** @class */ (function () {
         this.sub = this.route.params.subscribe(function (params) {
             _this.jobId = params['id'];
         });
+        // get job
         this.jobService.getJob(this.jobId)
             .subscribe(function (params) {
             _this.job = params.job;
+            // get job address balance
             _this.blockexplorer.get_addr(_this.job.address).subscribe(function (res) {
                 _this.api_data_job_addr = res.data;
             });
+            // get user
+            if (_this.isLoggedIn) {
+                _this.auth.profile().subscribe(function (user) {
+                    _this.user = user;
+                    if (_this.user.name == _this.job.author) {
+                        _this.isJobAuthor = true;
+                    }
+                });
+            }
         });
-        if (this.isLoggedIn) {
-            this.auth.profile().subscribe(function (user) {
-                _this.user = user;
-                if (_this.user.name == _this.job.author) {
-                    _this.isJobAuthor = true;
-                }
-            });
-        }
     };
     JobComponent.prototype.fundMe = function () {
         if (!this.submitted) {
