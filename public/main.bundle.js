@@ -1479,7 +1479,7 @@ var TransactionComponent = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    api_url: "http://lancerapp.herokuapp.com"
+    api_url: "https://lancerapp.herokuapp.com"
 };
 
 
