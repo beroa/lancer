@@ -24,7 +24,7 @@ var rp = require('request-promise');
 exports.getAddr = async function(addr) {
 	let response = await rp('https://chain.so/api/v2/get_address_balance/BTCTEST/' + addr);
 	let data = await JSON.parse(response);
-	return data;
+	return data.data;
 }
 
 exports.getTx = async function(tx) {
@@ -36,7 +36,7 @@ exports.getTx = async function(tx) {
 exports.getUnspent = async function(addr) {
 	let response = await rp('https://chain.so/api/v2/get_tx_unspent/BTCTEST/' + addr + '/utxo');
 	let data = await JSON.parse(response);
-	return data;
+	return data.data;
 }
 
 exports.postTx = async function(raw_tx) {
@@ -53,10 +53,10 @@ exports.postTx = async function(raw_tx) {
 	return JSON.stringify(response);
 }
 
-tx_input = function(id, index, satoshis) {
+tx_input = function(id, index, value) {
 	this.id = id;
 	this.index = index;
-	this.satoshis = satoshis;
+	this.value = value;
 	return this;
 }
 
@@ -64,11 +64,13 @@ exports.findInputs = async function(addr, quantity) {
 	var inputs = [];
 	var input;
 	let inputs_quantity = 0;
-	let response = await this.getUnspent(addr).txs;
+	let response = await this.getUnspent(addr);
+	response = response.txs
+	console.log("resp"+response);
 	for (let i = 0; i < response.length && inputs_quantity < quantity; i++) {
 		input = new tx_input(response[i].txid, response[i].output_no, response[i].value);
 		inputs.push(input);
-		inputs_satoshis += input.satoshis;
+		inputs_quantity += input.value;
 	}
 	return inputs;
 }

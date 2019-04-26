@@ -20,17 +20,19 @@ const DEF_FEE = 90000;
 // }
 
 exports.userSend = async function(user, destination, quantity, fee) {
-	quantity = parseFloat(quantity)*100000000;
-	fee = parseFloat(fee)*100000000;
-	let user_data = await BlockExplorerService.getAddr(user.address);
-	if (quantity > user_data.balanceSat) {
-		return "Quantity (${quantity}) is greater than balance (${user_data.balanceSat})";
-	}
+	quantity = parseFloat(quantity);//*100000000;
+	fee = parseFloat(fee);//*100000000;
+	// let user_data = await BlockExplorerService.getAddr(user.address);
+	// // if (quantity > user_data.confirmed_balance) {
+	// // 	return "Quantity (${quantity}) is greater than balance (${user_data.confirmed_balance})";
+	// // }
+	console.log("wtf");
 	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
-	// console.log(user.address);
-	// console.log("INPUTS" + inputs);
-	// console.log("QUANTITY" + quantity);
-	// console.log("FEE" + fee);
+	console.log("hello?");
+	console.log(user.address);
+	console.log("INPUTS" + inputs);
+	console.log("QUANTITY" + quantity);
+	console.log("FEE" + fee);
 	quantity -= fee;
 	return this.makeTransaction(user.WIF, destination, quantity, inputs, fee);
 }
@@ -48,6 +50,7 @@ exports.jobFullSend = async function(job, destination) {
 }
 
 exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee) {
+	quantity = quantity*100000000;
 	let key = bitcoin.ECPair.fromWIF(WIF, testnet);
 	let tx = new bitcoin.TransactionBuilder(testnet);
 	let total = 0;

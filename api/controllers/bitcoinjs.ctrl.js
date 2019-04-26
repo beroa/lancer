@@ -8,8 +8,6 @@ var BitcoinJSService = require('../services/bitcoinjs.serv');
 var BlockExplorerService = require('../services/blockexplorer.serv.js')
 
 exports.userSend = async function(req, res, next) {
-	debug("usersend");
-	console.log("usersend");
 	if (!req.payload._id) {
 		res.status(401).json({
 			"message" : "UnauthorizedError: must log in"
