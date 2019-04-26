@@ -8,7 +8,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 mongoose.Promise = bluebird
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, {
+  useMongoClient: true
+});
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
