@@ -16,7 +16,7 @@
 				<p> Address: {{job?.address}} </p>
 				<p>
 					Balance: 
-						<span *ngIf="api_data_job_addr">{{ api_data_job_addr.balance }} tBTC</span>
+						<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance }} tBTC</span>
 						<span *ngIf="!api_data_job_addr"></span>
 				</p>
 				<div id="jobAdmin" *ngIf="isJobAuthor">

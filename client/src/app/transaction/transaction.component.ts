@@ -45,7 +45,7 @@ export class TransactionComponent implements OnInit {
 			this.auth.profile().subscribe(res => {
 				this.user = res.profile;
 				this.blockexplorer.get_addr(this.user.address).subscribe(res => {
-					this.api_data_user_addr = res;
+					this.api_data_user_addr = res.data;
 				})
 			})
 		}

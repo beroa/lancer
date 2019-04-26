@@ -1,32 +1,32 @@
 <div class="container">
 	<div class="row">
-	  <div class="col-md-1"></div>
-	  <div class="col-md-10">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 		
-		<div class="pages">
-			Page: {{pageNumber}}
-			<span class="page-number" *ngFor="let page of countPages()" (click)="changePage(page)">
-				{{page}}
-			</span>
-		</div>
+			<div class="pages">
+				Page: {{pageNumber}}
+				<span class="page-number" *ngFor="let page of countPages()" (click)="changePage(page)">
+					{{page}}
+				</span>
+			</div>
 
-		<div class="jobs">
-			<ul class="job-list">
-				<li class="job-item" *ngFor="let job of jobList">
-					<a class="job-title" (click)="goToJob(job._id)">
-						{{job.title}}
-					</a>
-					<span class="job-date">
-						{{job.date_created}}
-					</span>
-				
-					<p class="job-description" [innerHtml]="job.description">
-					</p>
-				</li>
-			</ul>
-		</div>
+			<div class="jobs">
+				<ul class="job-list">
+					<li class="job-item" *ngFor="let job of jobList">
+						<a class="job-title" (click)="goToJob(job._id)">
+							{{job.title}}
+						</a>
+						<span class="job-date">
+							{{job.date_created}}
+						</span>
+					
+						<p class="job-description" [innerHtml]="job.description">
+						</p>
+					</li>
+				</ul>
+			</div>
 
-	  </div>
+	    </div>
 	</div>
   <div class="col-md-1"></div>
 </div>

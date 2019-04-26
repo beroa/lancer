@@ -3,8 +3,26 @@ var router = express.Router();
 var rp = require('request-promise');
 
 
+// exports.getAddr = async function(addr) {
+// 	let response = await rp('https://testnet.blockexplorer.com/api/addr/%20' + addr);
+// 	let data = await JSON.parse(response);
+// 	return data;
+// }
+
+// exports.getTx = async function(tx) {
+// 	let response = await rp('https://testnet.blockexplorer.com/api/tx/' + tx);
+// 	let data = await JSON.parse(response);
+// 	return data;
+// }
+
+// exports.getUnspent = async function(addr) {
+// 	let response = await rp('https://testnet.blockexplorer.com/api/addr/%20' + addr + '/utxo');
+// 	let data = await JSON.parse(response);
+// 	return data;
+// }
+
 exports.getAddr = async function(addr) {
-	let response = await rp('https://testnet.blockexplorer.com/api/addr/' + addr);
+	let response = await rp('https://chain.so/api/v2/get_address_balance/BTCTEST/' + addr);
 	let data = await JSON.parse(response);
 	return data;
 }
@@ -16,7 +34,7 @@ exports.getTx = async function(tx) {
 }
 
 exports.getUnspent = async function(addr) {
-	let response = await rp('https://testnet.blockexplorer.com/api/addr/' + addr + '/utxo');
+	let response = await rp('https://chain.so/api/v2/get_tx_unspent/BTCTEST/' + addr + '/utxo');
 	let data = await JSON.parse(response);
 	return data;
 }
@@ -35,10 +53,10 @@ exports.postTx = async function(raw_tx) {
 	return JSON.stringify(response);
 }
 
-tx_input = function(id, index, quantity) {
+tx_input = function(id, index, satoshis) {
 	this.id = id;
 	this.index = index;
-	this.quantity = quantity;
+	this.satoshis = satoshis;
 	return this;
 }
 
@@ -46,11 +64,11 @@ exports.findInputs = async function(addr, quantity) {
 	var inputs = [];
 	var input;
 	let inputs_quantity = 0;
-	let response = await this.getUnspent(addr);
+	let response = await this.getUnspent(addr).txs;
 	for (let i = 0; i < response.length && inputs_quantity < quantity; i++) {
-		input = new tx_input(response[i].txid, response[i].vout, response[i].satoshis);
+		input = new tx_input(response[i].txid, response[i].output_no, response[i].value);
 		inputs.push(input);
-		inputs_quantity += input.quantity;
+		inputs_satoshis += input.satoshis;
 	}
 	return inputs;
 }

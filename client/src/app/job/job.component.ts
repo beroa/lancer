@@ -51,7 +51,7 @@ export class JobComponent implements OnInit {
       .subscribe(params => {
         this.job = params.job;
         this.blockexplorer.get_addr(this.job.address).subscribe(res => {
-          this.api_data_job_addr = res;
+          this.api_data_job_addr = res.data;
         })
       });
 
