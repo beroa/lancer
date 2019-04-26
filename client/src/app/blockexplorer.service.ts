@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BlockExplorerService {
 
-	api_url = 'https://chain.so/api/v2/';
+	api_url = 'https://chain.so/api/v2';
 	address_balance_url = `${this.api_url}/get_address_balance/BTCTEST/`;
 
 	constructor(private http: Http, private router: Router) {}

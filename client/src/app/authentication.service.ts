@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
 import { RequestOptions, Request, RequestMethod } from '@angular/http';
+import { environment } from '../environments/environment';
 
 // decoded token
 export interface UserDetails {
@@ -22,7 +23,7 @@ export interface TokenPayload {
 	password: string;
 }
 
-var apiUrl = 'https://lancerapp.herokuapp.com/api';
+var apiUrl = environment.api_url + '/api';
 
 @Injectable()
 export class AuthenticationService {

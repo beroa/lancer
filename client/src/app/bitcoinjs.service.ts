@@ -5,13 +5,14 @@ import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BitcoinJSService {
 
-	apiUrl = 'https://lancerapp.herokuapp.com/api/maketx';
+	apiUrl = environment.api_url + "/api/maketx";
 
 	constructor(private http: Http, private router: Router, private auth: AuthenticationService) {}
 

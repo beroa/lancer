@@ -3,13 +3,15 @@ import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class JobService {
 
-	api_url = 'https://lancerapp.herokuapp.com';
+	api_url = environment.api_url;
+	// api_url = 'https://lancerapp.herokuapp.com';
 	postUrl = `${this.api_url}/api/post`;
 	findUrl = `${this.api_url}/api/find`;
 	jobUrl = `${this.api_url}/api/job`;

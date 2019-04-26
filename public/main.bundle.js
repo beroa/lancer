@@ -239,6 +239,7 @@ var AuthGuardService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators_map__ = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -252,7 +253,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var apiUrl = 'https://lancerapp.herokuapp.com/api';
+
+var apiUrl = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].api_url + '/api';
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http, router) {
         this.http = http;
@@ -396,7 +398,7 @@ var BlockExplorerService = /** @class */ (function () {
     function BlockExplorerService(http, router) {
         this.http = http;
         this.router = router;
-        this.api_url = 'https://chain.so/api/v2/';
+        this.api_url = 'https://chain.so/api/v2';
         this.address_balance_url = this.api_url + "/get_address_balance/BTCTEST/";
     }
     BlockExplorerService.prototype.get_addr = function (address) {
@@ -425,7 +427,8 @@ var BlockExplorerService = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -438,10 +441,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CommentService = /** @class */ (function () {
     function CommentService(http) {
         this.http = http;
-        this.api_url = 'https://lancerapp.herokuapp.com';
+        this.api_url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].api_url;
         this.jobUrl = this.api_url + "/api/job";
     }
     CommentService.prototype.postComment = function (comment) {
@@ -779,7 +783,8 @@ var HomeComponent = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JobService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -792,10 +797,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var JobService = /** @class */ (function () {
     function JobService(http) {
         this.http = http;
-        this.api_url = 'https://lancerapp.herokuapp.com';
+        this.api_url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].api_url;
+        // api_url = 'https://lancerapp.herokuapp.com';
         this.postUrl = this.api_url + "/api/post";
         this.findUrl = this.api_url + "/api/find";
         this.jobUrl = this.api_url + "/api/job";
@@ -1470,12 +1477,9 @@ var TransactionComponent = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
-    production: false
+    production: true,
+    api_url: "lancerapp.herokuapp.com"
 };
 
 
