@@ -6,8 +6,6 @@ var BlockExplorerService = require('./blockexplorer.serv');
 
 _this = this
 
-const DEF_FEE = 90000;
-
 // exports.parseTransaction = async function(user, destination, quantity) {
 // 	quantity = parseFloat(quantity)*100000000;
 // 	let user_data = await BlockExplorerService.getAddr(user.address);
@@ -26,48 +24,59 @@ exports.userSend = async function(user, destination, quantity, fee) {
 	// // if (quantity > user_data.confirmed_balance) {
 	// // 	return "Quantity (${quantity}) is greater than balance (${user_data.confirmed_balance})";
 	// // }
-	console.log("wtf");
-	let inputs = await BlockExplorerService.findInputs(user.address, quantity);
-	console.log("hello?");
-	console.log(user.address);
-	console.log("INPUTS" + inputs);
-	console.log("QUANTITY" + quantity);
-	console.log("FEE" + fee);
-	quantity -= fee;
+	// console.log("wtf");
+	let inputs = await BlockExplorerService.findInputs(user.address, quantity, fee);
+	// console.log("hello?");
+	// console.log(user.address);
+	// console.log("INPUTS" + inputs);
+	// console.log("QUANTITY" + quantity);
+	// console.log("FEE" + fee);
 	return this.makeTransaction(user.WIF, destination, quantity, inputs, fee);
 }
 
 exports.jobFullSend = async function(job, destination) {
+	var fee = .00050000;
+	console.log(job.address);
 	// quantity = parseFloat(quantity)*100000000;
 	let job_data = await BlockExplorerService.getAddr(job.address);
-	var quantity = job_data.balanceSat;
-	let inputs = await BlockExplorerService.findInputs(job.address, quantity);
+	console.log(`job balance ${job_data.confirmed_balance}`);
+	var quantity = parseFloat(job_data.confirmed_balance) - parseFloat(fee);
+	console.log (`quantity: ${quantity}`);
+	let inputs = await BlockExplorerService.findInputs(job.address, quantity, fee);
+	console.log(inputs)
 	// console.log(user.address);
 	// console.log("INPUTS" + inputs)
 	// console.log(quantity);
-	quantity -= DEF_FEE;
 	return this.makeTransaction(job.WIF, destination, quantity, inputs);
 }
 
 exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee) {
-	quantity = quantity*100000000;
+	console.log("making");
+	quantity = Math.round(quantity*100000000);
+	fee = Math.round(fee*100000000);
+	let total = 0;
+	// use bitcoinlib.js
 	let key = bitcoin.ECPair.fromWIF(WIF, testnet);
 	let tx = new bitcoin.TransactionBuilder(testnet);
-	let total = 0;
-	// console.log("INPLEN"+inputs.length);
+	// find sum of inputs
 	for (let i = 0; i < inputs.length; i++) {
 		tx.addInput(inputs[i].id, inputs[i].index);
-		total += inputs[i].quantity;
-		// console.log("TOTAL"+total);
+		total = total + (inputs[i].quantity*100000000);
+		console.log(`input ${i}: ${inputs[i].quantity}`);
 	}
+	// output to destination
 	tx.addOutput(destination, quantity);
-	total -= quantity;
-	// if (total > fee) {
-	// 	tx.addOutput(key.getAddress(), total - fee);
-	// }
+	// output to keep leftover
+	console.log(`total: ${total}`);
+	if (total > quantity + fee) {
+		tx.addOutput(key.getAddress(), total - (quantity + fee));
+	}
 	for (let i = 0; i < inputs.length; i++) {
 		tx.sign(i, key);
 	}
-	// console.log(tx.build().toHex());
+	console.log("quantity " + quantity);
+	console.log("fee " + fee);
+	console.log(`total ${total} - quantity ${quantity} + fee ${fee} =  ${total-(quantity+fee)}`);
+
 	return tx.build().toHex();
 }

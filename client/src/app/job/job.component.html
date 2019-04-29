@@ -11,14 +11,20 @@
 
 				<hr>
 
-				<p> Date created: {{job?.date_created}} </p>
-				<p> Created by: {{job?.author}} </p>
-				<p> Address: {{job?.address}} </p>
+				<p> <b>Date created:</b> {{job?.date_created}} </p>
+				<p> <b>Created by:</b> {{job?.author}} </p>
+				<p> <b>Address:</b>
+					<a href="https://chain.so/address/BTCTEST/{{job?.address}}">{{ job?.address }}</a>
 				<p>
-					Balance: 
-						<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance }} tBTC</span>
-						<span *ngIf="!api_data_job_addr"></span>
+					<b>Balance:</b>
+					<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance*1 }} tBTC</span>
 				</p>
+
+				<p>
+					<b>Unconfirmed Balance: </b>
+					<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance*1 + api_data_job_addr.unconfirmed_balance*1 }} tBTC</span>
+				</p>
+
 				<div id="jobAdmin" *ngIf="isJobAuthor">
 					<p>this is your job</p>
 				</div>

@@ -115,7 +115,7 @@ export class CommentsComponent implements OnInit {
 	select() {
 		this.isSelecting = !this.isSelecting;
 		console.log(this.api_data_job_addr);
-		this.popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.balance + " tBTC)?\n Your job will be marked complete.";
+		this.popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.confirmed_balance + " tBTC)?\n Your job will be marked complete.";
 	}
 
 	paySubmission(selectedComment: CommentModel) {

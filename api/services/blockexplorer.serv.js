@@ -53,24 +53,28 @@ exports.postTx = async function(raw_tx) {
 	return JSON.stringify(response);
 }
 
-tx_input = function(id, index, value) {
+tx_input = function(id, index, quantity) {
 	this.id = id;
 	this.index = index;
-	this.value = value;
+	this.quantity = quantity;
 	return this;
 }
 
-exports.findInputs = async function(addr, quantity) {
-	var inputs = [];
+// quantity is before fee
+exports.findInputs = async function(addr, quantity, fee) {
 	var input;
+	var inputs = [];
 	let inputs_quantity = 0;
+
 	let response = await this.getUnspent(addr);
-	response = response.txs
-	console.log("resp"+response);
-	for (let i = 0; i < response.length && inputs_quantity < quantity; i++) {
+	response = response.txs;
+
+	console.log(`unspent txs ${response}`)
+
+	for (let i = 0; i < response.length; i++) {
 		input = new tx_input(response[i].txid, response[i].output_no, response[i].value);
 		inputs.push(input);
-		inputs_quantity += input.value;
+		inputs_quantity += input.quantity;
 	}
 	return inputs;
 }
@@ -106,7 +110,7 @@ exports.findInputs = async function(addr, quantity) {
 //             input = new tx_input(
 //             	tx_data.txid,
 //             	tx_data.vout[j].n,
-//             	tx_data.vout[j].value*100000000);
+//             	tx_data.vout[j].quantity*100000000);
 //         	console.log("match");
 //         	console.log("input: " + input.id + " " + input.index);
 //             return input;

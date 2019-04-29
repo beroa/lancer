@@ -25,6 +25,7 @@ export class TransactionComponent implements OnInit {
 	confirmed = false;
 	user: UserModel;
 	txid = 0;
+	totalAmount = 0;
 
 	constructor(
 		private route: ActivatedRoute,
