@@ -13,7 +13,8 @@ var commentSchema = new mongoose.Schema({
 	authorId: String,
 	date_created: Date,
   	image: String,
-  	image_type: String
+  	image_type: String,
+  	earned: Number
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

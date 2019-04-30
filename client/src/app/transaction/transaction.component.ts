@@ -17,9 +17,11 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 })
 export class TransactionComponent implements OnInit {
 	isDestinationLocked = false;
+	isSentFromJob = false;
 	private isLoggedIn: boolean;
 	api_data_user_addr: any = {};
-	@Input() destination? = ""
+	@Input() destination_address? = ""
+	@Input() destination_user? = ""
 	form: FormGroup;
 	submitted = false;
 	confirmed = false;
@@ -37,9 +39,15 @@ export class TransactionComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (this.destination != "") {
-			this.form.controls.tx_destination.setValue(this.destination);
+		if (this.destination_address != "") {
+			this.form.controls.tx_destination.setValue(this.destination_address);
 			this.isDestinationLocked = true;
+		}
+
+		if (this.destination_user != "") {
+			this.form.controls.tx_destination.setValue(this.destination_user);
+			this.isDestinationLocked = true;
+			this.isSentFromJob = true;
 		}
 
 		if (this.isLoggedIn) {

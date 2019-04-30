@@ -43,18 +43,3 @@ exports.createJob = async function(JobData) {
         throw Error("Error while Creating Job")
     }
 }
-
-exports.completeJob = async function(user, job, recipient) {
-    var newJob = new Job();
-    newJob.title = JobData.title;
-    newJob.description = JobData.description;
-    newJob.author = JobData.author;
-    newJob.date_created = new Date();
-    newJob.generateWallet();
-    try{
-        var savedJob = await newJob.save();
-        return savedJob;
-    }catch(e){
-        throw Error("Error while Creating Job")
-    }
-}

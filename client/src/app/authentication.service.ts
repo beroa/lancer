@@ -120,7 +120,7 @@ export class AuthenticationService {
 		return request;
 	}
 
-	public jobComplete(job, destination): Observable<any> {
+	public jobSend(job, destination, comment): Observable<any> {
 		const httpOptions = {
 		  headers: new HttpHeaders({
 		    'Content-Type':  'application/json',
@@ -129,11 +129,12 @@ export class AuthenticationService {
 		};
 
 		let data = { 
-			job: `${job}`,
+			job_id: `${job}`,
+			comment_id: `${comment}`,
 			destination: `${destination}`
 		};
 
-		return this.http.post(`${apiUrl}/job/${job}/complete`, data, httpOptions
+		return this.http.post(`${apiUrl}/job/${job}/pay`, data, httpOptions
 		).map(res => {
 			return { res }
 		})

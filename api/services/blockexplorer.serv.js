@@ -69,7 +69,7 @@ exports.findInputs = async function(addr, quantity, fee) {
 	let response = await this.getUnspent(addr);
 	response = response.txs;
 
-	console.log(`unspent txs ${response}`)
+	console.log(`unspent txs ${response}`);
 
 	for (let i = 0; i < response.length; i++) {
 		input = new tx_input(response[i].txid, response[i].output_no, response[i].value);

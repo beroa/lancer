@@ -12,23 +12,15 @@
 
 		<form [formGroup]="form" (submit)="onSubmit()">
 
-			<p class="form-control-static" *ngIf="api_data_user_addr.confirmed_balance">
+			<p class="form-group" *ngIf="api_data_user_addr.confirmed_balance">
 				<b>Your account balance: </b>
 			{{api_data_user_addr.confirmed_balance*1}} tBTC</p>
 
-			<p class="form-control-static" *ngIf="api_data_user_addr.confirmed_balance">
+			<p class="form-group" *ngIf="api_data_user_addr.confirmed_balance">
 				<b>Your unconfirmed account balance: </b>
 			{{api_data_user_addr.confirmed_balance*1 + api_data_user_addr.unconfirmed_balance*1}} tBTC</p>
 
 			<p class="form-control-static-red" *ngIf="!api_data_user_addr.confirmed_balance"> Error: Check internet connection.</p>
-
-			<div *ngIf="!isDestinationLocked">
-				<div class="form-group">
-					<label for="tx_destination">Destination Address:</label>
-					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
-					<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
-				</div>
-			</div>
 
 			<div class="form-group">
 				<label for="tx_value">Amount to send (in tBTC):</label>
@@ -44,9 +36,22 @@
 				<p class="red-text" *ngIf=".0001 >= form.controls.tx_fee.value">Fees must be >= .0001</p>
 			</div>
 
-			<div *ngIf="isDestinationLocked">
-				<p> <b>Destination Address:</b> {{destination}} </p>
+			<div *ngIf="!isDestinationLocked">
+				<div class="form-group">
+					<label for="tx_destination">Destination Address:</label>
+					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
+					<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
+				</div>
 			</div>
+
+			<div *ngIf="isDestinationLocked && !isSentFromJob">
+				<p> <b>Destination Address:</b> {{destination_address}} </p>
+			</div>
+
+			<div *ngIf="isSentFromJob">
+				<p> <b>Destination User:</b> {{destination_user}} </p>
+			</div>
+
 			<div>
 				<p> <b>Total Amount:</b> {{(form.controls.tx_fee.value*1) + (form.controls.tx_value.value*1)}} </p>
 			</div>

@@ -26,7 +26,7 @@ export class CommentsComponent implements OnInit {
 	private sub: any;
 	private commentList: CommentModel[];
 	private newComment: CommentModel = new CommentModel();
-	private isPaying = false;
+	private isPayOpen = false;
 
 	public popoverTitle: string = 'Select For Payment';
 	public popoverMessage : String;
@@ -56,10 +56,6 @@ export class CommentsComponent implements OnInit {
 		  .subscribe(comments => {
 			this.commentList = comments.commentList;
 		});
-
-		this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?\n Your job will be marked complete.";
-
-
 	}
 
 	constructor(
@@ -101,14 +97,14 @@ export class CommentsComponent implements OnInit {
 
 	postComment() {
 		this.commentService.postComment(this.newComment)
-		  .subscribe((res) => {
-		  	this.commentList.push(this.newComment);
+		.subscribe((res) => {
+			this.commentList.push(this.newComment);
 		});
 
 		this.commentService.getComments(this.jobId)
-			  .subscribe(comments => {
-				this.commentList = comments.commentList
-			});
+		.subscribe(comments => {
+			this.commentList = comments.commentList;
+		});
 	}
 
 	showImage(comment: CommentModel): any {
@@ -116,14 +112,14 @@ export class CommentsComponent implements OnInit {
 	}
 
 	pay() {
-		this.isPaying = !this.isPaying;
+		this.isPayOpen = !this.isPayOpen;
 		console.log(this.api_data_job_addr.confirmed_balance);
-		this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?\n Your job will be marked complete.";
+		// this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?";
 
 	}
 
-	paySubmission(selectedComment: CommentModel) {
-		this.auth.jobComplete(this.job._id, selectedComment.author)
+	paySubmission(selectedComment: CommentModel) {																		
+		this.auth.jobSend(this.job._id, selectedComment.author, selectedComment._id)
 		.subscribe( res => {
 			console.log(res);
 		}, (err) => {

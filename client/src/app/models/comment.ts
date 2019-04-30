@@ -8,6 +8,7 @@ class Comment {
 	date_created: Date;
 	image: string;
 	image_type: string;
+	earned: number
 
 	constructor() {
 		this.jobId = ""
@@ -17,6 +18,7 @@ class Comment {
 		this.date_created = new Date()
 		this.image = ""
 		this.image_type = ""
+		this.earned = 0
 	}
 }
 

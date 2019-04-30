@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Job = mongoose.model('Job');
+var Comment = mongoose.model('Comment');
 var UserModel = require('../models/user');
 
+var CommentService = require('../services/comment.serv.js');
 var JobService = require('../services/job.serv.js');
 var BitcoinJSService = require('../services/bitcoinjs.serv');
 var BlockExplorerService = require('../services/blockexplorer.serv.js')
@@ -44,7 +46,7 @@ exports.userSend = async function(req, res, next) {
   }
 };
 
-exports.completeJob = async function(req, res, next) {
+exports.jobSend = async function(req, res, next) {
 	var request = {
 		jobId: req.params.id,
 		destination: req.body.destination
@@ -58,7 +60,8 @@ exports.completeJob = async function(req, res, next) {
 		var User = await UserModel.findById(req.payload._id);
 		var recipient = await UserModel.findOne({ name: req.body.destination });
 		var Job = await JobService.getJob(req.params.id);
-		
+		var Comment = await CommentService.getComment(req.body.comment_id);
+
 		if (Job.author != User.name) {
 			res.status(401).json({
 				"message" : "UnauthorizedError: not your job"
@@ -66,8 +69,9 @@ exports.completeJob = async function(req, res, next) {
 		} else {
 			try {
 				BitcoinJSService.jobFullSend(Job, recipient.address).then(function(response) {
-					console.log(response);
-					BlockExplorerService.postTx(response).then(function(response) {
+					console.log("txid " + response[0]);
+					console.log("quantity " + response[1]);
+					BlockExplorerService.postTx(response[0]).then(function(response) {
 						return res.status(200).json({res: response, message: "transaction posted"});
 					}).catch(function(err) {
 						res.status(400).json({status: 400, message: "posttx " + err.message});

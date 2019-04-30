@@ -24,12 +24,12 @@ router.get('/find', ctrlJob.getJobs);
 router.post('/post/submit', ctrlJob.createJob);
 
 router.get('/job/:id', ctrlJob.getJob);
-router.post('/job/:id/complete', auth, ctrlBitcoinJS.completeJob);
+router.post('/job/:id/pay', auth, ctrlBitcoinJS.jobSend);
 
 router.get('/job/:id/comments', ctrlComment.getComments);
 router.post('/job/:id/comments/submit', ctrlComment.createComment);
 
-router.get('/maketx', auth, ctrlBitcoinJS.userSend);
+router.get('/usersend', auth, ctrlBitcoinJS.userSend);
 // };
 
 
