@@ -29,7 +29,7 @@ export class CommentsComponent implements OnInit {
 	private isPaying = false;
 
 	public popoverTitle: string = 'Select For Payment';
-	public popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.confirmed_balance + " tBTC)?\n Your job will be marked complete.";
+	public popoverMessage : String;
 	public confirmClicked: boolean = false;
 	public cancelClicked: boolean = false;
 
@@ -54,8 +54,11 @@ export class CommentsComponent implements OnInit {
 
 		this.commentService.getComments(this.jobId)
 		  .subscribe(comments => {
-			this.commentList = comments.commentList
+			this.commentList = comments.commentList;
 		});
+
+		this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?\n Your job will be marked complete.";
+
 
 	}
 
@@ -68,6 +71,7 @@ export class CommentsComponent implements OnInit {
 		private fb: FormBuilder) {
 	this.createForm();
 	this.newComment = new CommentModel();
+
 	}
 
 	
@@ -113,7 +117,9 @@ export class CommentsComponent implements OnInit {
 
 	pay() {
 		this.isPaying = !this.isPaying;
-		console.log(this.api_data_job_addr);
+		console.log(this.api_data_job_addr.confirmed_balance);
+		this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?\n Your job will be marked complete.";
+
 	}
 
 	paySubmission(selectedComment: CommentModel) {

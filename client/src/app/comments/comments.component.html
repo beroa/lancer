@@ -3,63 +3,67 @@
 	  <div class="col-md-1"></div>
 	  <div class="col-md-10">
 	  	<div id="comments-frame">
-      
-	  	<form [formGroup]="form" class="post" (submit)="onSubmit()">
-	        <label for="">New Comment</label>
-	        <div *ngIf="!isLoggedIn" class="message-login" >
-    			<p>To post a comment, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
-  			</div>
-  			<div *ngIf="isLoggedIn">
-  				<div class="form-group">
-		        	<textarea type="text" class="form-control" name="content" placeholder="Enter Your Comment" formControlName="content"></textarea>
+ 
+ 			<!--new comment-->
+		  	<form [formGroup]="form" class="comment-form" (submit)="onSubmit()">
+		        <label for="">New Comment</label>
+		        <div *ngIf="!isLoggedIn" class="message-login" >
+	    			<p>To post a comment, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
+	  			</div>
+	  			<div *ngIf="isLoggedIn">
+	  				<div class="form-group">
+			        	<textarea type="text" class="form-control" name="content" placeholder="Enter Your Comment" formControlName="content"></textarea>
+			    	</div>
+
+			    	<div class="input-group">
+					<input type="file" id="image" (change)="onFileChange($event)" #fileInput>
+			        <span class="input-group-btn">
+			        	<button id="comment-post" type="submit" class="btn btn-default btn-comment">Post Comment</button>
+	    			</span>
+	    		</div>
+
 		    	</div>
-		        <div class="form-group">
-		        	<input type="file" id="image" (change)="onFileChange($event)" #fileInput>
-		        	<button id="post" type="submit" class="btn btn-default btn-comment">Post Comment</button>
-    			</div>
-	    	</div>
-      	</form>
+	      	</form>
 
+			<!--existing comments-->
+		    <div class="comments">
+		    	<!-- <p> {{this.api_data_job_addr.confirmed_balance}}</p> -->
+			    <ul class="comment-list">
+					<li class="comment-item" *ngFor="let comment of commentList">
+						
+						<img
+						*ngIf="comment.image && comment.image.length > 0"
+						[src]="showImage(comment)"
+					    alt="(submission image)">
 
-	    <div class="comments">
-	    	<p> {{this.api_data_job_addr.confirmed_balance}}</p>
-		    <ul class="comment-list">
-				<li class="comment-item" *ngFor="let comment of commentList">
-					
-					<img
-					*ngIf="comment.image && comment.image.length > 0"
-					[src]="showImage(comment)"
-				    alt="(submission image)">
+						<div [innerHtml]="comment.content"></div>
+						<br>
+						<div class="comment-bar">
+							<table>
+								<tr>
+									<td class="tleft">
+										- {{comment.author}}
+									</td>
+									<td class="tright">
+										<button class="pay" type="submit" class="btn btn-default" (click)="pay()"
+										*ngIf="isJobAuthor"
+										mwlConfirmationPopover
+										[popoverTitle]="popoverTitle"
+										placement="left"
+										(confirm)="paySubmission(comment)"
+										(cancel)="cancelClicked = true"
+										[popoverMessage]="popoverMessage">Pay</button>
 
-					<div [innerHtml]="comment.content"></div>
-					<br>
-					<div class="comment-bar">
-						<table>
-							<tr>
-								<td class="tleft">
-									- {{comment.author}}
-								</td>
-								<td class="tright">
-									<button class="pay" type="submit" class="btn btn-default" (click)="pay()" [disabled]="confirmed"
-									*ngIf="isJobAuthor"
-									mwlConfirmationPopover
-									[popoverTitle]="popoverTitle"
-									[popoverMessage]="popoverMessage"
-									placement="left"
-									(confirm)="paySubmission(comment)"
-									(cancel)="cancelClicked = true">Pay</button>
-
-									<!-- <span class="reply"> Reply </span> -->
-								</td>
-							</tr>
-						</table>
-					</div>
-				</li>
-		    </ul>
-	    </div>
-
-	  </div>
-	</div>
+										<!-- <span class="reply"> Reply </span> -->
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+			    </ul>
+		    </div>
+		  </div>
+		</div>
 	</div>
   <div class="col-md-1"></div>
 </div>

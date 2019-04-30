@@ -485,7 +485,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".post {\n\tmargin: .5em 0;\n\tpadding: .5em 1em;\n}\n\n.btn-comment {\n\tmargin-top: 2px;\n}\n\n.comment-list {\n\tlist-style: none;\n\tmargin-left: -40px;\n}\n\n.comment-item {\n\tborder: 1px solid #CCCCCC;\n\tbackground: #d0ecd9;\n\tmargin: .5em 0;\n\tpadding: .5em 1em;\n}\n\n.comment-content p {\n\tfont-size:18px;\n\tpadding-left: 1em;\n}\n\n.comment-bar {\n\tborder-top: 1px solid #EEEEEE;\n\tmargin-top: -20px;\n}\n\ntable {\n\twidth: 100%;\n}\n\n.tleft {\n\ttext-align: left;\n}\n\n.tright {\n\ttext-align: right;\n}\n\n#comments-frame {\n\t/*background: #edf8f0;*/\n\tmargin-top:2em;\n\tborder: 2px solid #CCCCCC;\n}\n\n.authorSelect {\n\tcursor: pointer;\n\tfont-weight: bold;\n/*\tcolor: gold;\n\tfont-weight: bold;\n\ttext-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/\n}\n\n#post {\n\tmargin-top:1em;\n\t\n}", ""]);
+exports.push([module.i, ".comment-form {\n\tmargin: .5em 0;\n\tpadding: .5em 1em;\n}\n\n.btn-comment {\n\tmargin-top: auto;\n}\n\n.comment-list {\n\tlist-style: none;\n\tmargin-left: -40px;\n}\n\n.comment-item {\n\tborder: 1px solid #CCCCCC;\n\tbackground: #d0ecd9;\n\tmargin: .5em 0;\n\tpadding: .5em 1em;\n}\n\n.comment-content p {\n\tfont-size:18px;\n\tpadding-left: 1em;\n}\n\n.comment-bar {\n\tborder-top: 1px solid #EEEEEE;\n\tmargin-top: -20px;\n}\n\ntable {\n\twidth: 100%;\n}\n\n.tleft {\n\ttext-align: left;\n}\n\n.tright {\n\ttext-align: right;\n}\n\n#comments-frame {\n\t/*background: #edf8f0;*/\n\tmargin-top:2em;\n\tborder: 2px solid #CCCCCC;\n}\n\n#comment-post{\n\tfloat: right;\n}", ""]);
 
 // exports
 
@@ -498,7 +498,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comments/comments.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t  <div class=\"col-md-1\"></div>\n\t  <div class=\"col-md-10\">\n\t  \t<div id=\"comments-frame\">\n      \n\t  \t<form [formGroup]=\"form\" class=\"post\" (submit)=\"onSubmit()\">\n\t        <label for=\"\">New Comment</label>\n\t        <div *ngIf=\"!isLoggedIn\" class=\"message-login\" >\n    \t\t\t<p>To post a comment, you must <a routerLink=\"/login\">log in</a> or <a routerLink=\"/register\">register</a>.</p>\n  \t\t\t</div>\n  \t\t\t<div *ngIf=\"isLoggedIn\">\n  \t\t\t\t<div class=\"form-group\">\n\t\t        \t<textarea type=\"text\" class=\"form-control\" name=\"content\" placeholder=\"Enter Your Comment\" formControlName=\"content\"></textarea>\n\t\t    \t</div>\n\t\t        <div class=\"form-group\">\n\t\t        \t<input type=\"file\" id=\"image\" (change)=\"onFileChange($event)\" #fileInput>\n\t\t        \t<button id=\"post\" type=\"submit\" class=\"btn btn-default btn-comment\">Post Comment</button>\n    \t\t\t</div>\n\t    \t</div>\n      \t</form>\n\n\n\t    <div class=\"comments\">\n\t    \t<p> {{this.api_data_job_addr.confirmed_balance}}</p>\n\t\t    <ul class=\"comment-list\">\n\t\t\t\t<li class=\"comment-item\" *ngFor=\"let comment of commentList\">\n\t\t\t\t\t\n\t\t\t\t\t<img\n\t\t\t\t\t*ngIf=\"comment.image && comment.image.length > 0\"\n\t\t\t\t\t[src]=\"showImage(comment)\"\n\t\t\t\t    alt=\"(submission image)\">\n\n\t\t\t\t\t<div [innerHtml]=\"comment.content\"></div>\n\t\t\t\t\t<br>\n\t\t\t\t\t<div class=\"comment-bar\">\n\t\t\t\t\t\t<table>\n\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td class=\"tleft\">\n\t\t\t\t\t\t\t\t\t- {{comment.author}}\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t<td class=\"tright\">\n\t\t\t\t\t\t\t\t\t<button class=\"pay\" type=\"submit\" class=\"btn btn-default\" (click)=\"pay()\" [disabled]=\"confirmed\"\n\t\t\t\t\t\t\t\t\t*ngIf=\"isJobAuthor\"\n\t\t\t\t\t\t\t\t\tmwlConfirmationPopover\n\t\t\t\t\t\t\t\t\t[popoverTitle]=\"popoverTitle\"\n\t\t\t\t\t\t\t\t\t[popoverMessage]=\"popoverMessage\"\n\t\t\t\t\t\t\t\t\tplacement=\"left\"\n\t\t\t\t\t\t\t\t\t(confirm)=\"paySubmission(comment)\"\n\t\t\t\t\t\t\t\t\t(cancel)=\"cancelClicked = true\">Pay</button>\n\n\t\t\t\t\t\t\t\t\t<!-- <span class=\"reply\"> Reply </span> -->\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t</table>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t    </ul>\n\t    </div>\n\n\t  </div>\n\t</div>\n\t</div>\n  <div class=\"col-md-1\"></div>\n</div>"
+module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t  <div class=\"col-md-1\"></div>\n\t  <div class=\"col-md-10\">\n\t  \t<div id=\"comments-frame\">\n \n \t\t\t<!--new comment-->\n\t\t  \t<form [formGroup]=\"form\" class=\"comment-form\" (submit)=\"onSubmit()\">\n\t\t        <label for=\"\">New Comment</label>\n\t\t        <div *ngIf=\"!isLoggedIn\" class=\"message-login\" >\n\t    \t\t\t<p>To post a comment, you must <a routerLink=\"/login\">log in</a> or <a routerLink=\"/register\">register</a>.</p>\n\t  \t\t\t</div>\n\t  \t\t\t<div *ngIf=\"isLoggedIn\">\n\t  \t\t\t\t<div class=\"form-group\">\n\t\t\t        \t<textarea type=\"text\" class=\"form-control\" name=\"content\" placeholder=\"Enter Your Comment\" formControlName=\"content\"></textarea>\n\t\t\t    \t</div>\n\n\t\t\t    \t<div class=\"input-group\">\n\t\t\t\t\t<input type=\"file\" id=\"image\" (change)=\"onFileChange($event)\" #fileInput>\n\t\t\t        <span class=\"input-group-btn\">\n\t\t\t        \t<button id=\"comment-post\" type=\"submit\" class=\"btn btn-default btn-comment\">Post Comment</button>\n\t    \t\t\t</span>\n\t    \t\t</div>\n\n\t\t    \t</div>\n\t      \t</form>\n\n\t\t\t<!--existing comments-->\n\t\t    <div class=\"comments\">\n\t\t    \t<!-- <p> {{this.api_data_job_addr.confirmed_balance}}</p> -->\n\t\t\t    <ul class=\"comment-list\">\n\t\t\t\t\t<li class=\"comment-item\" *ngFor=\"let comment of commentList\">\n\t\t\t\t\t\t\n\t\t\t\t\t\t<img\n\t\t\t\t\t\t*ngIf=\"comment.image && comment.image.length > 0\"\n\t\t\t\t\t\t[src]=\"showImage(comment)\"\n\t\t\t\t\t    alt=\"(submission image)\">\n\n\t\t\t\t\t\t<div [innerHtml]=\"comment.content\"></div>\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<div class=\"comment-bar\">\n\t\t\t\t\t\t\t<table>\n\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t<td class=\"tleft\">\n\t\t\t\t\t\t\t\t\t\t- {{comment.author}}\n\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t<td class=\"tright\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"pay\" type=\"submit\" class=\"btn btn-default\" (click)=\"pay()\"\n\t\t\t\t\t\t\t\t\t\t*ngIf=\"isJobAuthor\"\n\t\t\t\t\t\t\t\t\t\tmwlConfirmationPopover\n\t\t\t\t\t\t\t\t\t\t[popoverTitle]=\"popoverTitle\"\n\t\t\t\t\t\t\t\t\t\tplacement=\"left\"\n\t\t\t\t\t\t\t\t\t\t(confirm)=\"paySubmission(comment)\"\n\t\t\t\t\t\t\t\t\t\t(cancel)=\"cancelClicked = true\"\n\t\t\t\t\t\t\t\t\t\t[popoverMessage]=\"popoverMessage\">Pay</button>\n\n\t\t\t\t\t\t\t\t\t\t<!-- <span class=\"reply\"> Reply </span> -->\n\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t</table>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</li>\n\t\t\t    </ul>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n\t</div>\n  <div class=\"col-md-1\"></div>\n</div>"
 
 /***/ }),
 
@@ -544,7 +544,6 @@ var CommentsComponent = /** @class */ (function () {
         this.newComment = new __WEBPACK_IMPORTED_MODULE_3__models_comment__["a" /* default */]();
         this.isPaying = false;
         this.popoverTitle = 'Select For Payment';
-        this.popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.confirmed_balance + " tBTC)?\n Your job will be marked complete.";
         this.confirmClicked = false;
         this.cancelClicked = false;
         this.createForm();
@@ -569,6 +568,7 @@ var CommentsComponent = /** @class */ (function () {
             .subscribe(function (comments) {
             _this.commentList = comments.commentList;
         });
+        this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance * 1 + " tBTC)?\n Your job will be marked complete.";
     };
     CommentsComponent.prototype.createForm = function () {
         this.form = this.fb.group({
@@ -608,7 +608,8 @@ var CommentsComponent = /** @class */ (function () {
     };
     CommentsComponent.prototype.pay = function () {
         this.isPaying = !this.isPaying;
-        console.log(this.api_data_job_addr);
+        console.log(this.api_data_job_addr.confirmed_balance);
+        this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance * 1 + " tBTC)?\n Your job will be marked complete.";
     };
     CommentsComponent.prototype.paySubmission = function (selectedComment) {
         this.auth.jobComplete(this.job._id, selectedComment.author)
@@ -848,7 +849,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".listing {\n\tborder: 2px solid #CCCCCC;\n\tbackground: #edf8f0;\n\tpadding: 1em;\n}\n\n.job-title {\n\tfont-size: 2em;\n}\n\n#fundMe {\n\tmargin-top:1em;\n}\n\n.red-text {\n\tcolor:red;\n}\n\n.comments {\n}", ""]);
+exports.push([module.i, ".listing {\n\tborder: 2px solid #CCCCCC;\n\tbackground: #edf8f0;\n\tpadding: 1em;\n}\n\n.job-title {\n\tfont-size: 2em;\n}\n\n#fundMe {\n\tmargin-top:1em;\n}\n\n.red-text {\n\tcolor:red;\n}", ""]);
 
 // exports
 
