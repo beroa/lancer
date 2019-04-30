@@ -16,6 +16,8 @@ import JobModel from '../models/job';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
+	@Input() api_data_job_addr: any = {};
+
 	private form: FormGroup;
 	private isLoggedIn = this.auth.isLoggedIn();
 	private job: JobModel;
@@ -24,13 +26,10 @@ export class CommentsComponent implements OnInit {
 	private sub: any;
 	private commentList: CommentModel[];
 	private newComment: CommentModel = new CommentModel();
-	private isSelecting = false;
-
-	@Input() api_data_job_addr: any = {};
-
+	private isPaying = false;
 
 	public popoverTitle: string = 'Select For Payment';
-	public popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.balance + " tBTC)?\n Your job will be marked complete.";
+	public popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.confirmed_balance + " tBTC)?\n Your job will be marked complete.";
 	public confirmClicked: boolean = false;
 	public cancelClicked: boolean = false;
 
@@ -112,10 +111,9 @@ export class CommentsComponent implements OnInit {
     	return 'data:'+  comment.image_type + ';base64,' + comment.image;
 	}
 
-	select() {
-		this.isSelecting = !this.isSelecting;
+	pay() {
+		this.isPaying = !this.isPaying;
 		console.log(this.api_data_job_addr);
-		this.popoverMessage = "Are you sure you want this user to recieve your job's funds (" + this.api_data_job_addr.confirmed_balance + " tBTC)?\n Your job will be marked complete.";
 	}
 
 	paySubmission(selectedComment: CommentModel) {

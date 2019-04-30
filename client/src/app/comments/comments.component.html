@@ -22,6 +22,7 @@
 
 
 	    <div class="comments">
+	    	<p> {{this.api_data_job_addr.confirmed_balance}}</p>
 		    <ul class="comment-list">
 				<li class="comment-item" *ngFor="let comment of commentList">
 					
@@ -39,7 +40,7 @@
 									- {{comment.author}}
 								</td>
 								<td class="tright">
-									<button class="select" type="submit" class="btn btn-default" (click)="select()" [disabled]="confirmed"
+									<button class="pay" type="submit" class="btn btn-default" (click)="pay()" [disabled]="confirmed"
 									*ngIf="isJobAuthor"
 									mwlConfirmationPopover
 									[popoverTitle]="popoverTitle"
