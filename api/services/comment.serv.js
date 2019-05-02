@@ -29,7 +29,8 @@ exports.createComment = async function(Comment){
 		author: Comment.author,
 		date_created: new Date(),
 		image: Comment.image,
-		image_type: Comment.image_type
+		image_type: Comment.image_type,
+		earned: Comment.earned
 	})
 
 	try{

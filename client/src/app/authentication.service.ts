@@ -97,8 +97,8 @@ export class AuthenticationService {
 		return this.request('get', 'profile');
 	}
 
-	public transaction(user, destination, quantity, fee): Observable<any> {
-		let base = this.http.get(`${apiUrl}/maketx`, { 
+	public transactionFromUser(user, destination, quantity, fee): Observable<any> {
+		let base = this.http.get(`${apiUrl}/usersend`, { 
 			headers: { 
 				Authorization: `Bearer ${this.getToken()}`
 			},
@@ -120,25 +120,49 @@ export class AuthenticationService {
 		return request;
 	}
 
-	public jobSend(job, destination, comment): Observable<any> {
-		const httpOptions = {
-		  headers: new HttpHeaders({
-		    'Content-Type':  'application/json',
-		    'Authorization': `Bearer ${this.getToken()}`
-		  })
-		};
+	public transactionFromJob(job_id, comment_id, quantity, fee): Observable<any> {
+		let base = this.http.get(`${apiUrl}/job/${job_id}/jobSend`, { 
+			headers: { 
+				Authorization: `Bearer ${this.getToken()}`
+			},
+			params: { 
+				job_id:`${job_id}`,
+				comment_id: `${comment_id}`,
+				// destination_user: `${destination_user}`, 
+				quantity: `${quantity}`,
+				fee: `${fee}`}
+			});
 
-		let data = { 
-			job_id: `${job}`,
-			comment_id: `${comment}`,
-			destination: `${destination}`
-		};
-
-		return this.http.post(`${apiUrl}/job/${job}/pay`, data, httpOptions
-		).map(res => {
-			return { res }
-		})
+		const request = base.pipe(
+			map((data: TokenResponse) => {
+				if (data.token) {
+					this.saveToken(data.token);
+				}
+				return data;
+			})
+		);
+		return request;
 	}
+
+	// public jobSend(job, destination, comment): Observable<any> {
+	// 	const httpOptions = {
+	// 	  headers: new HttpHeaders({
+	// 	    'Content-Type':  'application/json',
+	// 	    'Authorization': `Bearer ${this.getToken()}`
+	// 	  })
+	// 	};
+
+	// 	let data = { 
+	// 		job_id: `${job}`,
+	// 		comment_id: `${comment}`,
+	// 		destination: `${destination}`
+	// 	};
+
+	// 	return this.http.post(`${apiUrl}/job/${job}/pay`, data, httpOptions
+	// 	).map(res => {
+	// 		return { res }
+	// 	})
+	// }
 
 	public logout(): void {
 		this.token = '';

@@ -27,7 +27,7 @@
 
 			<!--existing comments-->
 		    <div class="comments">
-		    	<!-- <p> {{this.api_data_job_addr.confirmed_balance}}</p> -->
+		    	<!-- <p> {{this.api_data_job.confirmed_balance}}</p> -->
 			    <ul class="comment-list">
 					<li class="comment-item" *ngFor="let comment of commentList">
 						
@@ -60,9 +60,9 @@
 								<tr> This comment earned {{comment.earned}}</tr>
 							</table>
 
-							<div id="payMe">
-								<button type="submit" class="btn btn-default" (click)="pay()" [disabled]="confirmed">Pay Me</button>
-								<app-transaction *ngIf ="isPayOpen" [destination_user]="comment.author"></app-transaction>
+							<div id="payMe" *ngIf="isJobAuthor">
+								<button type="submit" class="btn btn-default" (click)="pay(comment)" [disabled]="confirmed">Pay Me</button>
+								<app-transaction *ngIf="payOpenFor == comment._id" [source_job]="jobId" [destination_comment]="comment" [api_data_job]="api_data_job"></app-transaction>
 							</div>
 						</div>
 					</li>

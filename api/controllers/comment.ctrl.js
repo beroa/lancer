@@ -31,7 +31,8 @@ exports.createComment = async function(req, res, next){
         content: req.body.content,
         author: req.body.author,
         image: req.body.image,
-        image_type: req.body.image_type
+        image_type: req.body.image_type,
+        earned: req.body.earned
     }
 
     try{

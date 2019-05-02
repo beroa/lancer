@@ -22,7 +22,7 @@ export class JobComponent implements OnInit {
 	jobId: string;
 	job: JobModel;
 	user: UserModel;
-	api_data_job_addr: any = {};
+	api_data_job: any = {};
 	private sub: any;
 
 	private isLoggedIn: boolean;
@@ -54,7 +54,7 @@ export class JobComponent implements OnInit {
 
 				// get job address balance
 				this.blockexplorer.get_addr(this.job.address).subscribe(res => {
-					this.api_data_job_addr = res.data;
+					this.api_data_job = res.data;
 				})
 
 				// get user

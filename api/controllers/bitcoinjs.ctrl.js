@@ -10,6 +10,7 @@ var BitcoinJSService = require('../services/bitcoinjs.serv');
 var BlockExplorerService = require('../services/blockexplorer.serv.js')
 
 exports.userSend = async function(req, res, next) {
+	console.log("userSend called");
 	if (!req.payload._id) {
 		res.status(401).json({
 			"message" : "UnauthorizedError: must log in"
@@ -47,20 +48,22 @@ exports.userSend = async function(req, res, next) {
 };
 
 exports.jobSend = async function(req, res, next) {
-	var request = {
-		jobId: req.params.id,
-		destination: req.body.destination
-	}
+	console.log("jobSend called");
 
 	if (!req.payload._id) {
 		res.status(401).json({
 			"message" : "UnauthorizedError: private profile"
 		});
+	} else if (!req.query.comment_id || !req.query.quantity || !req.query.fee) {
+		res.status(401).json({
+			"message" : "transaction missing fields"
+		});
 	} else {
 		var User = await UserModel.findById(req.payload._id);
-		var recipient = await UserModel.findOne({ name: req.body.destination });
 		var Job = await JobService.getJob(req.params.id);
-		var Comment = await CommentService.getComment(req.body.comment_id);
+		var Comment = await CommentService.getComment(req.query.comment_id);
+		var recipient = await UserModel.findOne({ name: Comment.author });
+		
 
 		if (Job.author != User.name) {
 			res.status(401).json({
@@ -68,20 +71,27 @@ exports.jobSend = async function(req, res, next) {
 			});
 		} else {
 			try {
-				BitcoinJSService.jobFullSend(Job, recipient.address).then(function(response) {
-					console.log("txid " + response[0]);
-					console.log("quantity " + response[1]);
-					BlockExplorerService.postTx(response[0]).then(function(response) {
-						return res.status(200).json({res: response, message: "transaction posted"});
+				// create transaction hex
+				BitcoinJSService.jobSend(Job, recipient.address, req.query.quantity, req.query.fee).then(function(response) {
+					console.log("txid " + response);
+					// post transaction
+					BlockExplorerService.postTx(response)
+					.then(function(response) {
+						console.log(`Comment earned ${Comment._id}`);
+						console.log(`earned ${Comment.earned}`);
+						console.log(`quantity ${req.query.quantity*1.0}`);
+						Comment.earned += (req.query.quantity*1.0);
+						return res.status(200).json(response);
 					}).catch(function(err) {
-						res.status(400).json({status: 400, message: "posttx " + err.message});
+						res.status(400).json({status: 400, message: "posttx "+err.message});
 					})
 				}).catch(function(err) {
-					res.status(400).json({status: 400, message: "jobFullSend " + err.message});
+					res.status(400).json({status: 400, message: "jobSend " + err.message});
 				})
 			} catch (e) {
 				res.status(400).json({status: 400, message: e.message});
 			}
 		}
 	}
+
 }

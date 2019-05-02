@@ -17,12 +17,12 @@
 					<a href="https://chain.so/address/BTCTEST/{{job?.address}}">{{ job?.address }}</a>
 				<p>
 					<b>Balance:</b>
-					<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance*1 }} tBTC</span>
+					<span *ngIf="api_data_job">{{ api_data_job.confirmed_balance*1 }} tBTC</span>
 				</p>
 
 				<p>
 					<b>Unconfirmed Balance: </b>
-					<span *ngIf="api_data_job_addr">{{ api_data_job_addr.confirmed_balance*1 + api_data_job_addr.unconfirmed_balance*1 }} tBTC</span>
+					<span *ngIf="api_data_job">{{ api_data_job.confirmed_balance*1 + api_data_job.unconfirmed_balance*1 }} tBTC</span>
 				</p>
 
 				<div id="jobAdmin" *ngIf="isJobAuthor">
@@ -44,5 +44,5 @@
 </div>
 
 <div class="comments">
-	<app-comments [api_data_job_addr]="api_data_job_addr"></app-comments>
+	<app-comments [api_data_job]="api_data_job"></app-comments>
 </div>

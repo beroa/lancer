@@ -33,11 +33,9 @@ export class RegisterComponent {
 
 	onSubmit() {
 				this.submitted = true;
-				if (this.form.invalid) {
-						return;
-				}
+				if (this.form.invalid) return;
 				this.register();
-		}
+	}
 
 	register() {
 		this.credentials.name = this.form.get('name').value;

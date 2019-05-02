@@ -16,18 +16,24 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-	isDestinationLocked = false;
-	isSentFromJob = false;
 	private isLoggedIn: boolean;
-	api_data_user_addr: any = {};
-	@Input() destination_address? = ""
-	@Input() destination_user? = ""
+	fromJob = false; // not called from job page
+	hasDestination = false; // not called from withdraw
+
+	@Input() destination_address? = "";
+	@Input() destination_comment?;
+	@Input() source_job?;
+
+	api_dataIsJobs = false;
+	@Input() api_data_job?;
+	api_data: any = {};
+
 	form: FormGroup;
 	submitted = false;
 	confirmed = false;
 	user: UserModel;
+
 	txid = 0;
-	totalAmount = 0;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -39,25 +45,29 @@ export class TransactionComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (this.destination_address != "") {
-			this.form.controls.tx_destination.setValue(this.destination_address);
-			this.isDestinationLocked = true;
-		}
-
-		if (this.destination_user != "") {
-			this.form.controls.tx_destination.setValue(this.destination_user);
-			this.isDestinationLocked = true;
-			this.isSentFromJob = true;
-		}
-
-		if (this.isLoggedIn) {
+		if (!this.api_data_job) {
+			this.fromJob = false;
 			this.auth.profile().subscribe(res => {
 				this.user = res.profile;
 				this.blockexplorer.get_addr(this.user.address).subscribe(res => {
-					this.api_data_user_addr = res.data;
+					this.api_data = res.data;
 				})
 			})
+		} else {
+			this.fromJob = true;
+			this.api_data = this.api_data_job;
+			this.form.controls.tx_destination.setValue(this.destination_comment._id);
+			this.hasDestination = true;
+			
 		}
+
+		if (this.destination_address != "") {
+			this.form.controls.tx_destination.setValue(this.destination_address);
+			this.hasDestination = true;
+		}
+
+		
+
 	}
 
 	createForm() {
@@ -73,16 +83,30 @@ export class TransactionComponent implements OnInit {
 		if (this.form.invalid) {
 			return;
 		}
-		if (this.api_data_user_addr.balance < this.form.controls.tx_value.value) {
+		if (this.api_data.confirmed_balance < this.form.controls.tx_value.value + this.form.controls.tx_fee.value) {
 			return;
 		}
-		this.auth.transaction(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
-		.subscribe( res => {
-			console.log(res);
-			this.txid = JSON.parse(res).txid;
-			this.confirmed = true;
-		}, (err) => {
-			console.error(err);
-		});
+
+		// when called from job
+		if (this.fromJob) {
+			this.auth.transactionFromJob(this.source_job, this.destination_comment._id, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
+			.subscribe( res => {
+				console.log(res);
+				this.txid = JSON.parse(res).txid;
+				this.confirmed = true;
+			}, (err) => {
+				console.error(err);
+			});
+		// when called from comment
+		} else {
+			this.auth.transactionFromUser(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
+			.subscribe( res => {
+				console.log(res);
+				this.txid = JSON.parse(res).txid;
+				this.confirmed = true;
+			}, (err) => {
+				console.error(err);
+			});	
+		}
 	}  
 }

@@ -34,19 +34,21 @@ exports.userSend = async function(user, destination, quantity, fee) {
 	return this.makeTransaction(user.WIF, destination, quantity, inputs, fee);
 }
 
-exports.jobFullSend = async function(job, destination) {
-	var fee = .00050000;
+exports.jobSend = async function(job, destination, quantity, fee) {
+	quantity = parseFloat(quantity);//*100000000;
+	fee = parseFloat(fee);//*100000000;
 	console.log(job.address);
 	let job_data = await BlockExplorerService.getAddr(job.address);
-	// console.log(`job balance ${job_data.confirmed_balance}`);
-	var quantity = parseFloat(job_data.confirmed_balance) - parseFloat(fee);
-	// console.log (`quantity: ${quantity}`);
+
 	let inputs = await BlockExplorerService.findInputs(job.address, quantity, fee);
-	// console.log(inputs)
-	// console.log(user.address);
-	// console.log("INPUTS" + inputs)
-	// console.log(quantity);
-	return [this.makeTransaction(job.WIF, destination, quantity, inputs), quantity];
+	// console.log(`job balance ${job_data.confirmed_balance}`);
+	// var quantity = parseFloat(job_data.confirmed_balance) - parseFloat(fee);
+	// console.log (`quantity: ${quantity}`);
+	console.log(inputs)
+	console.log(job.address);
+	console.log("INPUTS" + inputs)
+	console.log(quantity);
+	return this.makeTransaction(job.WIF, destination, quantity, inputs, fee);
 }
 
 exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee) {
@@ -76,6 +78,7 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee
 	console.log("quantity " + quantity);
 	console.log("fee " + fee);
 	console.log(`total ${total} - quantity ${quantity} + fee ${fee} =  ${total-(quantity+fee)}`);
+	console.log(tx.build().toHex());
 
 	return tx.build().toHex();
 }

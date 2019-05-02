@@ -16,7 +16,7 @@ import JobModel from '../models/job';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-	@Input() api_data_job_addr: any = {};
+	@Input() api_data_job: any = {};
 
 	private form: FormGroup;
 	private isLoggedIn = this.auth.isLoggedIn();
@@ -26,7 +26,8 @@ export class CommentsComponent implements OnInit {
 	private sub: any;
 	private commentList: CommentModel[];
 	private newComment: CommentModel = new CommentModel();
-	private isPayOpen = false;
+
+	private payOpenFor = "";
 
 	public popoverTitle: string = 'Select For Payment';
 	public popoverMessage : String;
@@ -111,20 +112,26 @@ export class CommentsComponent implements OnInit {
     	return 'data:'+  comment.image_type + ';base64,' + comment.image;
 	}
 
-	pay() {
-		this.isPayOpen = !this.isPayOpen;
-		console.log(this.api_data_job_addr.confirmed_balance);
-		// this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job_addr.confirmed_balance*1 + " tBTC)?";
+	pay(selectedComment: CommentModel) {
+		if (this.payOpenFor == "") {
+			this.payOpenFor = selectedComment._id;
+		} else {
+			this.payOpenFor = "";
+		}
+		console.log(this.api_data_job.confirmed_balance);
+		// this.popoverMessage = "Are you sure you want this user to recieve your job's funds " + this.api_data_job.confirmed_balance*1 + " tBTC)?";
 
 	}
 
-	paySubmission(selectedComment: CommentModel) {																		
-		this.auth.jobSend(this.job._id, selectedComment.author, selectedComment._id)
-		.subscribe( res => {
-			console.log(res);
-		}, (err) => {
-			console.error(err);
-		});
-	}
+	// paySubmission(selectedComment: CommentModel) {																		
+	// 	this.auth.transactionFromJob(this.job._id, selectedComment._id, selectedComment._id)
+	// 	.subscribe( res => {
+	// 		console.log(res);
+	// 	}, (err) => {
+	// 		console.error(err);
+	// 	});
+	// }
 
 }
+
+// (user, job, destination, quantity, fee):

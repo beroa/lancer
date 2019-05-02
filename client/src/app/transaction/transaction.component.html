@@ -3,30 +3,30 @@
 	<div>
 		<p *ngIf="!isLoggedIn" class="message-login">To make a contribution, you must <a routerLink="/login">log in</a> or <a routerLink="/register">register</a>.</p>
 
-		<p *ngIf="isLoggedIn && api_data_user_addr && !api_data_user_addr.confirmed_balance" class="red-text">Your account balance is zero. Visit your <a routerLink="/profile">profile</a> to add funds.</p>
+		<p *ngIf="isLoggedIn && api_data && api_data.confirmed_balance == 0" class="red-text">Your account balance is zero. Visit your <a routerLink="/profile">profile</a> to add funds.</p>
+		<p *ngIf="!api_data" class="red-text">Error: User account data could not be loaded. Try again later.</p>
+		
 
-		<p *ngIf="!api_data_user_addr" class="red-text">Error: User account data could not be loaded. Try again later.</p>
+		
 	</div>
 
-	<div *ngIf="isLoggedIn && api_data_user_addr.confirmed_balance">
+	<div *ngIf="isLoggedIn && api_data.confirmed_balance">
 
 		<form [formGroup]="form" (submit)="onSubmit()">
 
-			<p class="form-group" *ngIf="api_data_user_addr.confirmed_balance">
-				<b>Your account balance: </b>
-			{{api_data_user_addr.confirmed_balance*1}} tBTC</p>
+			<p class="form-group" *ngIf="api_data.confirmed_balance">
+				<b>Your <span *ngIf="fromJob">job</span> account balance: </b> {{ api_data.confirmed_balance*1 }} tBTC
+			</p>
 
-			<p class="form-group" *ngIf="api_data_user_addr.confirmed_balance">
-				<b>Your unconfirmed account balance: </b>
-			{{api_data_user_addr.confirmed_balance*1 + api_data_user_addr.unconfirmed_balance*1}} tBTC</p>
-
-			<p class="form-control-static-red" *ngIf="!api_data_user_addr.confirmed_balance"> Error: Check internet connection.</p>
+			<p class="form-group" *ngIf="api_data.unconfirmed_balance">
+				<b>Your unconfirmed <span *ngIf="fromJob">job</span> account balance: </b>
+			{{api_data.confirmed_balance*1 + api_data.unconfirmed_balance*1}} tBTC</p>
 
 			<div class="form-group">
 				<label for="tx_value">Amount to send (in tBTC):</label>
 				<input type="text" class="form-control" name="tx_value" placeholder="1"  formControlName="tx_value">
 				<p class="red-text" *ngIf="form.controls.tx_value.errors?.required && (form.controls.tx_value.dirty || form.controls.tx_value.touched)">Amount is required</p>
-				<p class="red-text" *ngIf="api_data_user_addr.confirmed_balance < (form.controls.tx_value.value + form.controls.tx_fee.value)">Total amount cannot be greater than your account balance.</p>
+				<p class="red-text" *ngIf="api_data.confirmed_balance < (form.controls.tx_value.value + form.controls.tx_fee.value)">Total amount cannot be greater than your account balance.</p>
 			</div>
 
 			<div class="form-group">
@@ -36,7 +36,7 @@
 				<p class="red-text" *ngIf=".0001 >= form.controls.tx_fee.value">Fees must be >= .0001</p>
 			</div>
 
-			<div *ngIf="!isDestinationLocked">
+			<div *ngIf="!hasDestination">
 				<div class="form-group">
 					<label for="tx_destination">Destination Address:</label>
 					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
@@ -44,12 +44,21 @@
 				</div>
 			</div>
 
-			<div *ngIf="isDestinationLocked && !isSentFromJob">
+			<!-- <div *ngIf="!hasDestination">
+				<div class="form-group">
+					<label for="tx_destination">Destination Address:</label>
+					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
+					<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
+				</div>
+			</div> -->
+
+
+			<div *ngIf="hasDestination && !fromJob">
 				<p> <b>Destination Address:</b> {{destination_address}} </p>
 			</div>
 
-			<div *ngIf="isSentFromJob">
-				<p> <b>Destination User:</b> {{destination_user}} </p>
+			<div *ngIf="fromJob">
+				<p> <b>Destination User:</b> {{destination_comment.author}} </p>
 			</div>
 
 			<div>
