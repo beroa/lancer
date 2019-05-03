@@ -40,3 +40,34 @@ exports.createComment = async function(Comment){
 		throw Error("Error while Creating Comment")
 	}
 }
+
+exports.updateComment = async function(Comment){
+    var id = Comment._id;
+
+    try{
+        var oldComment = await CommentModel.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Comment")
+    }
+
+    if(!oldComment){
+        return false;
+    }
+
+    console.log(oldComment)
+
+	oldComment.content = Comment.content
+	oldComment.image = Comment.image
+	oldComment.image_type = Comment.image_type
+	oldComment.earned = Comment.earned
+
+
+    console.log(oldComment)
+
+    try{
+        var savedComment = await oldComment.save()
+        return savedComment;
+    }catch(e){
+        throw Error("And Error occured while updating the Comment");
+    }
+}

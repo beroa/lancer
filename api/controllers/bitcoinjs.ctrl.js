@@ -81,6 +81,7 @@ exports.jobSend = async function(req, res, next) {
 						console.log(`earned ${Comment.earned}`);
 						console.log(`quantity ${req.query.quantity*1.0}`);
 						Comment.earned += (req.query.quantity*1.0);
+						CommentService.updateComment(Comment);
 						return res.status(200).json(response);
 					}).catch(function(err) {
 						res.status(400).json({status: 400, message: "posttx "+err.message});
@@ -88,6 +89,7 @@ exports.jobSend = async function(req, res, next) {
 				}).catch(function(err) {
 					res.status(400).json({status: 400, message: "jobSend " + err.message});
 				})
+
 			} catch (e) {
 				res.status(400).json({status: 400, message: e.message});
 			}

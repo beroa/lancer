@@ -42,3 +42,28 @@ exports.createComment = async function(req, res, next){
         return res.status(400).json({status: 400, message: "Comment Creation was Unsuccesfull: " + e})
     }
 }
+
+// exports.updateComment = async function(req, res, next){
+
+//     if(!req.body._id){
+//         return res.status(400).json({status: 400., message: "Id must be present"})
+//     }
+
+//     var id = req.body._id;
+
+//     console.log(req.body)
+
+//     var todo = {
+//         id,
+//         title: req.body.title ? req.body.title : null,
+//         description: req.body.description ? req.body.description : null,
+//         status: req.body.status ? req.body.status : null
+//     }
+
+//     try{
+//         var updatedComment = await CommentService.updateComment(todo)
+//         return res.status(200).json({status: 200, data: updatedComment, message: "Succesfully Updated Tod"})
+//     }catch(e){
+//         return res.status(400).json({status: 400., message: e.message})
+//     }
+// }
