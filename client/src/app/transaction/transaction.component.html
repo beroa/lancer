@@ -44,15 +44,6 @@
 				</div>
 			</div>
 
-			<!-- <div *ngIf="!hasDestination">
-				<div class="form-group">
-					<label for="tx_destination">Destination Address:</label>
-					<input type="text" class="form-control" name="tx_destination" formControlName="tx_destination">
-					<p class="red-text" *ngIf="form.controls.tx_destination.errors?.required && (form.controls.tx_destination.dirty || form.controls.tx_destination.touched)">Destination is required</p>
-				</div>
-			</div> -->
-
-
 			<div *ngIf="hasDestination && !fromJob">
 				<p> <b>Destination Address:</b> {{destination_address}} </p>
 			</div>
