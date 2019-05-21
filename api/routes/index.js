@@ -9,7 +9,7 @@ const auth = jwt({
 }); 
 
 // module.exports = function(app) {
-ctrlAuth = require('../controllers/authentication.ctrl');
+var ctrlAuth = require('../controllers/authentication.ctrl');
 var ctrlProfile = require('../controllers/profile.ctrl');
 var ctrlJob = require('../controllers/job.ctrl');
 var ctrlComment = require('../controllers/comment.ctrl');
