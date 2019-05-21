@@ -14,7 +14,12 @@ start nodejs server in root with
 nodemon --exec npm start 
 ```
 
-start angular front-end in client with
+start angular front-end
+```
+ng serve
+```
+
+build angular front-end for heroku
 ```
 ng build --environment prod
 ```
