@@ -521,7 +521,7 @@ var BlockExplorerService = /** @class */ (function () {
         this.address_balance_url = this.api_url + "/get_address_balance/BTCTEST/";
     }
     BlockExplorerService.prototype.get_addr = function (address) {
-        return this.http.get(this.address_balance_url + address).map(function (res) { return res.json(); });
+        return this.http.get(this.address_balance_url + address);
     };
     //Default Error handling method.
     BlockExplorerService.prototype.handleError = function (error) {
@@ -879,7 +879,6 @@ var JobService = /** @class */ (function () {
     function JobService(http) {
         this.http = http;
         this.api_url = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url;
-        // api_url = 'https://lancerapp.herokuapp.com';
         this.postUrl = this.api_url + "/api/post";
         this.findUrl = this.api_url + "/api/find";
         this.jobUrl = this.api_url + "/api/job";

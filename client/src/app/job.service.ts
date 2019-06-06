@@ -11,7 +11,6 @@ import 'rxjs/add/operator/map';
 export class JobService {
 
 	api_url = environment.api_url;
-	// api_url = 'https://lancerapp.herokuapp.com';
 	postUrl = `${this.api_url}/api/post`;
 	findUrl = `${this.api_url}/api/find`;
 	jobUrl = `${this.api_url}/api/job`;

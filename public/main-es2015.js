@@ -512,7 +512,7 @@ let BlockExplorerService = class BlockExplorerService {
         this.address_balance_url = `${this.api_url}/get_address_balance/BTCTEST/`;
     }
     get_addr(address) {
-        return this.http.get(this.address_balance_url + address).map((res) => res.json());
+        return this.http.get(this.address_balance_url + address);
     }
     //Default Error handling method.
     handleError(error) {
@@ -858,7 +858,6 @@ let JobService = class JobService {
     constructor(http) {
         this.http = http;
         this.api_url = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url;
-        // api_url = 'https://lancerapp.herokuapp.com';
         this.postUrl = `${this.api_url}/api/post`;
         this.findUrl = `${this.api_url}/api/find`;
         this.jobUrl = `${this.api_url}/api/job`;
