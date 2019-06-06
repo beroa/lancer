@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Rx';
 // import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Http } from '@angular/http';
-import { Response } from '@angular/http';
+// import { Http } from '@angular/http';
+// import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
@@ -14,7 +15,7 @@ export class BitcoinJSService {
 
 	apiUrl = environment.api_url + "/api/maketx";
 
-	constructor(private http: Http, private router: Router, private auth: AuthenticationService) {}
+	constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {}
 
 	public sendTransaction() {
 		// this.auth.transaction().subscribe(res => {

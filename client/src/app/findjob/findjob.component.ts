@@ -1,4 +1,4 @@
-import { Response } from '@angular/http';
+// import { Response } from '@angular/http';
 import { JobService } from '../job.service';
 import JobModel from '../models/job';
 import { Component, OnInit } from '@angular/core';

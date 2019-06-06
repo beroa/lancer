@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Rx';
 // import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Http } from '@angular/http';
-import { Response } from '@angular/http';
+// import { Http } from '@angular/http';
+// import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,7 +14,7 @@ export class BlockExplorerService {
 	api_url = 'https://chain.so/api/v2';
 	address_balance_url = `${this.api_url}/get_address_balance/BTCTEST/`;
 
-	constructor(private http: Http, private router: Router) {}
+	constructor(private http: HttpClient, private router: Router) {}
 
 
 	public get_addr(address): Observable<any> {

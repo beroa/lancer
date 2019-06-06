@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
-import { RequestOptions, Request, RequestMethod } from '@angular/http';
+// import { RequestOptions, Request, RequestMethod } from '@angular/http-client';
 import { environment } from '../environments/environment';
 
 // decoded token

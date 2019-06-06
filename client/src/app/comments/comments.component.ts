@@ -1,4 +1,4 @@
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CommentService } from '../comment.service';
 import { JobService } from '../job.service';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
@@ -34,7 +34,7 @@ export class CommentsComponent implements OnInit {
 	public confirmClicked: boolean = false;
 	public cancelClicked: boolean = false;
 
-	@ViewChild('fileInput') fileInput: ElementRef;
+	@ViewChild('fileInput', {static: false}) fileInput: ElementRef;
 
 	ngOnInit(): void {
 
@@ -86,7 +86,7 @@ export class CommentsComponent implements OnInit {
 	      reader.onload = () => {
 	      	console.log(file.type);
 	      	this.newComment.image_type = file.type;
-	      	this.newComment.image = reader.result.split(',')[1];
+	      	this.newComment.image = (reader.result as string).split(',')[1];
 	      };
 	    }
   	}
