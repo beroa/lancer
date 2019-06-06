@@ -18,7 +18,7 @@ export class BlockExplorerService {
 
 
 	public get_addr(address): Observable<any> {
-		return this.http.get(this.address_balance_url + address).map((res: Response) => res.json())
+		return this.http.get(this.address_balance_url + address)
 	}
 
 	//Default Error handling method.
