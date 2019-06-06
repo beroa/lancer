@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/app.component.html":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/app.component.html ***!
-  \*********************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/app.component.html":
+/*!**************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/app.component.html ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11,10 +11,10 @@ module.exports = "<div id=\"root\">\n\t<div class=\"navbar navbar-inverse\">\n\t
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/comments/comments.component.html":
-/*!***********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/comments/comments.component.html ***!
-  \***********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/comments/comments.component.html":
+/*!****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/comments/comments.component.html ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -22,10 +22,10 @@ module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t  <div
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/findjob/findjob.component.html":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/findjob/findjob.component.html ***!
-  \*********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/findjob/findjob.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/findjob/findjob.component.html ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -33,10 +33,10 @@ module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/home/home.component.html":
-/*!***************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/home/home.component.html ***!
-  \***************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html":
+/*!********************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/home/home.component.html ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -44,10 +44,10 @@ module.exports = "<!-- <div class=\"container\">\n\t<div class=\"row\">\n\t<div 
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/job/job.component.html":
-/*!*************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/job/job.component.html ***!
-  \*************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/job/job.component.html":
+/*!******************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/job/job.component.html ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -55,10 +55,10 @@ module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/login/login.component.html":
-/*!*****************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/login/login.component.html ***!
-  \*****************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/login/login.component.html":
+/*!**********************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/login/login.component.html ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -66,10 +66,10 @@ module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div cla
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/postjob/postjob.component.html":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/postjob/postjob.component.html ***!
-  \*********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/postjob/postjob.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/postjob/postjob.component.html ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -77,10 +77,10 @@ module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div cla
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/profile/profile.component.html":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/profile/profile.component.html ***!
-  \*********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/profile/profile.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/profile/profile.component.html ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -88,10 +88,10 @@ module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/register/register.component.html":
-/*!***********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/register/register.component.html ***!
-  \***********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/register/register.component.html":
+/*!****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/register/register.component.html ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -99,10 +99,10 @@ module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div cla
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/transaction/transaction.component.html":
-/*!*****************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader!./src/app/transaction/transaction.component.html ***!
-  \*****************************************************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/transaction/transaction.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/transaction/transaction.component.html ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -167,7 +167,7 @@ var AppComponent = /** @class */ (function () {
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/app.component.html"),
+            template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"]])
@@ -728,7 +728,7 @@ var CommentsComponent = /** @class */ (function () {
     CommentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
             selector: 'app-comments',
-            template: __webpack_require__(/*! raw-loader!./comments.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/comments/comments.component.html"),
+            template: __webpack_require__(/*! raw-loader!./comments.component.html */ "./node_modules/raw-loader/index.js!./src/app/comments/comments.component.html"),
             styles: [__webpack_require__(/*! ./comments.component.css */ "./src/app/comments/comments.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"],
@@ -812,7 +812,7 @@ var FindJobComponent = /** @class */ (function () {
     FindJobComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
             selector: 'app-findjob',
-            template: __webpack_require__(/*! raw-loader!./findjob.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/findjob/findjob.component.html"),
+            template: __webpack_require__(/*! raw-loader!./findjob.component.html */ "./node_modules/raw-loader/index.js!./src/app/findjob/findjob.component.html"),
             styles: [__webpack_require__(/*! ./findjob.component.css */ "./src/app/findjob/findjob.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_job_service__WEBPACK_IMPORTED_MODULE_1__["JobService"],
@@ -844,7 +844,7 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            template: __webpack_require__(/*! raw-loader!./home.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/home/home.component.html")
+            template: __webpack_require__(/*! raw-loader!./home.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html")
         })
     ], HomeComponent);
     return HomeComponent;
@@ -1000,7 +1000,7 @@ var JobComponent = /** @class */ (function () {
     JobComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-job',
-            template: __webpack_require__(/*! raw-loader!./job.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/job/job.component.html"),
+            template: __webpack_require__(/*! raw-loader!./job.component.html */ "./node_modules/raw-loader/index.js!./src/app/job/job.component.html"),
             styles: [__webpack_require__(/*! ./job.component.css */ "./src/app/job/job.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_job_service__WEBPACK_IMPORTED_MODULE_5__["JobService"],
@@ -1053,7 +1053,7 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            template: __webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/login/login.component.html")
+            template: __webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.component.html")
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], LoginComponent);
@@ -1198,7 +1198,7 @@ var PostJobComponent = /** @class */ (function () {
     };
     PostJobComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            template: __webpack_require__(/*! raw-loader!./postjob.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/postjob/postjob.component.html"),
+            template: __webpack_require__(/*! raw-loader!./postjob.component.html */ "./node_modules/raw-loader/index.js!./src/app/postjob/postjob.component.html"),
             styles: [__webpack_require__(/*! ./postjob.component.css */ "./src/app/postjob/postjob.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
@@ -1268,7 +1268,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            template: __webpack_require__(/*! raw-loader!./profile.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/profile/profile.component.html"),
+            template: __webpack_require__(/*! raw-loader!./profile.component.html */ "./node_modules/raw-loader/index.js!./src/app/profile/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/profile/profile.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
@@ -1349,7 +1349,7 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            template: __webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/register/register.component.html"),
+            template: __webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/index.js!./src/app/register/register.component.html"),
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/register/register.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
@@ -1494,7 +1494,7 @@ var TransactionComponent = /** @class */ (function () {
     TransactionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-transaction',
-            template: __webpack_require__(/*! raw-loader!./transaction.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/index.js!./src/app/transaction/transaction.component.html"),
+            template: __webpack_require__(/*! raw-loader!./transaction.component.html */ "./node_modules/raw-loader/index.js!./src/app/transaction/transaction.component.html"),
             styles: [__webpack_require__(/*! ./transaction.component.css */ "./src/app/transaction/transaction.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
