@@ -26,8 +26,8 @@ export class JobComponent implements OnInit {
 	private sub: any;
 
 	private isLoggedIn: boolean;
-	private isJobAuthor = false;
-	private isFundingOpen = false;
+	isJobAuthor = false;
+	isFundingOpen = false;
 	form: FormGroup;
 	submitted = false;
 	confirmed = false;

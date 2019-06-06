@@ -18,13 +18,13 @@ import JobModel from '../models/job';
 export class CommentsComponent implements OnInit {
 	@Input() api_data_job: any = {};
 
-	private form: FormGroup;
-	private isLoggedIn = this.auth.isLoggedIn();
+	form: FormGroup;
+	isLoggedIn = this.auth.isLoggedIn();
 	private job: JobModel;
 	private jobId: string;
 	private isJobAuthor = false;
 	private sub: any;
-	private commentList: CommentModel[];
+	commentList: CommentModel[];
 	private newComment: CommentModel = new CommentModel();
 
 	private payOpenFor = "";

@@ -16,7 +16,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-	private isLoggedIn: boolean;
+	isLoggedIn: boolean;
 	fromJob = false; // not called from job page
 	hasDestination = false; // not called from withdraw
 
