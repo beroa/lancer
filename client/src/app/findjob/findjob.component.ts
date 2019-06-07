@@ -34,12 +34,12 @@ export class FindJobComponent implements OnInit {
 	}
 
 	changePage(newPage) {
-	this.jobService.getJobs(newPage)
-	.subscribe(jobs => {
+		this.jobService.getJobs(newPage)
+			.subscribe(jobs => {
 				this.jobList = jobs.jobList
 				this.pageCount = jobs.pageCount
 			});
-	this.pageNumber = newPage;
+		this.pageNumber = newPage;
 	}
 
 countPages() {
