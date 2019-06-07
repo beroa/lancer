@@ -53,8 +53,8 @@ exports.jobSend = async function(job, destination, quantity, fee) {
 
 exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee) {
 	console.log("making");
-	quantity = Math.round(quantity*100000000);
-	fee = Math.round(fee*100000000);
+	quantity = Math.floor(quantity*100000000);
+	fee = Math.floor(fee*100000000);
 	let total = 0;
 	// use bitcoinlib.js
 	let key = bitcoin.ECPair.fromWIF(WIF, testnet);
@@ -62,7 +62,7 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee
 	// find sum of inputs
 	for (let i = 0; i < inputs.length; i++) {
 		tx.addInput(inputs[i].id, inputs[i].index);
-		total = total + (inputs[i].quantity*100000000);
+		total = total + Math.floor(inputs[i].quantity*100000000);
 		console.log(`input ${i}: ${inputs[i].quantity}`);
 	}
 	// output to destination

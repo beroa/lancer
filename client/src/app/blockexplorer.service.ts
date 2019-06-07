@@ -16,7 +16,6 @@ export class BlockExplorerService {
 
 	constructor(private http: HttpClient, private router: Router) {}
 
-
 	public get_addr(address): Observable<any> {
 		return this.http.get(this.address_balance_url + address)
 	}

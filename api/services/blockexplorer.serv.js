@@ -40,7 +40,7 @@ exports.getUnspent = async function(addr) {
 }
 
 exports.postTx = async function(raw_tx) {
-		var options = {
+	var options = {
 		method: 'POST',
 		uri: 'https://testnet.blockexplorer.com/api/tx/send',
 		body: {
@@ -50,7 +50,7 @@ exports.postTx = async function(raw_tx) {
 	};
 
 	let response = await rp(options);
-	return JSON.stringify(response);
+	return response;
 }
 
 tx_input = function(id, index, quantity) {

@@ -34,6 +34,7 @@ export class TransactionComponent implements OnInit {
 	user: UserModel;
 
 	txid = 0;
+	error_message = "";
 
 	constructor(
 		private route: ActivatedRoute,
@@ -79,7 +80,9 @@ export class TransactionComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.error_message = ""
 		this.submitted = true;
+
 		if (this.form.invalid) {
 			return;
 		}
@@ -91,20 +94,30 @@ export class TransactionComponent implements OnInit {
 		if (this.fromJob) {
 			this.auth.transactionFromJob(this.source_job, this.destination_comment._id, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
-				console.log(res);
-				this.txid = JSON.parse(res).txid;
 				this.confirmed = true;
+				if (res.txid) {
+					this.txid = res.txid
+				} else {
+					this.error_message = res.message
+				}				
 			}, (err) => {
+				this.confirmed = true;
+				this.error_message = err;
 				console.error(err);
-			});
+			});	
 		// when called from comment
 		} else {
 			this.auth.transactionFromUser(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
-				console.log(res);
-				this.txid = JSON.parse(res).txid;
 				this.confirmed = true;
+				if (res.txid) {
+					this.txid = res.txid
+				} else {
+					this.error_message = res.message
+				}				
 			}, (err) => {
+				this.confirmed = true;
+				this.error_message = err;
 				console.error(err);
 			});	
 		}
