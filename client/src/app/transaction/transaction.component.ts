@@ -98,7 +98,6 @@ export class TransactionComponent implements OnInit {
 				this.txid = res.txid		
 			}, (err) => {
 				console.log("err")
-				this.confirmed = true;
 				this.error_message = err.error.message;
 				console.error(err);
 			});	
@@ -110,7 +109,6 @@ export class TransactionComponent implements OnInit {
 				this.txid = res.txid
 			}, (err) => {
 				console.log(err)
-				this.confirmed = true;
 				this.error_message = err.error.message;
 				console.error(err);
 			});	
