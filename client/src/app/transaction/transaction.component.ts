@@ -95,14 +95,11 @@ export class TransactionComponent implements OnInit {
 			this.auth.transactionFromJob(this.source_job, this.destination_comment._id, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
 				this.confirmed = true;
-				if (res.txid) {
-					this.txid = res.txid
-				} else {
-					this.error_message = res.message
-				}				
+				this.txid = res.txid		
 			}, (err) => {
+				console.log("err")
 				this.confirmed = true;
-				this.error_message = err;
+				this.error_message = err.error.message;
 				console.error(err);
 			});	
 		// when called from comment
@@ -110,14 +107,11 @@ export class TransactionComponent implements OnInit {
 			this.auth.transactionFromUser(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
 				this.confirmed = true;
-				if (res.txid) {
-					this.txid = res.txid
-				} else {
-					this.error_message = res.message
-				}				
+				this.txid = res.txid
 			}, (err) => {
+				console.log(err)
 				this.confirmed = true;
-				this.error_message = err;
+				this.error_message = err.error.message;
 				console.error(err);
 			});	
 		}

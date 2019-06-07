@@ -60,7 +60,7 @@
 
 			<div class="confirmation">
 				<p class="red-text" *ngIf="confirmed && txid == 0">Your transaction could not be sent.</p>
-				<p class="red-text" *ngIf="confirmed && txid == 0">Error Message: </p>
+				<p class="red-text" *ngIf="confirmed && txid == 0">Error Message: {{ error_message }} </p>
 				<p class="form-success" *ngIf="confirmed && txid != 0">Success! txid: <a href="https://chain.so/tx/BTCTEST/{{ txid }}"> {{ txid }} </a></p>
 			</div>
 		</form>

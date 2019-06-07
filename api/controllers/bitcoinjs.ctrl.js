@@ -30,7 +30,7 @@ exports.userSend = async function(req, res, next) {
 						// post transaction
 						BlockExplorerService.postTx(response)
 						.then(function(response) {
-							return res.status(200).json(response);
+							res.status(200).json(response);
 						}).catch(function(err) {
 							res.status(400).json({status: 400, message: "posttx "+err.message});
 						})
@@ -82,7 +82,7 @@ exports.jobSend = async function(req, res, next) {
 						console.log(`quantity ${req.query.quantity*1.0}`);
 						Comment.earned += (req.query.quantity*1.0);
 						CommentService.updateComment(Comment);
-						return res.status(200).json(response);
+						res.status(200).json(response);
 					}).catch(function(err) {
 						res.status(400).json({status: 400, message: "posttx "+err.message});
 					})
