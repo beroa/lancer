@@ -66,7 +66,7 @@ export class AuthenticationService {
 		}
 	}
 
-	private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'maketx', user?: TokenPayload): Observable<any> {
+	private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
 		let base;
 		if (method === 'post') {
 			base = this.http.post(`${apiUrl}/${type}`, user);
@@ -106,18 +106,11 @@ export class AuthenticationService {
 				user: `${user}`,
 				destination: `${destination}`, 
 				quantity: `${quantity}`,
-				fee: `${fee}`}
-			});
+				fee: `${fee}`
+			}
+		});
 
-		const request = base.pipe(
-			map((data: TokenResponse) => {
-				if (data.token) {
-					this.saveToken(data.token);
-				}
-				return data;
-			})
-		);
-		return request;
+		return base
 	}
 
 	public transactionFromJob(job_id, comment_id, quantity, fee): Observable<any> {
@@ -128,41 +121,13 @@ export class AuthenticationService {
 			params: { 
 				job_id:`${job_id}`,
 				comment_id: `${comment_id}`,
-				// destination_user: `${destination_user}`, 
 				quantity: `${quantity}`,
-				fee: `${fee}`}
-			});
+				fee: `${fee}`
+			}
+		});
 
-		const request = base.pipe(
-			map((data: TokenResponse) => {
-				if (data.token) {
-					this.saveToken(data.token);
-				}
-				return data;
-			})
-		);
-		return request;
+		return base
 	}
-
-	// public jobSend(job, destination, comment): Observable<any> {
-	// 	const httpOptions = {
-	// 	  headers: new HttpHeaders({
-	// 	    'Content-Type':  'application/json',
-	// 	    'Authorization': `Bearer ${this.getToken()}`
-	// 	  })
-	// 	};
-
-	// 	let data = { 
-	// 		job_id: `${job}`,
-	// 		comment_id: `${comment}`,
-	// 		destination: `${destination}`
-	// 	};
-
-	// 	return this.http.post(`${apiUrl}/job/${job}/pay`, data, httpOptions
-	// 	).map(res => {
-	// 		return { res }
-	// 	})
-	// }
 
 	public logout(): void {
 		this.token = '';

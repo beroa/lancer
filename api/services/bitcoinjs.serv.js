@@ -34,15 +34,13 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee
 	// find sum of inputs
 	for (let i = 0; i < inputs.length; i++) {
 		tx.addInput(inputs[i].id, inputs[i].index);
-		total = total + Math.floor(inputs[i].quantity)*100000000;
-		console.log(`input ${i}: ${inputs[i].quantity}`);
+		total = total + Math.floor(inputs[i].quantity*100000000);
 	}
 
 	// output to destination
 	tx.addOutput(destination, quantity);
 
 	// output to keep leftover
-	console.log(`total: ${total}`);
 	if (total > quantity + fee) {
 		tx.addOutput(key.getAddress(), total - (quantity + fee));
 	}
@@ -50,7 +48,7 @@ exports.makeTransaction = async function(WIF, destination, quantity, inputs, fee
 		tx.sign(i, key);
 	}
 
-	// console.log(`total ${total} - quantity ${quantity} + fee ${fee} =  ${total-(quantity+fee)}`);
+	console.log(`total ${total} - quantity ${quantity} + fee ${fee} =  ${total-(quantity+fee)}`);
 	// console.log(tx.build().toHex());
 	return tx.build().toHex();
 }
