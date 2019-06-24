@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var jwt = require('express-jwt');
-
 const auth = jwt({
-    secret: 'MY_SECRET',
+    secret: 'MY_SECRET', // this should be an environment variable
     userProperty: 'payload'
 }); 
 
