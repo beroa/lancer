@@ -2,14 +2,15 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird')
 
 var gracefulShutdown;
-var dbURI = 'mongodb://lancerapp:timlapw1@ds045464.mlab.com:45464/heroku_ddvgcv9l';
+var dbURI = 'local mongoDB goes here';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
 
 mongoose.Promise = bluebird
 mongoose.connect(dbURI, {
-  useMongoClient: true
+  useUnifiedTopology: true,
+  useNewUrlParser: true 
 });
 
 // CONNECTION EVENTS
