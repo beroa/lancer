@@ -9,9 +9,9 @@
 			<form [formGroup]="form" (submit)="onSubmit()">
 
 				<div class="form-group">
-					<label for="name">Username</label>
-					<input type="text" class="form-control" name="name" placeholder="Enter your username" formControlName="name">
-					<p class="form-invalid" *ngIf="form.controls.name.errors?.required && (form.controls.name.dirty || form.controls.name.touched)">Username is required.</p>
+					<label for="username">Username</label>
+					<input type="text" class="form-control" name="username" placeholder="Enter your username" formControlName="username">
+					<p class="form-invalid" *ngIf="form.controls.username.errors?.required && (form.controls.username.dirty || form.controls.username.touched)">Username is required.</p>
 				</div>
 
 				<div class="form-group">

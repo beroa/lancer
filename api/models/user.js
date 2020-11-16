@@ -8,7 +8,8 @@ const testnet = bitcoin.networks.testnet;
 var userSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	email: String,
 	hash: String,
