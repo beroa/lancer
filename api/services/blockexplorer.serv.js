@@ -5,7 +5,7 @@ var rp = require('request-promise');
 exports.getAddr = async function(addr) {
 	var options = {
 		method: 'GET',
-		uri: 'https://chain.so/api/v2/get_address_balance/BTCTEST/' + addr,
+		uri: 'https://sochain.com/api/v2/get_address_balance/BTCTEST/' + addr,
 		json: true
 	};
 
@@ -27,7 +27,7 @@ exports.getTx = async function(tx) {
 exports.getUnspent = async function(addr) {
 	var options = {
 		method: 'GET',
-		uri: 'https://chain.so/api/v2/get_tx_unspent/BTCTEST/' + addr + '/utxo',
+		uri: 'https://sochain.com/api/v2/get_tx_unspent/BTCTEST/' + addr + '/utxo',
 		json: true
 	};
 

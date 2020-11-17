@@ -33,6 +33,6 @@ https://medium.com/netscape/mean-app-tutorial-with-angular-4-part-1-18691663ea96
 
 https://www.sitepoint.com/user-authentication-mean-stack/
 
-https://chain.so/api
+https://sochain.com/api
 
 google

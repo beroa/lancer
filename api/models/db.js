@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird')
 
 var gracefulShutdown;
-var dbURI = 'local mongoDB goes here';
+var dbURI = 'mongodb+srv://lancerapp:yFPHZHTzP1Q3IoD1@cluster0.cj2dc.mongodb.net/lancerapp?retryWrites=true';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
