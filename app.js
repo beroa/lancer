@@ -1,10 +1,3 @@
-/*
-
-  There are some minor modifications to the default Express setup
-  Each is commented and marked with [SH] to make them easy to find
-
- */
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -33,8 +26,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -57,7 +48,7 @@ app.use('/api', routesApi);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', function (req, res) {
-    res.sendFile('./public/index.html'); // load our index.html file
+    res.sendFile('../public/index.html'); // load our index.html file
 });
 
 // catch 404 and forward to error handler
@@ -98,6 +89,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
