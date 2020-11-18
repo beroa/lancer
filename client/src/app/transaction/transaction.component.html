@@ -32,8 +32,8 @@
 			<div class="form-group">
 				<label for="tx_fee">Transaction fees:</label>
 				<input type="text" class="form-control" name="tx_fee" placeholder=".0001"  formControlName="tx_fee">
-				<p class="red-text" *ngIf=".01 <= form.controls.tx_fee.value">Fees must be <= .01</p>
-				<p class="red-text" *ngIf=".0001 >= form.controls.tx_fee.value">Fees must be >= .0001</p>
+				<p class="red-text" *ngIf=".01 < form.controls.tx_fee.value">Fees must be <= .01</p>
+				<p class="red-text" *ngIf=".0001 > form.controls.tx_fee.value">Fees must be >= .0001</p>
 			</div>
 
 			<div *ngIf="!hasDestination">
@@ -61,7 +61,7 @@
 			<div class="confirmation">
 				<p class="red-text" *ngIf="error_message">Your transaction could not be sent.</p>
 				<p class="red-text" *ngIf="error_message">{{ error_message }} </p>
-				<p class="form-success" *ngIf="confirmed">Success! txid: <a href="https://sochain.com/tx/BTCTEST/{{ txid }}"> {{ txid }} </a></p>
+				<p class="form-success" *ngIf="confirmed">Transaction Success! TXID: <a href="https://sochain.com/tx/BTCTEST/{{ txid }}"> {{ txid }} </a></p>
 			</div>
 		</form>
 	</div>

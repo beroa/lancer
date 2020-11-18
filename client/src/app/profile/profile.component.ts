@@ -22,8 +22,6 @@ export class ProfileComponent {
 	ngOnInit() {    
 		this.auth.profile().subscribe(res => {
 			this.profile = res.profile;
-			// console.log("profile: " + JSON.stringify(this.profile));
-			// console.log("profile_address: " + this.profile.address);
 			this.blockexplorer.get_addr(this.profile.address).subscribe(res => {
 				this.api_data = res.data;
 			})

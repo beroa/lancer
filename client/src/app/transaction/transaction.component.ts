@@ -90,27 +90,25 @@ export class TransactionComponent implements OnInit {
 			return;
 		}
 
-		// when called from job
+		// when called from job, going to a comment
 		if (this.fromJob) {
 			this.auth.transactionFromJob(this.source_job, this.destination_comment._id, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
-				this.confirmed = true;
-				this.txid = res.txid		
+				this.confirmed = true
+				this.txid = res.data.txid
 			}, (err) => {
-				console.log("err")
 				this.error_message = err.error.message;
 				console.error(err);
 			});	
-		// when called from comment
+		// when called from user, going to a job or another user
 		} else {
 			this.auth.transactionFromUser(this.user._id, this.form.controls.tx_destination.value, this.form.controls.tx_value.value, this.form.controls.tx_fee.value)
 			.subscribe( res => {
-				this.confirmed = true;
-				this.txid = res.txid
+				this.confirmed = true
+				this.txid = res.data.txid
 			}, (err) => {
-				console.log(err)
-				this.error_message = err.error.message;
-				console.error(err);
+				this.error_message = err.error.message
+				console.error(err)
 			});	
 		}
 	}  

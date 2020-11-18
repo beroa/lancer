@@ -13,10 +13,10 @@
 
 				<p> <b>Date created:</b> {{job?.date_created}} </p>
 				<p> <b>Created by:</b> {{job?.author}} </p>
-				<p> <b>Address:</b>
+				<p> <b>Address: </b>
 					<a href="https://sochain.com/address/BTCTEST/{{job?.address}}">{{ job?.address }}</a>
 				<p>
-					<b>Balance:</b>
+					<b>Balance: </b>
 					<span *ngIf="api_data_job">{{ api_data_job.confirmed_balance*1 }} tBTC</span>
 				</p>
 

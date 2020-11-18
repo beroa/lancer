@@ -13,17 +13,6 @@ exports.getAddr = async function(addr) {
 	return response.data;
 }
 
-exports.getTx = async function(tx) {
-	var options = {
-		method: 'GET',
-		uri: 'https://testnet.blockexplorer.com/api/tx/' + tx,
-		json: true 
-	};
-
-	let response = await rp(options);
-	return response;
-}
-
 exports.getUnspent = async function(addr) {
 	var options = {
 		method: 'GET',
@@ -38,9 +27,9 @@ exports.getUnspent = async function(addr) {
 exports.postTx = async function(raw_tx) {
 	var options = {
 		method: 'POST',
-		uri: 'https://testnet.blockexplorer.com/api/tx/send',
+		uri: 'https://sochain.com/api/v2/send_tx/BTCTEST',
 		body: {
-			rawtx: raw_tx
+			tx_hex: raw_tx
 		},
 		json: true
 	};
