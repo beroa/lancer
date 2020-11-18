@@ -48,7 +48,7 @@ app.use('/api', routesApi);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', function (req, res) {
-    res.sendFile('../public/index.html'); // load our index.html file
+    res.sendFile('public/index.html'); // load our index.html file
 });
 
 // catch 404 and forward to error handler
