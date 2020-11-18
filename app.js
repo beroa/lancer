@@ -47,8 +47,12 @@ app.use('/api', routesApi);
 // Serve only the static files form the dist directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', function (req, res) {
-    res.sendFile('public/index.html'); // load our index.html file
+// app.get('*', function (req, res) {
+//     res.sendFile('public/index.html'); // load our index.html file
+// });
+
+app.all('/*', function(req, res, next) {
+    res.sendFile('index.html', { root: __dirname });
 });
 
 // catch 404 and forward to error handler
