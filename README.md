@@ -1,15 +1,15 @@
-this is an application i'm building to learn MEAN stack and git.
+This is an application I'm building to learn MEAN stack and Git.
 
-users can create job listings, anyone can fund them, creators choose which of the replies get the funds. everything uses bitcoin testnet.
+Users can create job listings, anyone can fund them, creators choose which of the replies get the funds. Everything uses bitcoin testnet.
 
-# demo
+# Demo
 https://lancerapp.herokuapp.com/
 
-# running
+# Local Deployment
 
 'npm install' in root and client folders
 
-start nodejs server in root with
+Start nodejs server in root with:
 ```
 nodemon --exec npm start 
 ```
@@ -18,17 +18,17 @@ or
 npm start
 ```
 
-start angular front-end
+Start angular front-end
 ```
 ng serve
 ```
 
-build angular front-end for heroku
+Build angular front-end for heroku
 ```
 ng build --prod
 ```
 
-# thanks
+# Thanks
 https://medium.com/netscape/mean-app-tutorial-with-angular-4-part-1-18691663ea96
 
 https://www.sitepoint.com/user-authentication-mean-stack/
