@@ -7,7 +7,6 @@ const auth = jwt({
     userProperty: 'payload'
 }); 
 
-// module.exports = function(app) {
 var ctrlAuth = require('../controllers/authentication.ctrl');
 var ctrlProfile = require('../controllers/profile.ctrl');
 var ctrlJob = require('../controllers/job.ctrl');
@@ -29,7 +28,5 @@ router.get('/job/:id/comments', ctrlComment.getComments);
 router.post('/job/:id/comments/submit', ctrlComment.createComment);
 
 router.get('/usersend', auth, ctrlBitcoinJS.userSend);
-// };
-
 
 module.exports = router;

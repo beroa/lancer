@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {APP_BASE_HREF} from '@angular/common';
+
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -59,7 +61,8 @@ const routes: Routes = [
     AuthGuardService,
     JobService,
     CommentService,
-    BlockExplorerService
+    BlockExplorerService,
+    { provide: APP_BASE_HREF, useValue: '/' }
   ],
   bootstrap: [AppComponent]
 })
